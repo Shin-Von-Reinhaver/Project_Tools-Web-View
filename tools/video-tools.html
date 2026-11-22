@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%278%27 fill=%27%230284c7%27/%3E%3Cpath d=%27M9 9h14v14H9z%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%273%27 stroke-linejoin=%27round%27/%3E%3C/svg%3E">
+<meta name="theme-color" content="#7C3AED">
 <title>Video Tools</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap">
 <style>
@@ -79,6 +81,7 @@ progress{width:100%;height:8px;accent-color:var(--ac)}
 </style>
 </head>
 <body>
+<noscript><p style="padding:24px;font:16px system-ui">Aplikasi ini membutuhkan JavaScript. Aktifkan JavaScript di browser Anda.</p></noscript>
 <header class="top">
  <button class="brand" id="home" aria-label="Beranda"><svg viewBox="0 0 34 34"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--c1)"/><stop offset="1" style="stop-color:var(--c2)"/></linearGradient></defs><rect width="34" height="34" rx="10" fill="url(#lg)"/><path d="M13 10.5v13l11-6.5z" fill="#fff"/></svg><span>Video Tools</span></button>
  <div class="sp"></div>
@@ -195,7 +198,7 @@ function sel(id){
  cur=id;S=D();vid.pause();
  if(id==='up'){S.tgt='x2';S.sharp=1}
  if(id==='down')S.tgt='p720';
- if(id==='zip'){S.tgt='x1';S.kbps=1500}
+ if(id==='zip'){S.tgt='x1';S.kbps=Math.max(150,Math.min(1500,Math.round(V.size*8/V.dur/1000*.7/50)*50||150))}
  if(id==='dur')setSpd();if(id==='gif'){S.tgt='p360';S.fps=10}if(id==='rev'){S.tgt='p360';S.fps=15}if(id==='mrg'){S.tgt='p720';MC=[{name:V.name,url:V.url,dur:V.dur,w:V.w,h:V.h}]}if(id==='wsk'){S.asp=1;S.tgt='p512';S.fps=12}if(MAXD[id])S.end=Math.min(V.dur,MAXD[id]);
  $('#sk').max=V.dur;vid.currentTime=0;
  show('ws');
@@ -352,7 +355,7 @@ function result(b,g,m){
  if(RU)URL.revokeObjectURL(RU);RU=URL.createObjectURL(b);RB=b;
  const mp=b.type.includes('mp4'),ext=m==='g'?'gif':m==='s'?'webp':m==='v'?(mp?'mp4':'webm'):(mp?'m4a':'webm');
  RN=V.name.replace(/\.[^.]+$/,'')+'-'+cur+'.'+ext;
- $('#rv').innerHTML=m==='g'||m==='s'?`<img src="${RU}" alt="" style="max-width:100%;max-height:46vh;border-radius:12px;display:block;margin:auto">`:m==='v'?`<video src="${RU}" controls playsinline style="width:100%;max-height:46vh;border-radius:12px;background:#000"></video>`:`<audio src="${RU}" controls style="width:100%"></audio>`;
+ $('#rv').innerHTML=m==='g'||m==='s'?`<img src="${RU}" alt="" style="max-width:100%;max-height:46vh;border-radius:12px;display:block;margin:auto;background:repeating-conic-gradient(#8885 0 25%,transparent 0 50%) 0 0/16px 16px">`:m==='v'?`<video src="${RU}" controls playsinline style="width:100%;max-height:46vh;border-radius:12px;background:#000"></video>`:`<audio src="${RU}" controls style="width:100%"></audio>`;
  const d=Math.round((1-b.size/V.size)*100);
  $('#rs').textContent=`${fb(V.size)} → ${fb(b.size)} (${d>=0?'−'+d:'+'+Math.abs(d)}%)`+(m!=='a'?` · ${g.W}×${g.H}`:'');
  $('#rd').showModal();const rv=$('#rv video');if(rv)rv.onloadedmetadata=()=>{if(rv.duration===Infinity){rv.currentTime=1e101;rv.ontimeupdate=()=>{rv.ontimeupdate=null;rv.currentTime=0}}};
@@ -365,17 +368,17 @@ $('#fm').onchange=async e=>{for(const f of e.target.files){const u=URL.createObj
 const enc=async f=>{$('#busy').hidden=false;$('#bt').textContent='Mengemas…';await new Promise(r=>setTimeout(r,40));try{return await f()}finally{$('#busy').hidden=true}};
 async function capture(fps,maxD,g){
  if(busyF)return;if(S.end-S.start<.2){toast('Durasi terlalu pendek.');return}
- busyF=1;cancel=0;vid.pause();vid.muted=true;await seek(S.start);
- const end=Math.min(S.end,S.start+maxD),fr=[];let nx=S.start;
- $('#busy').hidden=false;vid.playbackRate=S.spd;
- try{await vid.play()}catch(e){cancel=2}
- await new Promise(res=>{(function f(){const t=vid.currentTime;
-  if(t>=nx&&nx<end){const c=document.createElement('canvas');c.width=g.W;c.height=g.H;draw(c.getContext('2d'),g.W,g.H,g,1);fr.push(c);nx+=S.spd/fps}
-  const p=Math.min(1,(t-S.start)/(end-S.start));$('#bp').value=p;$('#bt').textContent=Math.round(p*100)+'%';
-  if(cancel||t>=end-.02||vid.ended)res();else requestAnimationFrame(f)})()});
- vid.pause();vid.muted=false;vid.playbackRate=1;busyF=0;$('#busy').hidden=true;seek(S.start);
- if(cancel){toast(cancel===2?'Video tidak bisa diputar otomatis. Ketuk tombol putar sekali, lalu coba lagi.':'Dibatalkan.');return}
+ busyF=1;cancel=0;vid.pause();
+ const end=Math.min(S.end,S.start+maxD),step=S.spd/fps,n=Math.max(2,Math.floor((end-S.start)/step)),fr=[];
+ $('#busy').hidden=false;
+ for(let i=0;i<n&&!cancel;i++){
+  await seek(Math.min(S.start+i*step,V.dur-.05));await new Promise(r=>setTimeout(r,0));
+  const c=document.createElement('canvas');c.width=g.W;c.height=g.H;draw(c.getContext('2d'),g.W,g.H,g,1);fr.push(c);
+  $('#bp').value=(i+1)/n;$('#bt').textContent=Math.round((i+1)/n*100)+'%'}
+ busyF=0;$('#busy').hidden=true;seek(S.start);
+ if(cancel){toast('Dibatalkan.');return}
  return fr}
+const sig=c=>{const t=document.createElement('canvas');t.width=t.height=8;const x=t.getContext('2d');x.drawImage(c,0,0,8,8);return x.getImageData(0,0,8,8).data.join()};
 const BAY=[0,8,2,10,12,4,14,6,3,11,1,9,15,7,13,5],cl=v=>Math.max(0,Math.min(5,Math.round(v/51)));
 function lzw(px,o){let bits=0,cur=0,buf=[],n=9,next=258,d=new Map();
  const put=c=>{cur|=c<<bits;bits+=n;while(bits>=8){buf.push(cur&255);cur>>=8;bits-=8;if(buf.length===255){o.push(255,...buf);buf=[]}}};
@@ -409,10 +412,10 @@ async function fitWebp(fr,fps){let x,n=fr.length;
   if(n<=fps*2)return{b:x,sec:n/fps};n=Math.floor(n*.85)}}
 async function runWsk(share){
  if(!document.createElement('canvas').toDataURL('image/webp').startsWith('data:image/webp'))return toast('Browser ini tidak bisa membuat WebP. Pakai Chrome atau Edge.');
- const g=geom(),fr=await capture(S.fps,MAXD.wsk,g);if(!fr)return;if(!fr.length)return toast('Tidak ada frame yang berhasil diambil.');
+ const g=geom(),fr=await capture(S.fps,MAXD.wsk,g);if(!fr)return;if(fr.length<2)return toast('Video terlalu pendek untuk stiker animasi.');
  let r;try{r=await enc(()=>fitWebp(fr,S.fps))}catch(e){return toast('Gagal membuat stiker: '+e.message)}
  const want=fr.length/S.fps;result(r.b,g,'s');
- $('#rs').textContent='Stiker '+g.W+'×'+g.H+' · durasi '+r.sec.toFixed(1)+' detik'+(r.sec<want-.2?' (dipersingkat dari '+want.toFixed(1)+' detik agar diterima WhatsApp)':'')+(share?'. Ketuk Bagikan untuk mengirim ke WhatsApp.':'. Ketuk Unduh untuk menyimpan.')}
+ $('#rs').textContent='Stiker '+g.W+'×'+g.H+' · durasi '+r.sec.toFixed(1)+' detik'+(r.sec<want-.2?' (dipersingkat dari '+want.toFixed(1)+' detik agar diterima WhatsApp)':'')+(new Set(fr.map(sig)).size<2?'. Perhatian: semua frame sama, jadi hasilnya terlihat seperti gambar diam.':'')+(share?'. Ketuk Bagikan untuk mengirim ke WhatsApp.':'. Ketuk Unduh untuk menyimpan.')+' Jika WhatsApp menerimanya sebagai foto, buka WhatsApp, pilih Stiker lalu tombol + dan pilih file .webp ini.'}
 async function runRev(){
  const g=geom(),fps=S.fps,fr=await capture(fps,20,g);if(!fr||!fr.length)return toast('Tidak ada frame yang berhasil diambil.');
  const mt=mime('v');if(!mt)return toast('Browser ini tidak mendukung perekaman video.');
@@ -456,5 +459,6 @@ addEventListener('keydown',e=>{if(!V||busyF||!$('#ws').classList.contains('on')|
  if(e.code==='ArrowLeft')vid.currentTime=Math.max(0,vid.currentTime-5)});
 home();
 </script>
+<script>(function(){try{if(self!==top)return}catch(e){return}document.addEventListener('DOMContentLoaded',function(){var h=document.querySelector('header');if(!h)return;var a=document.createElement('a');a.href='../index.html';a.title='Beranda';a.setAttribute('aria-label','Kembali ke beranda');a.textContent='\u2190';a.style.cssText='display:inline-grid;place-items:center;width:36px;height:36px;margin-right:6px;border-radius:12px;border:1px solid rgba(128,128,160,.35);color:inherit;text-decoration:none;font-weight:800;font-size:18px;flex:none';h.insertBefore(a,h.firstChild)})})();</script>
 </body>
 </html>
