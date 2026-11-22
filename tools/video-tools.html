@@ -195,8 +195,8 @@ function sel(id){
  cur=id;S=D();vid.pause();
  if(id==='up'){S.tgt='x2';S.sharp=1}
  if(id==='down')S.tgt='p720';
- if(id==='zip'){S.tgt='p720';S.kbps=1500}
- if(id==='dur')setSpd();if(id==='gif'){S.tgt='p360';S.fps=10}if(id==='rev'){S.tgt='p360';S.fps=15}if(id==='mrg'){S.tgt='p720';MC=[{name:V.name,url:V.url,dur:V.dur,w:V.w,h:V.h}]}if(id==='wsk'){S.asp=1;S.tgt='p512';S.fps=12;S.end=Math.min(V.dur,8)}
+ if(id==='zip'){S.tgt='x1';S.kbps=1500}
+ if(id==='dur')setSpd();if(id==='gif'){S.tgt='p360';S.fps=10}if(id==='rev'){S.tgt='p360';S.fps=15}if(id==='mrg'){S.tgt='p720';MC=[{name:V.name,url:V.url,dur:V.dur,w:V.w,h:V.h}]}if(id==='wsk'){S.asp=1;S.tgt='p512';S.fps=12}if(MAXD[id])S.end=Math.min(V.dur,MAXD[id]);
  $('#sk').max=V.dur;vid.currentTime=0;
  show('ws');
  $('#tb').innerHTML=T.map(t=>`<button class="tl${t.id===cur?' on':''}" data-t="${t.id}" style="--cc:var(--c${t.c})"><span class="ch">${ic(t.i)}</span>${t.n}</button>`).join('');
@@ -213,6 +213,7 @@ const BASE={br:1,co:1,sa:1,gr:0,se:0,hue:0,inv:0};
 const FP={Normal:{},Vintage:{br:1.05,co:.9,sa:.75,se:.45},Sinematik:{br:.95,co:1.3,sa:1.15},'Hitam putih':{gr:1,co:1.15},Cerah:{br:1.15,co:1.1,sa:1.4},Negatif:{inv:1}};
 const PRE={'WhatsApp ringan':{tgt:'p480',kbps:900,fps:24},'Reels / TikTok 9:16':{asp:9/16,fit:2,tgt:'p1080'},'YouTube 1080p':{asp:16/9,fit:2,tgt:'p1080'},'Kotak 1:1':{asp:1,fit:2,tgt:'p1080'},'Hemat kuota':{tgt:'p360',kbps:500,fps:24}};
 const RES=[['x1','Asli'],['p1080','1080p'],['p720','720p'],['p480','480p'],['p360','360p'],['p240','240p']];
+const MAXD={gif:12,rev:20,wsk:10};
 const setSpd=()=>S.spd=Math.max(.25,Math.min(16,(S.end-S.start)/S.tdur));
 const TR=()=>rn('start','Mulai',0,V.dur,.1)+rn('end','Selesai',0,V.dur,.1);
 const SZ=()=>sg('tgt',[['p240','240p'],['p360','360p'],['p480','480p']],'Ukuran');
@@ -237,16 +238,18 @@ function panel(){
  if(cur==='gif'){h=TR()+SZ()+sg('fps',[[8,'8 fps'],[10,'10 fps'],[15,'15 fps']],'Frame rate')+'<div class="note">Dibatasi 12 detik. GIF memakai 216 warna dan file-nya besar, jadi pilih ukuran kecil untuk durasi panjang.</div>';go='Buat GIF'}
  if(cur==='rev'){h=TR()+sg('rv',[[0,'Mundur'],[1,'Boomerang']],'Mode')+SZ()+sg('fps',[[10,'10 fps'],[15,'15 fps'],[20,'20 fps']],'Frame rate')+'<div class="note">Maksimal 20 detik. Mode Mundur ikut membalik suara, Boomerang tanpa suara.</div>';go='Balik video'}
  if(cur==='mrg'){h='<div class="plab">Urutan video</div>'+MC.map((m,i)=>`<div class="note">${i+1}. ${esc(m.name)} · ${tf(m.dur)} <button data-rm="${i}">Hapus</button></div>`).join('')+'<div class="r"><button id="addv">Tambah video</button></div>'+sg('tgt',[['p480','480p'],['p720','720p'],['p1080','1080p']],'Resolusi hasil')+sg('fps',[[24,'24 fps'],[30,'30 fps']],'Frame rate')+'<div class="note">Video berbeda rasio diberi bar hitam.</div>';go='Gabungkan video'}
- if(cur==='wsk'){h='<div class="note">Stiker animasi WebP 512×512, bening dan tanpa bingkai putih. Maksimal 8 detik dan 500 KB.</div>'+TR()+sg('fit',[[0,'Penuhi bingkai (potong)'],[3,'Muat utuh (latar bening)']],'Isi bingkai')+sg('fps',[[8,'8 fps'],[12,'12 fps'],[15,'15 fps']],'Frame rate')+'<div class="r"><button class="p big" id="gw">Kirim ke WhatsApp</button></div>';go='Simpan stiker'}
+ if(cur==='wsk'){h='<div class="note">Stiker animasi WebP 512×512, bening dan tanpa bingkai putih. Durasi maksimal 10 detik, sama seperti batas stiker animasi WhatsApp. Kualitas disesuaikan otomatis agar bisa diterima WhatsApp.</div>'+TR()+sg('fit',[[0,'Penuhi bingkai (potong)'],[3,'Muat utuh (latar bening)']],'Isi bingkai')+sg('fps',[[8,'8 fps'],[12,'12 fps'],[15,'15 fps']],'Frame rate')+'<div class="r"><button class="p big" id="gw">Kirim ke WhatsApp</button></div>';go='Simpan stiker'}
  if(cur==='frm'){h='<div class="note">Jeda video di bagian yang diinginkan, lalu simpan sebagai gambar.</div><div class="r"><button class="p big" id="gj">Simpan JPG</button><button id="gp">Simpan PNG</button></div>'}
- else h+=(['up','down','zip','pre'].includes(cur)?sg('fmt',[['auto','Otomatis'],['mp4','MP4'],['webm','WebM']],'Format file')+sg('fps',[[15,'15 fps'],[24,'24 fps'],[30,'30 fps'],[60,'60 fps']],'Frame rate'):'')+(['aud','mrg','gif','rev','wsk'].includes(cur)?'':'<div class="note" id="inf"></div>')+`<div class="r"><button class="p big" id="go">${go}</button></div>`;
+ else h+=(['up','down','zip','pre'].includes(cur)?sg('fmt',[['auto','Otomatis'],['mp4','MP4'],['webm','WebM']],'Format file')+sg('fps',[[15,'15 fps'],[24,'24 fps'],[30,'30 fps'],[60,'60 fps']],'Frame rate'):'')+(['aud','mrg'].includes(cur)?'':'<div class="note" id="inf"></div>')+`<div class="r"><button class="p big" id="go">${go}</button></div>`;
  $('#pb').innerHTML=h;
   if($('#go'))$('#go').insertAdjacentHTML('afterbegin',ic('dl'));if($('#gj'))$('#gj').insertAdjacentHTML('afterbegin',ic('cam'));
  if($('#s1'))$('#s1').insertAdjacentHTML('afterbegin',ic('cut'));
  info();
 }
 function info(){
- const el=$('#inf');if(!el||!V)return;const g=geom(),d=(S.end-S.start)/S.spd,sz=getBps(g)*d/8+16000*d;
+ const el=$('#inf');if(!el||!V)return;
+ const mx=MAXD[cur];if(mx){const d=Math.min(S.end-S.start,mx)/S.spd;el.textContent=`Durasi hasil ${tf(d)} · maksimal ${mx} detik`+(S.end-S.start>mx?' · bagian di luar batas dipotong':'');return}
+ const g=geom(),d=(S.end-S.start)/S.spd,sz=getBps(g)*d/8+16000*d;
  el.textContent=`Hasil: ${g.W}×${g.H} · ${tf(d)} · perkiraan ${fb(sz)}`;
 }
 $('#pb').addEventListener('click',e=>{
@@ -267,6 +270,7 @@ $('#pb').addEventListener('input',e=>{
  const k=t.dataset.k;if(!k)return;S[k]=+t.value;if(k==='tdur')setSpd();
  if(k==='start'&&S.start>S.end-.1){S.start=Math.max(0,S.end-.1);t.value=S.start}
  if(k==='end'&&S.end<S.start+.1){S.end=Math.min(V.dur,S.start+.1);t.value=S.end}
+ const mx=MAXD[cur];if(mx&&(k==='start'||k==='end')&&S.end-S.start>mx){const o=k==='start'?'end':'start';S[o]=k==='start'?Math.min(V.dur,S.start+mx):Math.max(0,S.end-mx);const el=$('#pb [data-k="'+o+'"]');if(el){el.value=S[o];el.nextElementSibling.textContent=FM[o](S[o])}}
  t.nextElementSibling.textContent=FM[k](S[k]);
  if(k==='start'||k==='end'){vid.pause();vid.currentTime=S[k]}
  info();
@@ -278,7 +282,7 @@ function geom(){
  if(a&&!fit){if(sw/sh>a){const nw=sh*a;sx=(sw-nw)/2;sw=nw}else{const nh=sw/a;sy=(sh-nh)/2;sh=nh}}
  const q=S.rot%180!==0,rw=q?sh:sw,rh=q?sw:sh,t=S.tgt||'x1';
  let cw=rw,ch=rh;if(fit){if(rw/rh>a)ch=rw/a;else cw=rh*a}
- const f=t[0]==='x'?+t.slice(1):+t.slice(1)/Math.min(cw,ch);
+ let f=t[0]==='x'?+t.slice(1):+t.slice(1)/Math.min(cw,ch);if(cur==='down'||cur==='zip')f=Math.min(f,1);
  return{sx,sy,sw,sh,rw,rh,fit,W:ev(cw*f),H:ev(ch*f)};
 }
 function filt(k){
@@ -364,13 +368,13 @@ async function capture(fps,maxD,g){
  busyF=1;cancel=0;vid.pause();vid.muted=true;await seek(S.start);
  const end=Math.min(S.end,S.start+maxD),fr=[];let nx=S.start;
  $('#busy').hidden=false;vid.playbackRate=S.spd;
- try{await vid.play()}catch(e){cancel=1}
+ try{await vid.play()}catch(e){cancel=2}
  await new Promise(res=>{(function f(){const t=vid.currentTime;
   if(t>=nx&&nx<end){const c=document.createElement('canvas');c.width=g.W;c.height=g.H;draw(c.getContext('2d'),g.W,g.H,g,1);fr.push(c);nx+=S.spd/fps}
   const p=Math.min(1,(t-S.start)/(end-S.start));$('#bp').value=p;$('#bt').textContent=Math.round(p*100)+'%';
   if(cancel||t>=end-.02||vid.ended)res();else requestAnimationFrame(f)})()});
  vid.pause();vid.muted=false;vid.playbackRate=1;busyF=0;$('#busy').hidden=true;seek(S.start);
- if(cancel){toast('Dibatalkan.');return}
+ if(cancel){toast(cancel===2?'Video tidak bisa diputar otomatis. Ketuk tombol putar sekali, lalu coba lagi.':'Dibatalkan.');return}
  return fr}
 const BAY=[0,8,2,10,12,4,14,6,3,11,1,9,15,7,13,5],cl=v=>Math.max(0,Math.min(5,Math.round(v/51)));
 function lzw(px,o){let bits=0,cur=0,buf=[],n=9,next=258,d=new Map();
@@ -387,7 +391,7 @@ function gif(fr,dl){const W=fr[0].width,H=fr[0].height,o=[],b=n=>o.push(n&255),w
   for(let y=0,p=0;y<H;y++)for(let x=0;x<W;x++,p++){const i=p*4,t=(BAY[(y&3)*4+(x&3)]-7.5)*3.2;px[p]=cl(d[i]+t)*36+cl(d[i+1]+t)*6+cl(d[i+2]+t)}
   b(33);b(249);b(4);b(0);w(dl);b(0);b(0);b(44);w(0);w(0);w(W);w(H);b(0);b(8);lzw(px,o)}
  b(59);return new Blob([new Uint8Array(o)],{type:'image/gif'})}
-async function runGif(){const g=geom(),fr=await capture(S.fps,12,g);if(!fr)return;result(await enc(()=>gif(fr,Math.max(2,Math.round(100/S.fps)))),g,'g')}
+async function runGif(){const g=geom(),fr=await capture(S.fps,12,g);if(!fr||!fr.length)return toast('Tidak ada frame yang berhasil diambil.');result(await enc(()=>gif(fr,Math.max(2,Math.round(100/S.fps)))),g,'g')}
 const cat=a=>{const o=new Uint8Array(a.reduce((n,x)=>n+x.length,0));let p=0;a.forEach(x=>{o.set(x,p);p+=x.length});return o},w3=(n,l)=>Array.from({length:l},(_,i)=>(n>>(8*i))&255);
 const ck=(id,d)=>cat([new Uint8Array([...id].map(c=>c.charCodeAt(0))),new Uint8Array(w3(d.length,4)),d,new Uint8Array(d.length&1?[0]:[])]);
 async function awebp(fr,dl,q){const W=fr[0].width,H=fr[0].height,F=[];
@@ -396,11 +400,21 @@ async function awebp(fr,dl,q){const W=fr[0].width,H=fr[0].height,F=[];
   F.push(ck('ANMF',cat([new Uint8Array([0,0,0,0,0,0,...w3(W-1,3),...w3(H-1,3),...w3(dl,3),3]),...img])))}
  const body=cat([new Uint8Array([87,69,66,80]),ck('VP8X',new Uint8Array([18,0,0,0,...w3(W-1,3),...w3(H-1,3)])),ck('ANIM',new Uint8Array(6)),...F]);
  return new Blob([cat([new Uint8Array([82,73,70,70,...w3(body.length,4)]),body])],{type:'image/webp'})}
-async function runWsk(share){const g=geom(),fr=await capture(S.fps,8,g);if(!fr)return;
- const b=await enc(async()=>{let q=.75,x;for(;;){x=await awebp(fr,Math.round(1000/S.fps),q);if(x.size<=5e5||q<=.2)break;q-=.15}return x});
- result(b,g,'s');if(share)$('#sh').click()}
+const blobOf=(c,t,q)=>new Promise(r=>c.toBlob(r,t,q));
+async function fitWebp(fr,fps){let x,n=fr.length;
+ for(;;){const L=fr.slice(0,n);
+  for(const[st,q]of[[1,.6],[1,.45],[1,.3],[1,.2],[2,.3],[2,.15]]){
+   $('#bt').textContent='Menyesuaikan stiker…';x=await awebp(L.filter((_,i)=>i%st===0),Math.round(1000*st/fps),q);
+   if(x.size<=5e5)return{b:x,sec:n/fps}}
+  if(n<=fps*2)return{b:x,sec:n/fps};n=Math.floor(n*.85)}}
+async function runWsk(share){
+ if(!document.createElement('canvas').toDataURL('image/webp').startsWith('data:image/webp'))return toast('Browser ini tidak bisa membuat WebP. Pakai Chrome atau Edge.');
+ const g=geom(),fr=await capture(S.fps,MAXD.wsk,g);if(!fr)return;if(!fr.length)return toast('Tidak ada frame yang berhasil diambil.');
+ let r;try{r=await enc(()=>fitWebp(fr,S.fps))}catch(e){return toast('Gagal membuat stiker: '+e.message)}
+ const want=fr.length/S.fps;result(r.b,g,'s');
+ $('#rs').textContent='Stiker '+g.W+'×'+g.H+' · durasi '+r.sec.toFixed(1)+' detik'+(r.sec<want-.2?' (dipersingkat dari '+want.toFixed(1)+' detik agar diterima WhatsApp)':'')+(share?'. Ketuk Bagikan untuk mengirim ke WhatsApp.':'. Ketuk Unduh untuk menyimpan.')}
 async function runRev(){
- const g=geom(),fps=S.fps,fr=await capture(fps,20,g);if(!fr)return;
+ const g=geom(),fps=S.fps,fr=await capture(fps,20,g);if(!fr||!fr.length)return toast('Tidak ada frame yang berhasil diambil.');
  const mt=mime('v');if(!mt)return toast('Browser ini tidak mendukung perekaman video.');
  const seq=S.rv?fr.concat(fr.slice(1,-1).reverse()):fr.slice().reverse(),en=Math.min(S.end,S.start+20);
  busyF=1;cancel=0;initAudio();await AC.resume();rg.gain.value=S.mut?0:S.vol;
