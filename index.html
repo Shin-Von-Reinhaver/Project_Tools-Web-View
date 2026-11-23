@@ -150,6 +150,36 @@ h1{font-size:clamp(1.4rem,4.2vw,2rem);font-weight:800;letter-spacing:-.03em;line
 .cards{align-items:stretch}.card .acts{margin-top:auto}.cards .card:last-child:nth-child(odd){grid-column:1/-1}
 .cards .card:last-child:nth-child(odd) .acts .grow{flex:0 1 280px}
 @media (max-width:760px){.cards .card:last-child:nth-child(odd){grid-column:auto}.cards .card:last-child:nth-child(odd) .acts .grow{flex:1 1 130px}}
+.bot{margin:18px 0 6px;padding:22px;border-radius:26px;background:var(--card);border:1.5px solid var(--line);backdrop-filter:blur(16px);position:relative;overflow:hidden;display:flex;flex-direction:column;gap:14px}
+.bot::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:linear-gradient(90deg,#25d366,#34d399,#38bdf8)}
+.bot-h{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.bot-ico{width:48px;height:48px;border-radius:16px;display:grid;place-items:center;font-size:1.5rem;background:linear-gradient(135deg,#25d366,#128c7e);box-shadow:0 10px 22px -12px #25d366}
+.bot-t{flex:1;min-width:180px}.bot-t h2{font-size:1.05rem;font-weight:800}.bot-t p{color:var(--mut);font-size:.84rem;margin-top:2px}
+.bot-pill{display:inline-flex;align-items:center;gap:8px;padding:6px 13px;border-radius:999px;background:var(--card2);border:1px solid var(--line);font-size:.78rem;font-weight:800}
+.bot-pill i{width:9px;height:9px;border-radius:50%;background:var(--mut)}
+.bot-pill.ok i{background:var(--ok);box-shadow:0 0 0 4px color-mix(in srgb,var(--ok) 25%,transparent)}
+.bot-pill.wait i{background:#fbbf24}.bot-pill.bad i{background:var(--bad)}
+.bot-stats{display:flex;gap:8px;flex-wrap:wrap}.bot-stats .stat b{color:var(--ink);font-weight:800}
+.bot-row{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap}
+.bot-f{flex:1;min-width:220px;display:flex;flex-direction:column;gap:5px;font-size:.74rem;font-weight:800;color:var(--mut);text-transform:uppercase;letter-spacing:.06em}
+.bot input[type=url],.bot input[type=password],.bot input[type=text],.bot input[type=tel]{width:100%;padding:10px 13px;border-radius:13px;border:1.5px solid var(--line);background:var(--card2);color:var(--ink);font:inherit;font-size:.9rem;text-transform:none;letter-spacing:0;font-weight:500}
+.bot-hint{font-size:.82rem;color:var(--mut);padding:10px 13px;border-radius:13px;border:1px dashed var(--line)}
+.bot-hint.warn{color:#fbbf24;border-color:color-mix(in srgb,#fbbf24 50%,transparent)}
+.bot-owner{display:flex;flex-direction:column;gap:12px}
+.bot-box{padding:16px;border-radius:18px;background:var(--card2);border:1px solid var(--line);display:flex;flex-direction:column;gap:12px}
+.bot-box h3{font-size:.86rem;font-weight:800}.bot-box p{font-size:.82rem;color:var(--mut)}
+.bot-qr{align-self:center;width:min(260px,100%);border-radius:16px;background:#fff;padding:10px}
+.bot-code{align-self:center;font:800 1.9rem/1 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.18em;padding:16px 22px;border-radius:16px;background:var(--bg2);border:1.5px dashed var(--ac);user-select:all}
+.bot-acts{display:flex;gap:8px;flex-wrap:wrap}
+.creator{display:inline-flex;align-items:center;gap:7px;margin:6px 0 0;padding:5px 13px;border-radius:999px;font-size:.78rem;font-weight:800;color:#422006;background:linear-gradient(135deg,#fde68a,#f59e0b);box-shadow:0 8px 20px -10px #f59e0b}
+.bot-cmds summary{cursor:pointer;font-weight:800;font-size:.88rem;padding:4px 0}
+.bot-cmds .search{margin:10px 0}
+.bot-cat{margin:12px 0 6px;font-size:.74rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--mut)}
+.bot-cmd{display:flex;gap:10px;align-items:baseline;width:100%;text-align:left;padding:8px 11px;border-radius:12px;border:1px solid transparent;background:none;color:inherit;font:inherit;cursor:pointer}
+.bot-cmd:hover,.bot-cmd:focus-visible{background:var(--card2);border-color:var(--line)}
+.bot-cmd code{font:700 .82rem ui-monospace,Menlo,Consolas,monospace;color:var(--ac);white-space:nowrap}
+.bot-cmd span{font-size:.82rem;color:var(--mut)}
+@media(max-width:560px){.bot{padding:18px}.bot-cmd{flex-direction:column;gap:2px}}
 </style>
 <style id="hideNfBadge">a[href*="netlify.com"]:not([data-keep]),[id*="netlify-badge" i],[class*="netlify-badge" i],[id*="nf-badge" i],[class*="nf-badge" i]{display:none!important}html.nb{--bdg:0px!important}</style><script>(function(){function k(){document.querySelectorAll('a[href*="netlify.com"],[id*=netlify-badge i],[class*=netlify-badge i]').forEach(function(e){if(!e.hasAttribute("data-keep"))e.remove()})}document.addEventListener("DOMContentLoaded",k);try{new MutationObserver(k).observe(document.documentElement,{childList:true,subtree:true})}catch(e){}})();</script>
 </head>
@@ -198,6 +228,26 @@ h1{font-size:clamp(1.4rem,4.2vw,2rem);font-weight:800;letter-spacing:-.03em;line
       <span class="stat"><svg class="i"><use href="#i-bolt"/></svg><span data-i18n="stat3"></span></span>
     </div>
   </section>
+
+<section class="bot" id="botSec" aria-labelledby="botTitle">
+  <div class="bot-h">
+    <div class="bot-ico" aria-hidden="true">🤖</div>
+    <div class="bot-t"><h2 id="botTitle"></h2><p id="botSub"></p></div>
+    <span class="bot-pill" id="botPill"><i></i><span></span></span>
+  </div>
+  <div class="bot-stats" id="botStats"></div>
+  <div class="bot-row" id="botConn">
+    <label class="bot-f"><span id="lblBase"></span><input type="url" id="botBase" autocomplete="off" spellcheck="false" inputmode="url"></label>
+    <button class="btn violet" id="botSave" type="button"></button>
+  </div>
+  <p class="bot-hint" id="botHint" hidden></p>
+  <div id="botOwnerBox" class="bot-owner"></div>
+  <details class="bot-cmds" id="botCmds">
+    <summary id="botCmdSum"></summary>
+    <label class="search"><svg class="i"><use href="#i-search"/></svg><input type="search" id="botCq" autocomplete="off"></label>
+    <div id="botCmdList"></div>
+  </details>
+</section>
 
   <div class="head">
     <h2 data-i18n="sectionLabel"></h2>
@@ -709,6 +759,153 @@ async function downloadSrc(x){const r=await probe(x);if(!r.text){toast(diagMsg(x
  const blob=new Blob([text],{type:'text/html;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=x.file.split('/').pop();document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),6000);toast(t('downloaded')+': '+a.download+' · '+t(tidy?'tidied':'notTidied'))}
 
 applyTheme();applyLang();routeHash();
+</script>
+<script>
+/* Panel WhatsApp Bot: terhubung ke server di folder bot/ lewat API HTTP. Semua teks dari server ditampilkan dengan textContent. */
+(function(){
+const BT={
+id:{title:'WhatsApp Bot',sub:'Bot yang terhubung langsung ke panel ini',on:'Online',wait:'Menghubungkan…',qr:'Menunggu tautan',closed:'Terputus',out:'Sesi keluar',off:'Belum terhubung',
+ owner:'Pemilik',mode:'Mode',cmds:'Perintah',users:'Pengguna',up:'Aktif',base:'Alamat server bot',basePh:'http://localhost:3000',save:'Hubungkan',saved:'Alamat disimpan',
+ offHint:'Server bot belum terjangkau. Jalankan folder bot/ (lihat README.md), lalu isi alamatnya di atas. Jika halaman ini diakses lewat https, alamat bot juga harus https.',
+ mixed:'Halaman ini memakai https sedangkan alamat bot http. Browser memblokir ini; pakai alamat https atau buka panel dari server bot.',
+ login:'Masuk sebagai Creator',tokenPh:'Token pemilik (OWNER_TOKEN)',enter:'Masuk',exit:'Keluar',wrong:'Token salah',loginFail:'Gagal masuk',
+ hi:'Halo, {n}! Kamu masuk sebagai Creator.',badge:'Creator terverifikasi',welcome:'Selamat datang kembali, {n}',
+ linkT:'Tautkan nomor WhatsApp bot',scan:'Pindai QR ini: WhatsApp → Perangkat tertaut → Tautkan perangkat.',or:'Atau tautkan lewat kode: masukkan nomor bot, minta kode, lalu isi di WhatsApp → Perangkat tertaut → Tautkan dengan nomor telepon.',
+ numPh:'6281234567890',ask:'Minta kode',codeIs:'Kode tautan (berlaku singkat):',linked:'Terhubung sebagai',ctl:'Kendali bot',public:'Publik',self:'Hanya saya',restart:'Mulai ulang',unlink:'Putuskan WhatsApp',unlinkQ:'Putuskan WhatsApp dari bot? Kamu perlu menautkan ulang.',
+ done:'Selesai',fail:'Gagal',top:'Teratas',cmdsT:'Daftar perintah',cq:'Cari perintah',copied:'Disalin: ',tap:'Ketuk perintah untuk menyalin',none:'Tidak ada hasil',total:'Total perintah dijalankan',banned:'Diblokir'},
+en:{title:'WhatsApp Bot',sub:'A bot wired straight into this panel',on:'Online',wait:'Connecting…',qr:'Waiting to link',closed:'Disconnected',out:'Logged out',off:'Not connected',
+ owner:'Owner',mode:'Mode',cmds:'Commands',users:'Users',up:'Uptime',base:'Bot server address',basePh:'http://localhost:3000',save:'Connect',saved:'Address saved',
+ offHint:'The bot server is unreachable. Run the bot/ folder (see README.md), then enter its address above. If this page is served over https, the bot address must be https too.',
+ mixed:'This page uses https but the bot address is http. Browsers block that; use an https address or open the panel from the bot server.',
+ login:'Sign in as Creator',tokenPh:'Owner token (OWNER_TOKEN)',enter:'Sign in',exit:'Sign out',wrong:'Wrong token',loginFail:'Sign-in failed',
+ hi:'Hi, {n}! You are signed in as Creator.',badge:'Verified Creator',welcome:'Welcome back, {n}',
+ linkT:'Link the bot’s WhatsApp number',scan:'Scan this QR: WhatsApp → Linked devices → Link a device.',or:'Or link by code: enter the bot number, request a code, then type it in WhatsApp → Linked devices → Link with phone number.',
+ numPh:'6281234567890',ask:'Get code',codeIs:'Link code (short-lived):',linked:'Connected as',ctl:'Bot controls',public:'Public',self:'Only me',restart:'Restart',unlink:'Unlink WhatsApp',unlinkQ:'Unlink WhatsApp from the bot? You will need to link again.',
+ done:'Done',fail:'Failed',top:'Top',cmdsT:'Command list',cq:'Search commands',copied:'Copied: ',tap:'Tap a command to copy it',none:'No results',total:'Commands run',banned:'Blocked'}};
+const L=()=>BT[(typeof lang!=='undefined'&&BT[lang])?lang:'id'];
+const $=s=>document.querySelector(s);
+const el=(t,a,...k)=>{const e=document.createElement(t);for(const[n,v]of Object.entries(a||{})){if(n==='class')e.className=v;else if(n.startsWith('on'))e.addEventListener(n.slice(2),v);else if(v!==false&&v!=null)e.setAttribute(n,v)}for(const c of k.flat())if(c!=null)e.append(c.nodeType?c:document.createTextNode(c));return e};
+const S={pub:null,cmds:null,own:null,err:false,sess:null,sig:''};
+try{S.sess=JSON.parse(localStorage.getItem('botSession')||'null')}catch(e){}
+if(S.sess&&(!S.sess.s||S.sess.exp<Date.now()))S.sess=null;
+const store=(k,v)=>{try{v==null?localStorage.removeItem(k):localStorage.setItem(k,v)}catch(e){}};
+const getBase=()=>{try{return localStorage.getItem('botBase')||''}catch(e){return''}};
+const norm=u=>{u=String(u||'').trim().replace(/\/+$/,'');if(!/^https?:\/\/[^\s/]+/i.test(u))return'';return u};
+let base=norm(getBase());
+
+async function api(path,o={}){
+  if(!base)throw new Error('no-base');
+  const c=new AbortController(),t=setTimeout(()=>c.abort(),7000);
+  try{
+    const r=await fetch(base+path,{method:o.method||'GET',signal:c.signal,cache:'no-store',headers:Object.assign({},o.body?{'Content-Type':'application/json'}:{},S.sess&&path.startsWith('/api/owner')?{Authorization:'Bearer '+S.sess.s}:{}),body:o.body?JSON.stringify(o.body):undefined});
+    let j=null;try{j=await r.json()}catch(e){}
+    if(!j)throw new Error('bad-response');
+    if(r.status===401&&path.startsWith('/api/owner')){S.sess=null;store('botSession',null);renderAll()}
+    if(!r.ok)throw Object.assign(new Error(j.error||('HTTP '+r.status)),{status:r.status});
+    return j;
+  }finally{clearTimeout(t)}
+}
+const fmtUp=s=>{const d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60);return(d?d+'d ':'')+(h?h+'h ':'')+m+'m'};
+
+function pill(){
+  const t=L(),p=$('#botPill'),st=S.pub&&S.pub.status;let c='bad',x=t.off;
+  if(S.pub&&!S.err){if(st==='open'){c='ok';x=t.on}else if(st==='connecting'){c='wait';x=t.wait}else if(st==='qr'){c='wait';x=t.qr}else if(st==='logged_out'){c='wait';x=t.out}else{c='bad';x=t.closed}}
+  p.className='bot-pill '+c;p.lastChild.textContent=x;
+}
+function renderHead(){
+  const t=L();$('#botTitle').textContent=t.title;$('#botSub').textContent=t.sub;$('#lblBase').textContent=t.base;
+  $('#botBase').placeholder=t.basePh;$('#botSave').textContent=t.save;$('#botCmdSum').textContent=t.cmdsT+(S.cmds?' ('+S.cmds.list.length+')':'');$('#botCq').placeholder=t.cq;
+  pill();
+  const box=$('#botStats');box.textContent='';
+  if(S.pub&&!S.err){const p=S.pub;[[t.owner,p.owner],[t.mode,p.mode==='self'?t.self:t.public],[t.cmds,p.commands],[t.users,p.users],[t.up,fmtUp(p.uptime)]].forEach(([k,v])=>box.append(el('span',{class:'stat'},k+': ',el('b',{},String(v)))))}
+  const h=$('#botHint');
+  if(S.err||!S.pub){h.hidden=false;h.className='bot-hint';h.textContent=(location.protocol==='https:'&&/^http:\/\//i.test(base)&&!/^http:\/\/(localhost|127\.)/i.test(base))?t.mixed:t.offHint}else h.hidden=true;
+}
+function renderCreatorBadge(){
+  const t=L();let b=$('#creatorBadge');
+  if(S.sess){
+    if(!b){b=el('div',{class:'creator',id:'creatorBadge'});const h=document.querySelector('.profile h1');h&&h.after(b)}
+    b.textContent='👑 '+t.badge+' · '+(S.sess.owner||'');
+  }else if(b)b.remove();
+}
+function renderOwner(force){
+  const t=L(),box=$('#botOwnerBox'),o=S.own;
+  const sig=[!!S.err,!!S.pub,!!S.sess,o&&o.status,o&&o.qr&&o.qr.length,o&&o.pairingCode,o&&o.mode,o&&o.me,o&&o.users,o&&o.totalCommands,lang].join('|');
+  if(!force&&sig===S.sig)return;S.sig=sig;
+  const keep=['#botTok','#botNum'].map(s=>{const e=$(s);return e?[s,e.value,document.activeElement===e]:null}).filter(Boolean);
+  box.textContent='';
+  if(S.err||!S.pub){return}
+  if(!S.sess){
+    const tok=el('input',{type:'password',id:'botTok',placeholder:t.tokenPh,autocomplete:'current-password','aria-label':t.tokenPh});
+    const go=async()=>{const v=tok.value;if(!v)return;go.b.disabled=true;try{const r=await api('/api/login',{method:'POST',body:{token:v}});S.sess={s:r.session,owner:r.owner,exp:Date.now()+r.expiresIn*1000};store('botSession',JSON.stringify(S.sess));tok.value='';toast(t.hi.replace('{n}',r.owner));renderAll();pollOwner()}catch(e){toast(e.status===401?t.wrong:(e.message||t.loginFail))}go.b.disabled=false};
+    go.b=el('button',{class:'btn ok',type:'button',onclick:go},t.enter);
+    tok.addEventListener('keydown',e=>{if(e.key==='Enter')go()});
+    box.append(el('div',{class:'bot-box'},el('h3',{},'🔐 '+t.login),el('div',{class:'bot-row'},el('label',{class:'bot-f'},el('span',{},t.tokenPh),tok),go.b)));
+    return;
+  }
+  const blocks=[];
+  if(o&&o.status!=='open'){
+    const b=el('div',{class:'bot-box'},el('h3',{},'📲 '+t.linkT));
+    if(o.qr&&/^data:image\/png;base64,[A-Za-z0-9+/=]+$/.test(o.qr)){b.append(el('img',{class:'bot-qr',src:o.qr,alt:'QR'}),el('p',{},t.scan))}
+    b.append(el('p',{},t.or));
+    const num=el('input',{type:'tel',id:'botNum',placeholder:t.numPh,inputmode:'numeric',autocomplete:'off','aria-label':t.numPh});
+    const ask=el('button',{class:'btn violet',type:'button',onclick:async()=>{ask.disabled=true;try{const r=await api('/api/owner/pair',{method:'POST',body:{number:num.value}});S.own=Object.assign(S.own||{},{pairingCode:r.code});renderOwner(true)}catch(e){toast(e.message)}ask.disabled=false}},t.ask);
+    b.append(el('div',{class:'bot-row'},el('label',{class:'bot-f'},el('span',{},t.numPh),num),ask));
+    if(o.pairingCode)b.append(el('p',{},t.codeIs),el('div',{class:'bot-code'},o.pairingCode));
+    blocks.push(b);
+  }
+  const post=async(p,body,msg)=>{try{await api(p,{method:'POST',body});toast(msg||t.done);pollOwner()}catch(e){toast(t.fail+': '+e.message)}};
+  const c=el('div',{class:'bot-box'},el('h3',{},'🛠️ '+t.ctl+(o&&o.me?' · '+t.linked+' +'+o.me:'')));
+  if(o){c.append(el('p',{},t.total+': '+o.totalCommands+' · '+t.users+': '+o.users+' · '+t.banned+': '+o.banned+(o.top&&o.top.length?' · '+t.top+': '+o.top.map(x=>x[0]+' ('+x[1]+')').join(', '):'')))}
+  const modes=el('div',{class:'seg',role:'group'},['public','self'].map(m=>el('button',{class:'btn'+(o&&o.mode===m?' on':''),type:'button',onclick:()=>post('/api/owner/mode',{mode:m})},m==='self'?t.self:t.public)));
+  c.append(el('div',{class:'bot-acts'},el('span',{class:'stat'},t.mode),modes));
+  c.append(el('div',{class:'bot-acts'},
+    el('button',{class:'btn amber',type:'button',onclick:()=>post('/api/owner/restart',{})},t.restart),
+    el('button',{class:'btn danger',type:'button',onclick:()=>{if(confirm(t.unlinkQ))post('/api/owner/logout',{})}},t.unlink),
+    el('button',{class:'btn',type:'button',onclick:async()=>{try{await api('/api/owner/logout-panel',{method:'POST',body:{}})}catch(e){}S.sess=null;S.own=null;store('botSession',null);renderAll()}},t.exit)));
+  blocks.push(c);
+  box.append(...blocks);
+  keep.forEach(([s,v,f])=>{const e=$(s);if(e){e.value=v;if(f)e.focus()}});
+}
+function renderCmds(){
+  const t=L(),box=$('#botCmdList');box.textContent='';
+  if(!S.cmds){return}
+  const q=$('#botCq').value.trim().toLowerCase(),cats={};
+  S.cmds.list.forEach(c=>{if(q&&!(c.name+' '+c.desc+' '+c.usage+' '+(c.aliases||[]).join(' ')).toLowerCase().includes(q))return;(cats[c.category]=cats[c.category]||[]).push(c)});
+  const ks=Object.keys(cats);if(!ks.length){box.append(el('p',{class:'bot-hint'},t.none));return}
+  box.append(el('p',{class:'bot-hint'},t.tap));
+  ks.forEach(k=>{box.append(el('div',{class:'bot-cat'},k));cats[k].forEach(c=>box.append(el('button',{class:'bot-cmd',type:'button',onclick:()=>{const v=S.cmds.prefix+c.usage;(navigator.clipboard?navigator.clipboard.writeText(v):Promise.reject()).then(()=>toast(t.copied+v),()=>toast(v))}},el('code',{},S.cmds.prefix+c.usage),el('span',{},c.desc))))});
+}
+function renderAll(){renderHead();renderCreatorBadge();renderOwner(true);renderCmds();const i=$('#botBase');if(i&&document.activeElement!==i)i.value=base}
+
+let busyS=false;
+async function pollStatus(){
+  if(busyS||!base||document.hidden)return;busyS=true;
+  try{S.pub=await api('/api/status');S.err=false;if(!S.cmds){try{S.cmds=await api('/api/commands');renderCmds()}catch(e){}}}catch(e){S.err=true}
+  busyS=false;renderHead();renderOwner();
+}
+async function pollOwner(){
+  if(!S.sess||S.err||document.hidden||!base)return;
+  try{S.own=await api('/api/owner/state');renderOwner()}catch(e){}
+  renderCreatorBadge();
+}
+$('#botSave').addEventListener('click',()=>{const v=norm($('#botBase').value);if(!v){toast('URL?');return}base=v;store('botBase',v);S.cmds=null;S.err=false;S.pub=null;toast(L().saved);renderAll();pollStatus().then(pollOwner)});
+$('#botBase').addEventListener('keydown',e=>{if(e.key==='Enter')$('#botSave').click()});
+$('#botCq').addEventListener('input',renderCmds);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden){pollStatus().then(pollOwner)}});
+
+const _al=applyLang;applyLang=function(){_al.apply(this,arguments);renderAll()};
+
+(async function init(){
+  if(!base&&/^https?:$/.test(location.protocol)){ // dilayani langsung oleh server bot? coba alamat asal yang sama
+    try{const c=new AbortController();setTimeout(()=>c.abort(),2500);const r=await fetch(location.origin+'/api/status',{signal:c.signal,cache:'no-store'});const j=await r.json();if(r.ok&&j&&j.name&&'status' in j){base=location.origin;store('botBase',base)}}catch(e){}
+  }
+  renderAll();
+  if(base){await pollStatus();await pollOwner();}
+  setInterval(()=>{pollStatus().then(()=>{if(S.sess&&(!S.own||S.own.status!=='open'||Date.now()%3===0))pollOwner()})},4000);
+  setInterval(pollOwner,6000);
+})();
+})();
 </script>
 </body>
 </html>
