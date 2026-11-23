@@ -109,7 +109,7 @@ progress{width:100%;height:8px;accent-color:var(--ac)}
 
 <input type="file" id="fi" accept="video/*" hidden><input type="file" id="fm" accept="video/*" multiple hidden>
 <div id="busy" hidden><div class="bx"><div class="spin"></div><b>Memproses video…</b><progress id="bp" max="1" value="0"></progress><div class="mut" id="bt">0%</div><p class="mut" style="font-size:12px;margin:6px 0 12px">Diproses secara real-time. Biarkan tab ini tetap terbuka.</p><button class="dng" id="bc">Batal</button></div></div>
-<dialog id="rd"><h3>Selesai</h3><div id="rv"></div><div class="note" id="rs"></div><div class="r"><button class="p big" id="dl"></button><button id="sh">Bagikan</button><button id="rc">Tutup</button></div></dialog>
+<dialog id="rd"><h3>Selesai</h3><div id="rv"></div><div class="note" id="rs"></div><div class="r"><button class="p big" id="dl"></button><button id="ga" hidden>Kirim sebagai GIF (bergerak)</button><button id="sh">Bagikan</button><button id="rc">Tutup</button></div></dialog>
 <div id="toast" role="status"></div>
 
 <script>
@@ -216,7 +216,7 @@ const BASE={br:1,co:1,sa:1,gr:0,se:0,hue:0,inv:0};
 const FP={Normal:{},Vintage:{br:1.05,co:.9,sa:.75,se:.45},Sinematik:{br:.95,co:1.3,sa:1.15},'Hitam putih':{gr:1,co:1.15},Cerah:{br:1.15,co:1.1,sa:1.4},Negatif:{inv:1}};
 const PRE={'WhatsApp ringan':{tgt:'p480',kbps:900,fps:24},'Reels / TikTok 9:16':{asp:9/16,fit:2,tgt:'p1080'},'YouTube 1080p':{asp:16/9,fit:2,tgt:'p1080'},'Kotak 1:1':{asp:1,fit:2,tgt:'p1080'},'Hemat kuota':{tgt:'p360',kbps:500,fps:24}};
 const RES=[['x1','Asli'],['p1080','1080p'],['p720','720p'],['p480','480p'],['p360','360p'],['p240','240p']];
-const MAXD={gif:12,rev:20,wsk:10};
+const MAXD={gif:12,rev:20,wsk:8};
 const setSpd=()=>S.spd=Math.max(.25,Math.min(16,(S.end-S.start)/S.tdur));
 const TR=()=>rn('start','Mulai',0,V.dur,.1)+rn('end','Selesai',0,V.dur,.1);
 const SZ=()=>sg('tgt',[['p240','240p'],['p360','360p'],['p480','480p']],'Ukuran');
@@ -241,7 +241,7 @@ function panel(){
  if(cur==='gif'){h=TR()+SZ()+sg('fps',[[8,'8 fps'],[10,'10 fps'],[15,'15 fps']],'Frame rate')+'<div class="note">Dibatasi 12 detik. GIF memakai 216 warna dan file-nya besar, jadi pilih ukuran kecil untuk durasi panjang.</div>';go='Buat GIF'}
  if(cur==='rev'){h=TR()+sg('rv',[[0,'Mundur'],[1,'Boomerang']],'Mode')+SZ()+sg('fps',[[10,'10 fps'],[15,'15 fps'],[20,'20 fps']],'Frame rate')+'<div class="note">Maksimal 20 detik. Mode Mundur ikut membalik suara, Boomerang tanpa suara.</div>';go='Balik video'}
  if(cur==='mrg'){h='<div class="plab">Urutan video</div>'+MC.map((m,i)=>`<div class="note">${i+1}. ${esc(m.name)} · ${tf(m.dur)} <button data-rm="${i}">Hapus</button></div>`).join('')+'<div class="r"><button id="addv">Tambah video</button></div>'+sg('tgt',[['p480','480p'],['p720','720p'],['p1080','1080p']],'Resolusi hasil')+sg('fps',[[24,'24 fps'],[30,'30 fps']],'Frame rate')+'<div class="note">Video berbeda rasio diberi bar hitam.</div>';go='Gabungkan video'}
- if(cur==='wsk'){h='<div class="note">Stiker animasi WebP 512×512, bening dan tanpa bingkai putih. Durasi maksimal 10 detik, sama seperti batas stiker animasi WhatsApp. Kualitas disesuaikan otomatis agar bisa diterima WhatsApp.</div>'+TR()+sg('fit',[[0,'Penuhi bingkai (potong)'],[3,'Muat utuh (latar bening)']],'Isi bingkai')+sg('fps',[[8,'8 fps'],[12,'12 fps'],[15,'15 fps']],'Frame rate')+'<div class="r"><button class="p big" id="gw">Kirim ke WhatsApp</button></div>';go='Simpan stiker'}
+ if(cur==='wsk'){h='<div class="note">Stiker animasi WebP 512×512, bening dan tanpa bingkai putih. Durasi maksimal 8 detik, sesuai batas stiker animasi WhatsApp. Kualitas disesuaikan otomatis agar bisa diterima WhatsApp.</div>'+TR()+sg('fit',[[0,'Penuhi bingkai (potong)'],[3,'Muat utuh (latar bening)']],'Isi bingkai')+sg('fps',[[8,'8 fps'],[12,'12 fps'],[15,'15 fps']],'Frame rate')+'<div class="r"><button class="p big" id="gw">Bagikan stiker</button></div>';go='Simpan stiker'}
  if(cur==='frm'){h='<div class="note">Jeda video di bagian yang diinginkan, lalu simpan sebagai gambar.</div><div class="r"><button class="p big" id="gj">Simpan JPG</button><button id="gp">Simpan PNG</button></div>'}
  else h+=(['up','down','zip','pre'].includes(cur)?sg('fmt',[['auto','Otomatis'],['mp4','MP4'],['webm','WebM']],'Format file')+sg('fps',[[15,'15 fps'],[24,'24 fps'],[30,'30 fps'],[60,'60 fps']],'Frame rate'):'')+(['aud','mrg'].includes(cur)?'':'<div class="note" id="inf"></div>')+`<div class="r"><button class="p big" id="go">${go}</button></div>`;
  $('#pb').innerHTML=h;
@@ -358,9 +358,10 @@ function result(b,g,m){
  $('#rv').innerHTML=m==='g'||m==='s'?`<img src="${RU}" alt="" style="max-width:100%;max-height:46vh;border-radius:12px;display:block;margin:auto;background:repeating-conic-gradient(#8885 0 25%,transparent 0 50%) 0 0/16px 16px">`:m==='v'?`<video src="${RU}" controls playsinline style="width:100%;max-height:46vh;border-radius:12px;background:#000"></video>`:`<audio src="${RU}" controls style="width:100%"></audio>`;
  const d=Math.round((1-b.size/V.size)*100);
  $('#rs').textContent=`${fb(V.size)} → ${fb(b.size)} (${d>=0?'−'+d:'+'+Math.abs(d)}%)`+(m!=='a'?` · ${g.W}×${g.H}`:'');
- $('#rd').showModal();const rv=$('#rv video');if(rv)rv.onloadedmetadata=()=>{if(rv.duration===Infinity){rv.currentTime=1e101;rv.ontimeupdate=()=>{rv.ontimeupdate=null;rv.currentTime=0}}};
+ $('#ga').hidden=m!=='s';$('#rd').showModal();const rv=$('#rv video');if(rv)rv.onloadedmetadata=()=>{if(rv.duration===Infinity){rv.currentTime=1e101;rv.ontimeupdate=()=>{rv.ontimeupdate=null;rv.currentTime=0}}};
 }
 $('#dl').onclick=()=>{const a=document.createElement('a');a.href=RU;a.download=RN;document.body.append(a);a.click();a.remove()};
+$('#ga').onclick=async()=>{if(!WSK)return;try{const sc=document.createElement('canvas'),Z=Math.min(384,WSK.fr[0].width),L=WSK.fr.map(c=>{const x=document.createElement('canvas');x.width=Z;x.height=Math.round(c.height*Z/c.width);const g=x.getContext('2d');g.fillStyle='#000';g.fillRect(0,0,x.width,x.height);g.drawImage(c,0,0,x.width,x.height);return x});const b=await enc(async()=>gif(L,Math.max(2,Math.round(100/WSK.fps)))),f=new File([b],WSK.name+'-stiker.gif',{type:'image/gif'});if(navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share({files:[f]});return}catch(e){if(e.name==='AbortError')return}}const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=f.name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);toast('GIF disimpan: '+f.name)}catch(e){toast('Gagal membuat GIF: '+e.message)}};
 $('#rc').onclick=()=>{$('#rd').close();$('#rv').innerHTML=''};
 $('#rd').addEventListener('close',()=>$('#rv').innerHTML='');
 $('#sh').onclick=async()=>{const f=new File([RB],RN,{type:RB.type});try{if(navigator.canShare&&navigator.canShare({files:[f]}))await navigator.share({files:[f]});else toast('Berbagi tidak didukung di perangkat ini. Pakai Unduh.')}catch(e){}};
@@ -410,12 +411,13 @@ async function fitWebp(fr,fps){let x,n=fr.length;
    $('#bt').textContent='Menyesuaikan stiker…';x=await awebp(L.filter((_,i)=>i%st===0),Math.round(1000*st/fps),q);
    if(x.size<=5e5)return{b:x,sec:n/fps}}
   if(n<=fps*2)return{b:x,sec:n/fps};n=Math.floor(n*.85)}}
+let WSK=null;
 async function runWsk(share){
  if(!document.createElement('canvas').toDataURL('image/webp').startsWith('data:image/webp'))return toast('Browser ini tidak bisa membuat WebP. Pakai Chrome atau Edge.');
  const g=geom(),fr=await capture(S.fps,MAXD.wsk,g);if(!fr)return;if(fr.length<2)return toast('Video terlalu pendek untuk stiker animasi.');
  let r;try{r=await enc(()=>fitWebp(fr,S.fps))}catch(e){return toast('Gagal membuat stiker: '+e.message)}
- const want=fr.length/S.fps;result(r.b,g,'s');
- $('#rs').textContent='Stiker '+g.W+'×'+g.H+' · durasi '+r.sec.toFixed(1)+' detik'+(r.sec<want-.2?' (dipersingkat dari '+want.toFixed(1)+' detik agar diterima WhatsApp)':'')+(new Set(fr.map(sig)).size<2?'. Perhatian: semua frame sama, jadi hasilnya terlihat seperti gambar diam.':'')+(share?'. Ketuk Bagikan untuk mengirim ke WhatsApp.':'. Ketuk Unduh untuk menyimpan.')+' Jika WhatsApp menerimanya sebagai foto, buka WhatsApp, pilih Stiker lalu tombol + dan pilih file .webp ini.'}
+ const want=fr.length/S.fps;WSK={fr,fps:S.fps,name:V.name.replace(/\.[^.]+$/,'')};result(r.b,g,'s');
+ $('#rs').textContent='Stiker '+g.W+'×'+g.H+' · durasi '+r.sec.toFixed(1)+' detik'+(r.sec<want-.2?' (dipersingkat dari '+want.toFixed(1)+' detik agar diterima WhatsApp)':'')+(new Set(fr.map(sig)).size<2?'. Perhatian: semua frame sama, jadi hasilnya terlihat seperti gambar diam.':'')+'. File .webp ini adalah stiker animasi asli. Jika dikirim lewat chat, WhatsApp menampilkannya sebagai foto diam. Agar bergerak sebagai stiker, impor lewat aplikasi pembuat stiker WhatsApp (misalnya Sticker Maker) atau paket stiker. Untuk dikirim langsung di chat dan tetap bergerak, pakai tombol Kirim sebagai GIF.'}
 async function runRev(){
  const g=geom(),fps=S.fps,fr=await capture(fps,20,g);if(!fr||!fr.length)return toast('Tidak ada frame yang berhasil diambil.');
  const mt=mime('v');if(!mt)return toast('Browser ini tidak mendukung perekaman video.');
