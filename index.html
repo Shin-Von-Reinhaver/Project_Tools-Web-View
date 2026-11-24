@@ -88,8 +88,7 @@ h1{font-size:clamp(1.4rem,4.2vw,2rem);font-weight:800;letter-spacing:-.03em;line
 .foot{max-width:1040px;margin:0 auto;padding:0 18px calc(72px + env(safe-area-inset-bottom,0px));text-align:center;color:var(--mut);font-size:.78rem}
 /* penampil */
 .ov{position:fixed;inset:0;z-index:100;display:none;flex-direction:column;background:var(--bg)}
-.ov{--bdg:60px}
-.ov.on{display:flex;animation:fade .2s both;padding-bottom:var(--bdg);background:var(--bg2)}
+.ov.on{display:flex;animation:fade .2s both;background:var(--bg2)}
 .ov:fullscreen{padding-bottom:0}
 .ov.on .frame{border-radius:0}
 @keyframes fade{from{opacity:0}}
@@ -150,38 +149,55 @@ h1{font-size:clamp(1.4rem,4.2vw,2rem);font-weight:800;letter-spacing:-.03em;line
 .cards{align-items:stretch}.card .acts{margin-top:auto}.cards .card:last-child:nth-child(odd){grid-column:1/-1}
 .cards .card:last-child:nth-child(odd) .acts .grow{flex:0 1 280px}
 @media (max-width:760px){.cards .card:last-child:nth-child(odd){grid-column:auto}.cards .card:last-child:nth-child(odd) .acts .grow{flex:1 1 130px}}
-.bot{margin:18px 0 6px;padding:22px;border-radius:26px;background:var(--card);border:1.5px solid var(--line);backdrop-filter:blur(16px);position:relative;overflow:hidden;display:flex;flex-direction:column;gap:14px}
-.bot::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:linear-gradient(90deg,#25d366,#34d399,#38bdf8)}
-.bot-h{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.bot-ico{width:48px;height:48px;border-radius:16px;display:grid;place-items:center;font-size:1.5rem;background:linear-gradient(135deg,#25d366,#128c7e);box-shadow:0 10px 22px -12px #25d366}
-.bot-t{flex:1;min-width:180px}.bot-t h2{font-size:1.05rem;font-weight:800}.bot-t p{color:var(--mut);font-size:.84rem;margin-top:2px}
-.bot-pill{display:inline-flex;align-items:center;gap:8px;padding:6px 13px;border-radius:999px;background:var(--card2);border:1px solid var(--line);font-size:.78rem;font-weight:800}
-.bot-pill i{width:9px;height:9px;border-radius:50%;background:var(--mut)}
-.bot-pill.ok i{background:var(--ok);box-shadow:0 0 0 4px color-mix(in srgb,var(--ok) 25%,transparent)}
-.bot-pill.wait i{background:#fbbf24}.bot-pill.bad i{background:var(--bad)}
-.bot-stats{display:flex;gap:8px;flex-wrap:wrap}.bot-stats .stat b{color:var(--ink);font-weight:800}
-.bot-row{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap}
-.bot-f{flex:1;min-width:220px;display:flex;flex-direction:column;gap:5px;font-size:.74rem;font-weight:800;color:var(--mut);text-transform:uppercase;letter-spacing:.06em}
-.bot input[type=url],.bot input[type=password],.bot input[type=text],.bot input[type=tel]{width:100%;padding:10px 13px;border-radius:13px;border:1.5px solid var(--line);background:var(--card2);color:var(--ink);font:inherit;font-size:.9rem;text-transform:none;letter-spacing:0;font-weight:500}
-.bot-hint{font-size:.82rem;color:var(--mut);padding:10px 13px;border-radius:13px;border:1px dashed var(--line)}
-.bot-hint.warn{color:#fbbf24;border-color:color-mix(in srgb,#fbbf24 50%,transparent)}
-.bot-owner{display:flex;flex-direction:column;gap:12px}
+.bot{margin:18px 0 6px;border-radius:28px;background:var(--card);border:1.5px solid var(--line);backdrop-filter:blur(16px);overflow:hidden}
+.bot-hero{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:22px;background:linear-gradient(120deg,color-mix(in srgb,#25d366 26%,transparent),color-mix(in srgb,#38bdf8 14%,transparent) 60%,transparent)}
+.bot-av{position:relative;width:70px;height:70px;flex:none}
+.bot-av img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:3px solid #25d366;box-shadow:0 12px 26px -12px #25d366}
+.bot-av i{position:absolute;right:1px;bottom:3px;width:17px;height:17px;border-radius:50%;border:3px solid var(--bg2);background:var(--bad)}
+.bot-av.ok i{background:var(--ok);animation:pulse 2s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 6px color-mix(in srgb,var(--ok) 25%,transparent)}}
+.bot-t{flex:1;min-width:190px}.bot-t h2{font-size:1.25rem;font-weight:800}.bot-t p{font-size:.84rem;color:var(--mut)}
+.bot-by{display:inline-flex;align-items:center;gap:6px;margin-top:6px;font-size:.74rem;font-weight:700;color:var(--mut)}.bot-by img{width:20px;height:20px;border-radius:50%;object-fit:cover}
+.bot-pill{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;background:var(--card2);border:1px solid var(--line);font-size:.78rem;font-weight:800}
+.bot-pill i{width:9px;height:9px;border-radius:50%;background:var(--bad)}
+.bot-pill.ok i{background:var(--ok);box-shadow:0 0 0 4px color-mix(in srgb,var(--ok) 25%,transparent)}.bot-pill.wait i{background:#fbbf24}
+.bot-in{padding:18px 22px 22px;display:flex;flex-direction:column;gap:16px}
+.bot-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:10px}
+.bt{padding:12px 8px;border-radius:16px;background:var(--card2);border:1px solid var(--line);text-align:center}.bt em{font-style:normal;font-size:1.1rem}.bt b{display:block;font-size:1.05rem;font-weight:800;overflow-wrap:anywhere}.bt small{color:var(--mut);font-size:.7rem;font-weight:700}
+.bot-steps{display:flex;gap:6px;list-style:none}
+.bot-steps li{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;font-size:.7rem;font-weight:700;color:var(--mut);text-align:center}
+.bot-steps .n{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--card2);border:1.5px solid var(--line);font-size:.78rem}
+.bot-steps .done .n{background:var(--ok);border-color:var(--ok);color:#052e1b}.bot-steps .cur{color:var(--ink)}.bot-steps .cur .n{background:var(--ac);border-color:var(--ac);color:var(--on);box-shadow:0 0 0 4px color-mix(in srgb,var(--ac) 25%,transparent)}
+.bot-grid{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:18px;align-items:start}
+.bot-main{display:flex;flex-direction:column;gap:12px}
 .bot-box{padding:16px;border-radius:18px;background:var(--card2);border:1px solid var(--line);display:flex;flex-direction:column;gap:12px}
-.bot-box h3{font-size:.86rem;font-weight:800}.bot-box p{font-size:.82rem;color:var(--mut)}
-.bot-qr{align-self:center;width:min(260px,100%);border-radius:16px;background:#fff;padding:10px}
-.bot-code{align-self:center;font:800 1.9rem/1 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.18em;padding:16px 22px;border-radius:16px;background:var(--bg2);border:1.5px dashed var(--ac);user-select:all}
-.bot-acts{display:flex;gap:8px;flex-wrap:wrap}
+.bot-box h3{font-size:.9rem;font-weight:800}.bot-box p,.bot-hint{font-size:.82rem;color:var(--mut)}.bot-hint.warn{color:#fbbf24}
+.bot-row{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap}
+.bot-f{flex:1;min-width:200px;display:flex;flex-direction:column;gap:6px}.bot-f span{font-size:.76rem;font-weight:700;color:var(--mut)}
+.bot input[type=url],.bot input[type=password],.bot input[type=text],.bot input[type=tel]{width:100%;padding:11px 13px;border-radius:13px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-size:.9rem}
+.bot input:focus{outline:0;border-color:var(--ac)}
+.bot-acts{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.bot-qr{align-self:center;width:min(240px,100%);border-radius:16px;background:#fff;padding:8px}
+.bot-code{align-self:center;font:800 1.9rem/1 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.14em;padding:14px 18px;border-radius:14px;background:var(--code);color:var(--codeink);border:1px dashed var(--line)}
+.bot-pre{position:relative;padding:12px 78px 12px 14px;border-radius:14px;background:var(--code);color:var(--codeink);border:1px solid var(--line);font:600 .78rem/1.55 ui-monospace,Menlo,Consolas,monospace;white-space:pre;overflow-x:auto}
+.bot-pre .btn{position:absolute;top:7px;right:7px;padding:4px 10px;font-size:.72rem;border-radius:10px}
+.bot-phone{border-radius:26px;background:#0b141a;border:6px solid #1f2933;overflow:hidden;color:#e9edef;font-size:.8rem;box-shadow:var(--shadow)}
+.ph-h{display:flex;gap:9px;align-items:center;padding:10px 12px;background:#202c33}.ph-h img{width:32px;height:32px;border-radius:50%}.ph-h b{display:block;font-size:.84rem}.ph-h small{color:#25d366;font-size:.7rem}.ph-h small.off{color:#8696a0}
+.ph-b{padding:12px;height:270px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;background:radial-gradient(circle at 20% 10%,#14232b,#0b141a 70%)}
+.bb{max-width:90%;padding:7px 10px;border-radius:10px;white-space:pre-wrap;overflow-wrap:anywhere;animation:pop .3s both}.bb.me{align-self:flex-end;background:#005c4b;border-top-right-radius:2px}.bb.bot{align-self:flex-start;background:#202c33;border-top-left-radius:2px}
+@keyframes pop{from{opacity:0;transform:translateY(8px) scale(.96)}}
+.ph-c{display:flex;gap:6px;flex-wrap:wrap;padding:9px 10px;background:#111b21}.ph-c button{border:0;border-radius:999px;padding:4px 11px;background:#202c33;color:#aebac1;font:700 .72rem ui-monospace,Menlo,Consolas,monospace}.ph-c button.on{background:#25d366;color:#052e1b}
 .creator{display:inline-flex;align-items:center;gap:7px;margin:6px 0 0;padding:5px 13px;border-radius:999px;font-size:.78rem;font-weight:800;color:#422006;background:linear-gradient(135deg,#fde68a,#f59e0b);box-shadow:0 8px 20px -10px #f59e0b}
 .bot-cmds summary{cursor:pointer;font-weight:800;font-size:.88rem;padding:4px 0}
 .bot-cmds .search{margin:10px 0}
-.bot-cat{margin:12px 0 6px;font-size:.74rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--mut)}
-.bot-cmd{display:flex;gap:10px;align-items:baseline;width:100%;text-align:left;padding:8px 11px;border-radius:12px;border:1px solid transparent;background:none;color:inherit;font:inherit;cursor:pointer}
+.bot-cat{margin:12px 0 6px;font-size:.74rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--mut)}
+.bot-cmd{display:flex;gap:10px;align-items:baseline;width:100%;padding:8px 10px;border-radius:12px;background:none;border:1px solid transparent;text-align:left}
 .bot-cmd:hover,.bot-cmd:focus-visible{background:var(--card2);border-color:var(--line)}
-.bot-cmd code{font:700 .82rem ui-monospace,Menlo,Consolas,monospace;color:var(--ac);white-space:nowrap}
-.bot-cmd span{font-size:.82rem;color:var(--mut)}
-@media(max-width:560px){.bot{padding:18px}.bot-cmd{flex-direction:column;gap:2px}}
+.bot-cmd code{font:700 .82rem ui-monospace,Menlo,Consolas,monospace;color:var(--ac)}.bot-cmd span{font-size:.82rem;color:var(--mut)}
+#botApiBody{display:flex;flex-direction:column;gap:10px;margin-top:10px}
+@media(max-width:760px){.bot-grid{grid-template-columns:1fr}.bot-phone{max-width:340px;width:100%;justify-self:center}}
+@media(max-width:560px){.bot-hero,.bot-in{padding-inline:16px}.bot-cmd{flex-direction:column;gap:2px}}
 </style>
-<style id="hideNfBadge">a[href*="netlify.com"]:not([data-keep]),[id*="netlify-badge" i],[class*="netlify-badge" i],[id*="nf-badge" i],[class*="nf-badge" i]{display:none!important}html.nb{--bdg:0px!important}</style><script>(function(){function k(){document.querySelectorAll('a[href*="netlify.com"],[id*=netlify-badge i],[class*=netlify-badge i]').forEach(function(e){if(!e.hasAttribute("data-keep"))e.remove()})}document.addEventListener("DOMContentLoaded",k);try{new MutationObserver(k).observe(document.documentElement,{childList:true,subtree:true})}catch(e){}})();</script>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
@@ -230,23 +246,25 @@ h1{font-size:clamp(1.4rem,4.2vw,2rem);font-weight:800;letter-spacing:-.03em;line
   </section>
 
 <section class="bot" id="botSec" aria-labelledby="botTitle">
-  <div class="bot-h">
-    <div class="bot-ico" aria-hidden="true">🤖</div>
-    <div class="bot-t"><h2 id="botTitle"></h2><p id="botSub"></p></div>
+  <div class="bot-hero">
+    <div class="bot-av" id="botAvBox"><img id="botAv" alt=""><i></i></div>
+    <div class="bot-t"><h2 id="botTitle"></h2><p id="botSub"></p><span class="bot-by"><img id="botBy" alt=""><span id="botByName"></span></span></div>
     <span class="bot-pill" id="botPill"><i></i><span></span></span>
   </div>
-  <div class="bot-stats" id="botStats"></div>
-  <div class="bot-row" id="botConn">
-    <label class="bot-f"><span id="lblBase"></span><input type="url" id="botBase" autocomplete="off" spellcheck="false" inputmode="url"></label>
-    <button class="btn violet" id="botSave" type="button"></button>
+  <div class="bot-in">
+    <div class="bot-stats" id="botStats"></div>
+    <ol class="bot-steps" id="botSteps"></ol>
+    <div class="bot-grid">
+      <div class="bot-main" id="botOwnerBox"></div>
+      <aside class="bot-phone" id="botPhone" aria-hidden="true"></aside>
+    </div>
+    <details class="bot-cmds" id="botApi"><summary id="botApiSum"></summary><div id="botApiBody"></div></details>
+    <details class="bot-cmds" id="botCmds">
+      <summary id="botCmdSum"></summary>
+      <label class="search"><svg class="i"><use href="#i-search"/></svg><input type="search" id="botCq" autocomplete="off"></label>
+      <div id="botCmdList"></div>
+    </details>
   </div>
-  <p class="bot-hint" id="botHint" hidden></p>
-  <div id="botOwnerBox" class="bot-owner"></div>
-  <details class="bot-cmds" id="botCmds">
-    <summary id="botCmdSum"></summary>
-    <label class="search"><svg class="i"><use href="#i-search"/></svg><input type="search" id="botCq" autocomplete="off"></label>
-    <div id="botCmdList"></div>
-  </details>
 </section>
 
   <div class="head">
@@ -278,6 +296,7 @@ h1{font-size:clamp(1.4rem,4.2vw,2rem);font-weight:800;letter-spacing:-.03em;line
         <label class="search"><svg class="i"><use href="#i-search"/></svg><input type="search" id="cq" data-i18n-ph="codeSearch" autocomplete="off" aria-label="Cari kode"></label>
         <button class="btn icon" id="cPrev" aria-label="Sebelumnya"><svg class="i"><use href="#i-up"/></svg></button><span class="cnt" id="cCnt">0/0</span><button class="btn icon" id="cNext" aria-label="Berikutnya"><svg class="i"><use href="#i-dn"/></svg></button>
         <button class="btn violet" id="cCopy"><span class="chip"><svg class="i"><use href="#i-copy"/></svg></span><span data-i18n="copy"></span></button>
+        <button class="btn amber" id="cTidy"><span class="chip"><svg class="i"><use href="#i-code"/></svg></span><span data-i18n="tidyBtn"></span></button>
         <button class="btn pink" id="cWrap"><span class="chip"><svg class="i"><use href="#i-wrap"/></svg></span><span data-i18n="wrap"></span></button>
         <button class="btn icon amber" id="cFm" aria-label="A-"><svg class="i"><use href="#i-minus"/></svg></button><button class="btn icon amber" id="cFp" aria-label="A+"><svg class="i"><use href="#i-plus"/></svg></button>
       </div>
@@ -309,10 +328,10 @@ const TOOLS=[
 const T={
  id:{bio:'Koleksi aplikasi web mandiri, utilitas praktis, dan kode sumber HTML terbuka yang siap dipakai langsung dari browser.',sectionLabel:'Daftar Aplikasi & Kode',stat2:'Diproses di perangkat',stat3:'Tanpa instal',search:'Cari aplikasi…',codeSearch:'Cari di kode…',empty:'Tidak ada aplikasi yang cocok.',foot:'Semua alat berjalan di browser Anda. Berkas tidak diunggah ke server.',all:'Semua',pdf:'PDF',image:'Gambar',video:'Video',
   open:'Buka',code:'Kode',download:'Unduh',newTab:'Tab baru',btnPreview:'Tampilan',btnCode:'Kode HTML',btnDownload:'Unduh HTML',btnClose:'Tutup',reload:'Muat ulang',fullscreen:'Layar penuh',theme:'Ganti tema',copy:'Salin',wrap:'Bungkus',
-  dTitle:'Berkas aplikasi bermasalah',dInvalid:'Berkas {f} ada di server, tetapi isinya bukan HTML lengkap (hanya {n}). Kemungkinan terpotong atau rusak saat diunggah. Unggah ulang berkas aslinya yang utuh. Baris 404 di bawah hanyalah jalur cadangan yang dicoba otomatis.',dNotFound:'Berkas tidak ditemukan di server (404). Pastikan struktur folder: index.html, tools/pdf-tools.html, tools/image-tools.html, tools/video-tools.html, dan nama berkas persis sama (huruf besar kecil berpengaruh).',dNet:'Tidak bisa membaca berkas dari sini (kemungkinan dibuka langsung dari penyimpanan atau tidak ada internet). Buka lewat server atau pilih berkas lokal.',dSmall:'Berkas di server hanya {n}, padahal seharusnya sekitar {m} atau lebih. Kemungkinan upload gagal atau terpotong. Upload ulang berkas lengkapnya.',dLfs:'Berkas ini hanya penunjuk Git LFS, bukan isinya. Upload ulang sebagai berkas biasa.',dPreview:'Lihat isi berkas di server',retry:'Coba lagi',force:'Tetap muat',loadingApp:'Membuka aplikasi…',loadingCode:'Memuat kode sumber…',codeFail:'Kode sumber tidak bisa dibaca dari sini. Buka lewat server (Netlify, GitHub Pages, atau localhost) atau pakai tombol Tab baru.',copied:'Kode disalin.',copyFail:'Gagal menyalin.',pick:'Pilih berkas HTML untuk dilihat',downloaded:'Terunduh',tidying:'Merapikan kode…',tidied:'kode dirapikan',notTidied:'kode asli (tidak bisa dirapikan dengan aman)',more:'Muat lebih banyak',cut:'+{n} karakter',apps:'{n} aplikasi',lines:'{n} baris',size:'Ukuran'},
+  dTitle:'Berkas aplikasi bermasalah',dInvalid:'Berkas {f} ada di server, tetapi isinya bukan HTML lengkap (hanya {n}). Kemungkinan terpotong atau rusak saat diunggah. Unggah ulang berkas aslinya yang utuh. Baris 404 di bawah hanyalah jalur cadangan yang dicoba otomatis.',dNotFound:'Berkas tidak ditemukan di server (404). Pastikan struktur folder: index.html, tools/pdf-tools.html, tools/image-tools.html, tools/video-tools.html, dan nama berkas persis sama (huruf besar kecil berpengaruh).',dNet:'Tidak bisa membaca berkas dari sini (kemungkinan dibuka langsung dari penyimpanan atau tidak ada internet). Buka lewat server atau pilih berkas lokal.',dSmall:'Berkas di server hanya {n}, padahal seharusnya sekitar {m} atau lebih. Kemungkinan upload gagal atau terpotong. Upload ulang berkas lengkapnya.',dLfs:'Berkas ini hanya penunjuk Git LFS, bukan isinya. Upload ulang sebagai berkas biasa.',dPreview:'Lihat isi berkas di server',retry:'Coba lagi',force:'Tetap muat',loadingApp:'Membuka aplikasi…',loadingCode:'Memuat kode sumber…',codeFail:'Kode sumber tidak bisa dibaca dari sini. Buka lewat server (hosting, GitHub Pages, atau localhost) atau pakai tombol Tab baru.',copied:'Kode disalin.',copyFail:'Gagal menyalin.',pick:'Pilih berkas HTML untuk dilihat',downloaded:'Terunduh',tidying:'Merapikan kode…',tidyBtn:'Rapikan',tidyFail:'Perapi butuh internet (memuat Prettier). Coba lagi saat online.',tidied:'kode dirapikan',notTidied:'kode asli (perapi butuh internet)',more:'Muat lebih banyak',cut:'+{n} karakter',apps:'{n} aplikasi',lines:'{n} baris',size:'Ukuran'},
  en:{bio:'A curated collection of standalone web apps, practical utilities, and open HTML source code ready to run right in your browser.',sectionLabel:'Applications & Source Code',stat2:'Runs on your device',stat3:'No install',search:'Search apps…',codeSearch:'Search in code…',empty:'No matching apps.',foot:'Every tool runs in your browser. Files are never uploaded to a server.',all:'All',pdf:'PDF',image:'Image',video:'Video',
   open:'Open',code:'Code',download:'Download',newTab:'New tab',btnPreview:'Preview',btnCode:'HTML Code',btnDownload:'Download HTML',btnClose:'Close',reload:'Reload',fullscreen:'Fullscreen',theme:'Change theme',copy:'Copy',wrap:'Wrap',
-  dTitle:'Problem with the app file',dInvalid:'The file {f} exists on the server, but its content is not a complete HTML page (only {n}). It was probably truncated or corrupted during upload. Upload the original complete file again. The 404 rows below are just fallback paths tried automatically.',dNotFound:'The file was not found on the server (404). Make sure the folders are: index.html, tools/pdf-tools.html, tools/image-tools.html, tools/video-tools.html, with the exact same names (case matters).',dNet:'The file cannot be read from here (probably opened straight from storage, or offline). Open it through a server or choose a local file.',dSmall:'The file on the server is only {n}, while it should be about {m} or more. The upload probably failed or was truncated. Upload the complete file again.',dLfs:'This file is only a Git LFS pointer, not the real content. Re-upload it as a normal file.',dPreview:'View the file on the server',retry:'Retry',force:'Load anyway',loadingApp:'Opening app…',loadingCode:'Loading source code…',codeFail:'The source cannot be read from here. Open it through a server (Netlify, GitHub Pages, or localhost) or use the New tab button.',copied:'Code copied.',copyFail:'Copy failed.',pick:'Choose the HTML file to view',downloaded:'Downloaded',tidying:'Tidying code…',tidied:'code tidied',notTidied:'original code (could not be tidied safely)',more:'Load more',cut:'+{n} characters',apps:'{n} apps',lines:'{n} lines',size:'Size'}};
+  dTitle:'Problem with the app file',dInvalid:'The file {f} exists on the server, but its content is not a complete HTML page (only {n}). It was probably truncated or corrupted during upload. Upload the original complete file again. The 404 rows below are just fallback paths tried automatically.',dNotFound:'The file was not found on the server (404). Make sure the folders are: index.html, tools/pdf-tools.html, tools/image-tools.html, tools/video-tools.html, with the exact same names (case matters).',dNet:'The file cannot be read from here (probably opened straight from storage, or offline). Open it through a server or choose a local file.',dSmall:'The file on the server is only {n}, while it should be about {m} or more. The upload probably failed or was truncated. Upload the complete file again.',dLfs:'This file is only a Git LFS pointer, not the real content. Re-upload it as a normal file.',dPreview:'View the file on the server',retry:'Retry',force:'Load anyway',loadingApp:'Opening app…',loadingCode:'Loading source code…',codeFail:'The source cannot be read from here. Open it through a server (hosting, GitHub Pages, or localhost) or use the New tab button.',copied:'Code copied.',copyFail:'Copy failed.',pick:'Choose the HTML file to view',downloaded:'Downloaded',tidying:'Tidying code…',tidyBtn:'Tidy',tidyFail:'The formatter needs internet (loads Prettier). Try again when online.',tidied:'code tidied',notTidied:'original code (formatter needs internet)',more:'Load more',cut:'+{n} characters',apps:'{n} apps',lines:'{n} lines',size:'Size'}};
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const ico=n=>'<svg class="i"><use href="#i-'+n+'"/></svg>';
@@ -333,8 +352,7 @@ $$('[data-lang]').forEach(b=>b.onclick=()=>{lang=b.dataset.lang;store.set('sv-la
 /* ---------- avatar dengan cadangan ---------- */
 const img=$('#profileImg');
 const fallback='data:image/svg+xml;utf8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 112 112"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#a78bfa"/></linearGradient></defs><rect width="112" height="112" fill="url(#g)"/><text x="56" y="73" text-anchor="middle" font-family="sans-serif" font-size="52" font-weight="800" fill="#fff">S</text></svg>');
-const srcs=['media/images/images.jpeg','media/images.jpeg','media/images.jpg','media/images.png','https://images.weserv.nl/?url=img.sanishtech.com/u/0a94ea50a3a7b12c8b75569dde098fe5.jpg&output=jpg',fallback];let si=0;
-img.onerror=()=>{si++;if(si<srcs.length)img.src=srcs[si];else img.onerror=null};img.src=srcs[0];
+img.onerror=()=>{img.onerror=null;img.src=fallback};img.src='media/images/images.jpeg';
 
 /* ---------- daftar kartu ---------- */
 function renderChips(){const tags=[['all',t('all')]].concat([...new Set(TOOLS.map(x=>x.tag))].map(g=>[g,t(g)]));$('#chips').innerHTML=tags.map(([k,l])=>'<button class="btn'+(filter===k?' on':'')+'" data-f="'+k+'">'+esc(l)+'</button>').join('')}
@@ -428,370 +446,77 @@ function replaceLine(n,term){const el=$('#L'+n);if(el)el.outerHTML=lineHtml(n,SR
 function goHit(d){if(!SRC||!SRC.hits.length)return;SRC.hi=(SRC.hi+d+SRC.hits.length)%SRC.hits.length;const n=SRC.hits[SRC.hi];if(SRC.prev!=null)replaceLine(SRC.prev,'');if(n>=SRC.shown)renderMore(n-SRC.shown+60);replaceLine(n,SRC.term);const e=$('#L'+n);if(!e)return;e.classList.add('hit');SRC.prev=n;e.scrollIntoView({block:'center'});$('#cCnt').textContent=(SRC.hi+1)+'/'+SRC.hits.length}
 $('#cNext').onclick=()=>goHit(1);$('#cPrev').onclick=()=>goHit(-1);$('#cq').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();goHit(e.shiftKey?-1:1)}};
 $('#cCopy').onclick=async()=>{if(!SRC)return;try{await navigator.clipboard.writeText(SRC.text);toast(t('copied'))}catch(e){try{const a=document.createElement('textarea');a.value=SRC.text;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove();toast(t('copied'))}catch(x){toast(t('copyFail'))}}};
+$('#cTidy').onclick=async()=>{if(!SRC)return;const b=$('#cTidy');
+ if(SRC.orig){SRC.text=SRC.orig;SRC.orig=null;b.classList.remove('on')}
+ else{b.disabled=true;toast(t('tidying'));try{const f=await tidy(SRC.text);SRC.orig=SRC.text;SRC.text=f;b.classList.add('on')}catch(e){toast(t('tidyFail'))}b.disabled=false;if(!SRC.orig)return}
+ SRC.lines=SRC.text.split('\n');SRC.shown=0;SRC.hits=[];SRC.hi=-1;SRC.prev=null;$('#cview').innerHTML='';$('#cq').value='';$('#cCnt').textContent='0/0';renderCodeHead();renderMore(300)};
 $('#cWrap').onclick=()=>{$('#cview').classList.toggle('wr');$('#cWrap').classList.toggle('on')};
 let fs=13;const setFs=d=>{fs=Math.max(9,Math.min(24,fs+d));$('#cview').style.setProperty('--fs',fs+'px')};$('#cFm').onclick=()=>setFs(-1);$('#cFp').onclick=()=>setFs(1);
-/* ---------- perapi kode (dipakai saat unduh) ---------- */
-const Fmt=(()=>{
-const pad=n=>'  '.repeat(Math.max(0,n));
-const KW=new Set(['if','for','while','switch','catch','with','return','typeof','void','delete','in','of','instanceof','case','throw','else','do','await','yield','new']);
-const REKW=new Set(['return','typeof','instanceof','in','of','new','delete','void','throw','case','do','else','yield','await']);
-const OBJW=new Set(['return','typeof','in','of','void','delete','throw','yield','await','const','let','var']);
-const OBJP=new Set(['=','(',',','[','?','&&','||','??','!','+=','|=','&&=','||=','??=',':','...']);
-const BIN=new Set('= == === != !== < > <= >= + - * / % ** & | ^ && || ?? << >> >>> += -= *= /= %= **= &= |= ^= <<= >>= >>>= &&= ||= ??= => ?'.split(' '));
-const PUNCT=['>>>=','...','===','!==','**=','<<=','>>=','>>>','&&=','||=','??=','=>','==','!=','<=','>=','&&','||','??','?.','++','--','+=','-=','*=','/=','%=','&=','|=','^=','<<','>>','**'];
-const CONT=new Set([')',']',',',';','.','?.',':','(','[','?','=','==','===','!=','!==','&&','||','??','*','/','%','<','>','<=','>=','+','-']);
-
-/* ===== JavaScript ===== */
-function skipStr(s,i){const q=s[i];i++;while(i<s.length){const c=s[i];if(c==='\\'){i+=2;continue}if(c===q)return i+1;if(c==='\n')return i;i++}return i}
-function skipTpl(s,i){i++;while(i<s.length){const c=s[i];if(c==='\\'){i+=2;continue}if(c==='`')return i+1;if(c==='$'&&s[i+1]==='{'){i=skipBrace(s,i+2);continue}i++}return i}
-function skipBrace(s,i){let d=1;while(i<s.length){const c=s[i];
- if(c==='"'||c==="'"){i=skipStr(s,i);continue}
- if(c==='`'){i=skipTpl(s,i);continue}
- if(c==='/'&&s[i+1]==='/'){while(i<s.length&&s[i]!=='\n')i++;continue}
- if(c==='/'&&s[i+1]==='*'){const e=s.indexOf('*/',i+2);i=e<0?s.length:e+2;continue}
- if(c==='{')d++;else if(c==='}'){d--;if(!d)return i+1}
- i++}return i}
-function scanRe(s,i){let j=i+1,cl=false;const n=s.length;while(j<n){const c=s[j];if(c==='\n')return -1;if(c==='\\'){j+=2;continue}if(c==='[')cl=true;else if(c===']')cl=false;else if(c==='/'&&!cl){j++;while(j<n&&/[a-z]/i.test(s[j]))j++;return j}j++}return -1}
-function reOk(l){if(!l)return true;if(l.t==='p')return !(l.v===')'||l.v===']'||l.v==='}'||l.v==='++'||l.v==='--');if(l.t==='w')return REKW.has(l.v)&&!l.prop;return false}
-function jsTok(s){
- const T=[],n=s.length;let i=0,nlc=0,last=null;
- while(i<n){
-  const c=s[i];
-  if(c==='\n'){nlc++;i++;continue}
-  if(/\s/.test(c)){i++;continue}
-  let t,j;
-  if(c==='/'&&s[i+1]==='/'){j=i;while(j<n&&s[j]!=='\n')j++;t='lc'}
-  else if(c==='/'&&s[i+1]==='*'){j=s.indexOf('*/',i+2);j=j<0?n:j+2;t='bc'}
-  else if(c==='"'||c==="'"){j=skipStr(s,i);t='s'}
-  else if(c==='`'){j=skipTpl(s,i);t='tpl'}
-  else if(c==='/'&&reOk(last)&&(j=scanRe(s,i))>0){t='re'}
-  else if(/[0-9]/.test(c)||(c==='.'&&/[0-9]/.test(s[i+1]||''))){
-   const m=/^(?:0[xXbBoO][\da-fA-F_]+n?|(?:\d[\d_]*\.?[\d_]*|\.\d[\d_]*)(?:[eE][+-]?\d+)?n?)/.exec(s.slice(i,i+80));j=i+m[0].length;t='w'}
-  else if(/[A-Za-z_$#\\\u0080-\uffff]/.test(c)){j=i+1;while(j<n&&/[\w$\u0080-\uffff\\]/.test(s[j]))j++;t='w'}
-  else{let m=null;for(const p of PUNCT){if(s.startsWith(p,i)&&!(p==='?.'&&/[0-9]/.test(s[i+2]||''))){m=p;break}}j=i+(m?m.length:1);t='p'}
-  let v=s.slice(i,j);if(t==='lc')v=v.replace(/\s+$/,'');
-  const k={t,v,nl:nlc>0,bl:nlc>1};
-  if(last&&last.t==='p'&&(last.v==='.'||last.v==='?.'))k.prop=true;
-  T.push(k);
-  if(t!=='lc'&&t!=='bc')last=k;
-  nlc=(t==='bc'&&v.includes('\n'))?1:0;
-  i=j;
- }
- return T}
-
-const endsExpr=p=>{if(!p)return false;if(p.t==='s'||p.t==='tpl'||p.t==='re')return true;if(p.t==='w')return !(KW.has(p.v)&&!p.prop);if(p.t==='p')return p.v===')'||p.v===']'||p.v==='}'||!!p.post;return false};
-
-function gap(p,k){
- const pv=p.v,kv=k.v,pP=p.t==='p',kP=k.t==='p';
- if(p.t==='bc')return !(kP&&(kv===')'||kv===']'||kv===','||kv===';'));
- if(pP&&p.un)return false;
- if(pP&&(pv==='('||pv==='['||pv==='.'||pv==='?.'||pv==='...'))return false;
- if(pP&&pv==='{')return !!p.inl;
- if(/^\d+$/.test(pv)&&kv==='.')return true;
- if(kP&&(kv===')'||kv===']'||kv===','||kv===';'||kv==='.'||kv==='?.'))return false;
- if(kP&&kv===':'&&!k.bin)return false;
- if(kP&&kv==='}')return !!k.inl;
- if(kP&&k.post)return false;
- if(pP&&(p.bin||pv===','||pv===';'||pv===':'))return true;
- if(kP&&k.bin)return true;
- if(kP&&(kv==='('||kv==='['))return p.t==='w'&&!p.prop&&KW.has(pv);
- if(kP&&kv==='{')return true;
- if(pP&&(pv===')'||pv==='}'||pv===']'))return true;
- if(p.t==='w'||p.t==='s'||p.t==='tpl'||p.t==='re')return true;
- return false}
-
-function jsFmt(src,base){
- const T=jsTok(src),n=T.length,o=[];
- let ind=base||0,force=false,p=null,ps=null,pend=false,pendT=0,lastSw=false,afterDo=false;
- const st=[{k:'root',tern:0}];
- const top=()=>st[st.length-1];
- for(let i=0;i<n;i++){
-  const k=T[i],nx=T[i+1],isP=k.t==='p',v=k.v;
-  if(isP){
-   const pe=endsExpr(ps);
-   if(v==='++'||v==='--'){if(pe&&!k.nl)k.post=true;else k.un=true}
-   else if(v==='!'||v==='~')k.un=true;
-   else if(v==='+'||v==='-'){if(pe)k.bin=true;else k.un=true}
-   else if(v===':'){const c=top();if(pend&&c.tern===pendT)k.kind='case';else if(c.tern>0){k.kind='tern';k.bin=true}else k.kind='prop'}
-   else if(BIN.has(v))k.bin=true;
-  }
-  let sp=null,x=0;
-  if(isP&&(v==='}'||v===')'||v===']')){
-   const c=st.length>1?st.pop():{};
-   if(v==='}'){
-    if(c.k==='blk'||(c.k==='obj'&&c.multi)){
-     if(!c.empty){if(c.caseOpen)ind--;ind--;sp='\n'}
-     k.blk=true;afterDo=!!c.doBody;
-    }else if(c.k==='obj'&&!c.empty)k.inl=true;
-   }else if(v===')')lastSw=!!c.kw;
-  }
-  if(k.t==='w'&&!k.prop&&(v==='case'||(v==='default'&&nx&&nx.v===':'))){
-   const c=top();
-   if(c.k==='blk'&&c.sw&&ps&&(ps.v==='{'||ps.v===';'||ps.v==='}'||ps.kind==='case')){
-    if(c.caseOpen){ind--;c.caseOpen=false}
-    sp='\n';pend=true;pendT=c.tern||0;
-   }
-  }
-  if(sp===null){
-   if(!p)sp='';
-   else if(p.t==='lc')sp='\n';
-   else if(force){if((k.t==='lc'||k.t==='bc')&&!k.nl)sp=' ';else sp='\n'}
-   else if(p.blk){
-    if(k.t==='lc'||k.t==='bc')sp=k.nl?'\n':' ';
-    else if(k.t==='w'&&!k.prop&&(v==='else'||v==='catch'||v==='finally'||(v==='while'&&afterDo)))sp=' ';
-    else if(isP&&CONT.has(v))sp=gap(p,k)?' ':'';
-    else sp='\n';
-   }
-   else if(k.t==='lc'||k.t==='bc')sp=k.nl?'\n':' ';
-   else if(k.nl&&(endsExpr(p)||p.t==='w'||p.t==='bc')&&!(isP&&(v===')'||v===']'||v===','||v===';'))){
-    sp='\n';const c=top();x=(c.k==='('||c.k==='['||(c.k==='obj'&&!c.multi))?1:0;
-   }
-   else sp=gap(p,k)?' ':'';
-  }
-  if(sp==='\n')force=false;
-  if(sp==='\n'){
-   o.push((k.bl&&p&&p.v!=='{'&&!(isP&&v==='}')?'\n':'')+'\n'+pad(ind+x));
-  }else{
-   if(sp===''&&p){
-    const a=p.v[p.v.length-1],b=v[0],pt=p.t,kt=k.t;
-    const wl=t=>t==='w'||t==='s'||t==='tpl'||t==='re';
-    if(((a==='+'||a==='-')&&b===a)||(a==='/'&&(b==='/'||b==='*'))||(wl(pt)&&wl(kt))||(/^\d+$/.test(p.v)&&v==='.')||(p.t==='lc'))sp=' ';
-   }
-   if(sp===' ')o.push(' ');
-  }
-  o.push(v);
-  if(isP){
-   const c=top();
-   if(v==='('){st.push({k:'(',tern:0,kw:!!(ps&&ps.t==='w'&&!ps.prop&&ps.v==='switch')})}
-   else if(v==='['){st.push({k:'[',tern:0})}
-   else if(v==='{'){
-    const empty=!!(nx&&nx.t==='p'&&nx.v==='}');
-    const prevObj=ps&&((ps.t==='p'&&OBJP.has(ps.v)&&ps.kind!=='case')||(ps.t==='w'&&OBJW.has(ps.v)&&!ps.prop));
-    if(prevObj){
-     if(empty)st.push({k:'obj',multi:false,empty:true,tern:0});
-     else{
-      let d=1,cnt=0,ok=true;
-      for(let j=i+1;j<n;j++){const q=T[j];cnt++;
-       if(q.t==='lc'||q.t==='bc'||cnt>16){ok=false;break}
-       if(q.t==='p'){if(q.v==='{'||q.v===';'||q.v==='=>'){ok=false;break}if(q.v==='}'){d--;if(!d)break}}
-       if(q.t==='w'&&q.v==='function'){ok=false;break}}
-      if(ok&&d===0){st.push({k:'obj',multi:false,tern:0});k.inl=true}
-      else{st.push({k:'obj',multi:true,tern:0});ind++;force=true}
-     }
-    }else{
-     st.push({k:'blk',tern:0,sw:!!(ps&&ps.v===')'&&lastSw),caseOpen:false,doBody:!!(ps&&ps.t==='w'&&ps.v==='do'),empty});
-     if(!empty){ind++;force=true}
-    }
-   }
-   else if(v==='?'){c.tern++}
-   else if(v===':'){if(k.kind==='tern')c.tern--;else if(k.kind==='case'){pend=false;force=true;ind++;c.caseOpen=true}}
-   else if(v===','){if(c.k==='obj'&&c.multi)force=true}
-   else if(v===';'){if(c.k!=='(')force=true}
-  }
-  p=k;if(k.t!=='lc'&&k.t!=='bc')ps=k;
- }
- return o.join('').trim()}
-
-function jsOk(a,b){
- try{if(jsTok(a).map(x=>x.v).join('\u0001')!==jsTok(b).map(x=>x.v).join('\u0001'))return false}catch(e){return false}
- try{new Function(a)}catch(e){if(e instanceof EvalError)return true;return false}
- try{new Function(b)}catch(e){return false}
- return true}
-
-/* ===== CSS ===== */
-function cssFmt(src,base){
- const n=src.length,out=[];let i=0,ind=base||0,buf='',depth=0;
- const line=s=>out.push(pad(ind)+s);
- const clean=s=>s.replace(/\s+/g,' ').trim();
- const decl=s=>{s=clean(s);if(!s||s[0]==='@')return s;let d=0,q='';
-  for(let j=0;j<s.length;j++){const c=s[j];if(q){if(c==='\\')j++;else if(c===q)q='';continue}
-   if(c==='"'||c==="'")q=c;else if(c==='(')d++;else if(c===')')d--;
-   else if(c===':'&&!d)return s.slice(0,j).trim()+': '+s.slice(j+1).trim()}
-  return s};
- const prelude=s=>{s=clean(s);if(s[0]==='@')return s;
-  const parts=[];let d=0,q='',cur='';
-  for(let j=0;j<s.length;j++){const c=s[j];cur+=c;
-   if(q){if(c==='\\'){cur+=s[++j]||''}else if(c===q)q='';continue}
-   if(c==='"'||c==="'")q=c;else if(c==='('||c==='[')d++;else if(c===')'||c===']')d--;
-   else if(c===','&&!d){parts.push(cur.slice(0,-1).trim());cur=''}}
-  parts.push(cur.trim());
-  return parts.join(',\n'+pad(ind))};
- while(i<n){
-  const c=src[i];
-  if(c==='/'&&src[i+1]==='*'){let e=src.indexOf('*/',i+2);e=e<0?n:e+2;const cm=src.slice(i,e);
-   if(!buf.trim())line(cm);else buf+=cm;i=e;continue}
-  if(c==='"'||c==="'"){let j=i+1;while(j<n&&src[j]!==c){if(src[j]==='\\')j++;j++}j=Math.min(j+1,n);buf+=src.slice(i,j);i=j;continue}
-  if((c==='u'||c==='U')&&/^url\(/i.test(src.slice(i,i+4))){let j=i+4,q='';
-   while(j<n){const d=src[j];if(q){if(d==='\\')j++;else if(d===q)q=''}else if(d==='"'||d==="'")q=d;else if(d===')')break;j++}
-   j=Math.min(j+1,n);buf+=src.slice(i,j);i=j;continue}
-  if(/\s/.test(c)){if(buf&&!/\s$/.test(buf))buf+=' ';i++;continue}
-  if(c==='('){depth++;buf+=c;i++;continue}
-  if(c===')'){depth--;buf+=c;i++;continue}
-  if(depth>0){buf+=c;i++;continue}
-  if(c==='{'){line(prelude(buf)+' {');ind++;buf='';i++;continue}
-  if(c==='}'){if(buf.trim())line(decl(buf)+';');buf='';ind--;line('}');
-   if(ind<=(base||0)&&src.slice(i+1).trim())out.push('');i++;continue}
-  if(c===';'){if(buf.trim())line(decl(buf)+';');buf='';i++;continue}
-  buf+=c;i++}
- if(buf.trim())line(decl(buf)+(buf.trim()[0]==='@'?';':';'));
- return out.join('\n').trim()}
-
-function cssOk(a,b){
- const strip=s=>s.replace(/[\s;]+/g,'');
- if(strip(a)!==strip(b))return false;
- return true}
-
-/* ===== HTML ===== */
-const BLK=new Set('html head body title meta link base style script noscript template div section article aside header footer nav main figure figcaption address blockquote p h1 h2 h3 h4 h5 h6 ul ol li dl dt dd table thead tbody tfoot tr td th caption colgroup col form fieldset legend details summary dialog hr pre menu hgroup option optgroup'.split(' '));
-const VOID=new Set('area base br col embed hr img input link meta param source track wbr'.split(' '));
-const AUTO={li:['li'],p:['p'],td:['td','th'],th:['td','th'],tr:['tr','td','th'],dt:['dt','dd'],dd:['dt','dd'],option:['option']};
-
-function inner(name,open,content,base){
- try{
-  if(!content.trim())return '';
-  if(name==='style'){const r=cssFmt(content,base);return cssOk(content,r)?r:null}
-  const m=/\stype\s*=\s*["']?([^"'\s>]+)/i.exec(open);
-  const ty=m?m[1].toLowerCase():'';
-  if(ty&&!/^(text|application)\/(x-)?(javascript|ecmascript)$/.test(ty))return null;
-  const r=jsFmt(content,base);
-  return jsOk(content,r)?r:null;
- }catch(e){return null}}
-
-function html(src){
- const CO='<'+'!'+'--',CE='-'+'-'+'>';
- const re=new RegExp(CO+'[\\s\\S]*?'+CE+'|<![^>]*>|<\\?[\\s\\S]*?\\?>|</?[A-Za-z][^\\s/>]*(?:"[^"]*"|\'[^\']*\'|[^\'">])*>','g');
- const low=src.toLowerCase(),toks=[];
- let pos=0,m;
- while((m=re.exec(src))){
-  if(m.index>pos)toks.push({k:'text',v:src.slice(pos,m.index)});
-  const s=m[0];pos=re.lastIndex;
-  if(s.startsWith(CO))toks.push({k:'comment',v:s});
-  else if(s[1]==='!'||s[1]==='?')toks.push({k:'decl',v:s});
-  else if(s[1]==='/')toks.push({k:'close',v:s,name:/^<\/([^\s>]+)/.exec(s)[1].toLowerCase()});
-  else{
-   const name=/^<([^\s/>]+)/.exec(s)[1].toLowerCase(),self=/\/>$/.test(s);
-   if(!self&&(name==='script'||name==='style'||name==='pre'||name==='textarea')){
-    let idx=low.indexOf('</'+name,pos),end;
-    if(idx<0){idx=src.length;end=src.length}else{end=low.indexOf('>',idx);end=end<0?src.length:end+1}
-    toks.push({k:'raw',name,open:s,content:src.slice(pos,idx),close:src.slice(idx,end)});
-    pos=end;re.lastIndex=end;
-   }else toks.push({k:'open',v:s,name,self});
-  }
- }
- if(pos<src.length)toks.push({k:'text',v:src.slice(pos)});
-
- const st=[];let o='',after='start';
- const depth=()=>st.length;
- const nl=()=>{o=o.replace(/[ \t]+$/,'');if(o)o+='\n'+pad(depth())};
- const mark=()=>{if(st.length)st[st.length-1].bc=true};
- const blockName=(name,top)=>{
-  if(top&&top.svg==='inline')return false;
-  if(name==='svg')return !top||top.block;
-  if(top&&top.svg==='block')return true;
-  return BLK.has(name)};
- const isBlockTok=t=>{
-  if(!t)return true;
-  if(t.k==='comment'||t.k==='decl')return true;
-  if(t.k==='raw')return t.name!=='textarea';
-  const top=st[st.length-1];
-  if(t.k==='close'){return top&&top.name===t.name?top.block||top.bc:blockName(t.name,top)}
-  if(t.k==='open')return blockName(t.name,top);
-  return false};
- for(let i=0;i<toks.length;i++){
-  const t=toks[i],nx=toks[i+1];
-  if(t.k==='text'){
-   const core=t.v.replace(/\s+/g,' '),nb=isBlockTok(nx);
-   if(!core.trim()){if(after==='inl'&&!nb&&core)o+=' ';continue}
-   let lead=/^ /.test(core);const trail=/ $/.test(core);
-   if(after==='close'){nl();lead=false}else if(after==='open'||after==='start')lead=false;
-   if(lead)o+=' ';
-   o+=core.trim();if(trail&&!nb)o+=' ';
-   after='inl';
-  }else if(t.k==='comment'||t.k==='decl'){
-   nl();o+=t.v;mark();after='close';
-  }else if(t.k==='raw'){
-   if(t.name==='textarea'){if(after==='close')nl();o+=t.open+t.content+t.close;after='inl'}
-   else if(t.name==='pre'){nl();o+=t.open+t.content+t.close;mark();after='close'}
-   else{
-    nl();mark();o+=t.open;
-    const r=inner(t.name,t.open,t.content,depth()+1);
-    if(r===null)o+=t.content+t.close;
-    else if(r==='')o+=t.close;
-    else o+='\n'+pad(depth()+1)+r+'\n'+pad(depth())+t.close;
-    after='close';
-   }
-  }else if(t.k==='open'){
-   while(st.length&&AUTO[t.name]&&AUTO[t.name].includes(st[st.length-1].name))st.pop();
-   const top=st[st.length-1],block=blockName(t.name,top);
-   let svg;if(t.name==='svg')svg=block?'block':'inline';else if(top&&top.svg)svg=top.svg;
-   if(block){nl();mark()}else if(after==='close')nl();
-   o+=t.v;
-   if(VOID.has(t.name)||t.self)after=block?'close':'inl';
-   else{st.push({name:t.name,block,svg,bc:false});after=block?'open':'inl'}
-  }else if(t.k==='close'){
-   let idx=-1;for(let j=st.length-1;j>=0;j--)if(st[j].name===t.name){idx=j;break}
-   if(idx<0){o+=t.v;continue}
-   st.length=idx+1;
-   const e=st.pop();
-   if(e.bc)nl();
-   o+=t.v;
-   after=(e.block||e.bc)?'close':'inl';
-  }
- }
- return o.replace(/[ \t]+$/gm,'').trim()+'\n'}
-
-function run(src){
- const r=html(src);
- if(typeof DOMParser!=='undefined'){
-  const A=new DOMParser().parseFromString(src,'text/html'),B=new DOMParser().parseFromString(r,'text/html');
-  const sig=d=>[...d.querySelectorAll('*')].map(e=>e.tagName).join(',');
-  const txt=d=>{d.querySelectorAll('script,style').forEach(e=>{e.textContent=''});return d.documentElement.textContent.replace(/\s+/g,'')};
-  if(sig(A)!==sig(B)||txt(A)!==txt(B))return null;
- }
- return r}
-
-return {run,html,jsFmt,jsOk,cssFmt,cssOk,jsTok}})();
-if(typeof module!=='undefined')module.exports=Fmt;
+/* ---------- perapi kode: Prettier (seperti Acode), dimuat saat dibutuhkan ---------- */
+const PRETTIER='https://cdn.jsdelivr.net/npm/prettier@3.6.2/';
+let PR=null;
+const loadPrettier=()=>PR||(PR=Promise.all(['standalone.mjs','plugins/html.mjs','plugins/postcss.mjs','plugins/babel.mjs','plugins/estree.mjs'].map(f=>import(PRETTIER+f))).catch(e=>{PR=null;throw e}));
+async function tidy(text){
+ const [p,...pl]=await loadPrettier(),keep=[];
+ /* pustaka pihak ketiga yang sudah di-minify (satu baris raksasa) dibiarkan utuh */
+ const src=text.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi,m=>m.length>600000||/[^\n]{8000,}/.test(m)?(keep.push(m),'<!--KEEP'+(keep.length-1)+'-->'):m);
+ const out=await p.format(src,{parser:'html',plugins:pl,tabWidth:2,printWidth:100});
+ return out.replace(/<!--KEEP(\d+)-->/g,(_,i)=>keep[i]);
+}
 
 async function downloadSrc(x){const r=await probe(x);if(!r.text){toast(diagMsg(x,r)||t('codeFail'));return}if(r.problem&&r.problem!=='small'){toast(diagMsg(x,r));return}
- let text=r.text,tidy=false;toast(t('tidying'));await new Promise(z=>setTimeout(z,40));
- try{const f=Fmt.run(text);if(f){text=f;tidy=true}}catch(e){}
- const blob=new Blob([text],{type:'text/html;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=x.file.split('/').pop();document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),6000);toast(t('downloaded')+': '+a.download+' · '+t(tidy?'tidied':'notTidied'))}
+ let text=r.text,ok=false;toast(t('tidying'));
+ try{text=await tidy(text);ok=true}catch(e){}
+ const blob=new Blob([text],{type:'text/html;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=x.file.split('/').pop();document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),6000);toast(t('downloaded')+': '+a.download+' · '+t(ok?'tidied':'notTidied'))}
 
 applyTheme();applyLang();routeHash();
 </script>
 <script>
-/* Panel WhatsApp Bot: terhubung ke server di folder bot/ lewat API HTTP. Semua teks dari server ditampilkan dengan textContent. */
+/* Panel WhatsApp Bot: terhubung ke server di folder bot/ lewat link koneksi. Semua teks dari server ditampilkan dengan textContent. */
 (function(){
 const BT={
-id:{title:'WhatsApp Bot',sub:'Bot yang terhubung langsung ke panel ini',on:'Online',wait:'Menghubungkan…',qr:'Menunggu tautan',closed:'Terputus',out:'Sesi keluar',off:'Belum terhubung',
- owner:'Pemilik',mode:'Mode',cmds:'Perintah',users:'Pengguna',up:'Aktif',base:'Alamat server bot',basePh:'http://localhost:3000',save:'Hubungkan',saved:'Alamat disimpan',
- offHint:'Server bot belum terjangkau. Jalankan folder bot/ (lihat README.md), lalu isi alamatnya di atas. Jika halaman ini diakses lewat https, alamat bot juga harus https.',
- mixed:'Halaman ini memakai https sedangkan alamat bot http. Browser memblokir ini; pakai alamat https atau buka panel dari server bot.',
- login:'Masuk sebagai Creator',tokenPh:'Token pemilik (OWNER_TOKEN)',enter:'Masuk',exit:'Keluar',wrong:'Token salah',loginFail:'Gagal masuk',
- hi:'Halo, {n}! Kamu masuk sebagai Creator.',badge:'Creator terverifikasi',welcome:'Selamat datang kembali, {n}',
- linkT:'Tautkan nomor WhatsApp bot',scan:'Pindai QR ini: WhatsApp → Perangkat tertaut → Tautkan perangkat.',or:'Atau tautkan lewat kode: masukkan nomor bot, minta kode, lalu isi di WhatsApp → Perangkat tertaut → Tautkan dengan nomor telepon.',
- numPh:'6281234567890',ask:'Minta kode',codeIs:'Kode tautan (berlaku singkat):',linked:'Terhubung sebagai',ctl:'Kendali bot',public:'Publik',self:'Hanya saya',restart:'Mulai ulang',unlink:'Putuskan WhatsApp',unlinkQ:'Putuskan WhatsApp dari bot? Kamu perlu menautkan ulang.',
- done:'Selesai',fail:'Gagal',top:'Teratas',cmdsT:'Daftar perintah',cq:'Cari perintah',copied:'Disalin: ',tap:'Ketuk perintah untuk menyalin',none:'Tidak ada hasil',total:'Total perintah dijalankan',banned:'Diblokir'},
-en:{title:'WhatsApp Bot',sub:'A bot wired straight into this panel',on:'Online',wait:'Connecting…',qr:'Waiting to link',closed:'Disconnected',out:'Logged out',off:'Not connected',
- owner:'Owner',mode:'Mode',cmds:'Commands',users:'Users',up:'Uptime',base:'Bot server address',basePh:'http://localhost:3000',save:'Connect',saved:'Address saved',
- offHint:'The bot server is unreachable. Run the bot/ folder (see README.md), then enter its address above. If this page is served over https, the bot address must be https too.',
- mixed:'This page uses https but the bot address is http. Browsers block that; use an https address or open the panel from the bot server.',
- login:'Sign in as Creator',tokenPh:'Owner token (OWNER_TOKEN)',enter:'Sign in',exit:'Sign out',wrong:'Wrong token',loginFail:'Sign-in failed',
- hi:'Hi, {n}! You are signed in as Creator.',badge:'Verified Creator',welcome:'Welcome back, {n}',
- linkT:'Link the bot’s WhatsApp number',scan:'Scan this QR: WhatsApp → Linked devices → Link a device.',or:'Or link by code: enter the bot number, request a code, then type it in WhatsApp → Linked devices → Link with phone number.',
- numPh:'6281234567890',ask:'Get code',codeIs:'Link code (short-lived):',linked:'Connected as',ctl:'Bot controls',public:'Public',self:'Only me',restart:'Restart',unlink:'Unlink WhatsApp',unlinkQ:'Unlink WhatsApp from the bot? You will need to link again.',
- done:'Done',fail:'Failed',top:'Top',cmdsT:'Command list',cq:'Search commands',copied:'Copied: ',tap:'Tap a command to copy it',none:'No results',total:'Commands run',banned:'Blocked'}};
+id:{title:'WhatsApp Bot',sub:'Gratis, tanpa API berbayar: jalankan bot, buka link, selesai.',on:'Online',wait:'Menghubungkan…',qr:'Menunggu tautan',closed:'Terputus',out:'Sesi keluar',off:'Belum terhubung',
+ s:['Jalankan','Masuk','Tautkan','Siap'],owner:'Pemilik',mode:'Mode',cmds:'Perintah',users:'Pengguna',up:'Aktif',public:'Publik',self:'Hanya saya',by:'Dibuat oleh',
+ runT:'1. Jalankan bot',run:'Di komputer, Termux atau server (butuh Node.js 20+):',copy:'Salin',copied:'Disalin',
+ linkT:'Hubungkan ke bot',linkLbl:'Tempel link dari terminal bot',linkPh:'Link panel dari terminal, atau http://localhost:3000',connect:'Hubungkan',tryLocal:'Coba localhost:3000',
+ linkHint:'Setelah bot jalan, terminal menampilkan “Link panel”. Tempel di sini, alamat dan kunci langsung terisi. Cara paling cepat: buka link itu langsung di browser.',
+ offHint:'Bot belum terjangkau. Pastikan sudah berjalan dan alamatnya benar.',mixed:'Situs ini https tetapi alamat bot http, jadi diblokir browser. Pakai alamat https (TUNNEL=1 di .env) atau buka panel dari server bot.',badUrl:'Alamat tidak valid',
+ conTo:'Terhubung ke',change:'Ubah alamat',keyT:'2. Masuk sebagai Creator',keyLbl:'Kunci API',keyPh:'Dari terminal bot / data/config.json',enter:'Masuk',exit:'Keluar',wrong:'Kunci salah',loginFail:'Gagal masuk',
+ hi:'Halo, {n}! Kamu masuk sebagai Creator.',badge:'Creator terverifikasi',
+ pairT:'3. Tautkan nomor WhatsApp bot',scan:'Pindai QR: WhatsApp → Perangkat tertaut → Tautkan perangkat.',or:'Atau pakai kode: isi nomor bot, minta kode, lalu masukkan di WhatsApp → Tautkan dengan nomor telepon.',
+ ask:'Minta kode',codeIs:'Kode tautan (berlaku singkat):',linked:'Terhubung sebagai',ctl:'Bot siap dipakai',ctl3:'Kendali bot',total:'Perintah dijalankan',banned:'Diblokir',top:'Teratas',
+ restart:'Mulai ulang',unlink:'Putuskan WhatsApp',unlinkQ:'Putuskan WhatsApp dari bot? Kamu perlu menautkan ulang.',done:'Selesai',fail:'Gagal',
+ apiT:'API gratis: kirim pesan lewat link',apiNote:'Ganti KUNCI_API dengan kunci dari terminal bot. Jangan bagikan kunci ini.',
+ cmdsT:'Daftar perintah',cq:'Cari perintah',tap:'Ketuk perintah untuk menyalin',none:'Tidak ada hasil'},
+en:{title:'WhatsApp Bot',sub:'Free, no paid API: run the bot, open the link, done.',on:'Online',wait:'Connecting…',qr:'Waiting to link',closed:'Disconnected',out:'Logged out',off:'Not connected',
+ s:['Run','Sign in','Link','Ready'],owner:'Owner',mode:'Mode',cmds:'Commands',users:'Users',up:'Uptime',public:'Public',self:'Only me',by:'Made by',
+ runT:'1. Run the bot',run:'On a computer, Termux or server (Node.js 20+ needed):',copy:'Copy',copied:'Copied',
+ linkT:'Connect to the bot',linkLbl:'Paste the link from the bot terminal',linkPh:'Panel link from terminal, or http://localhost:3000',connect:'Connect',tryLocal:'Try localhost:3000',
+ linkHint:'Once the bot runs, its terminal prints a “Panel link”. Paste it here and the address and key fill in. Fastest: open that link in your browser.',
+ offHint:'The bot is unreachable. Make sure it is running and the address is right.',mixed:'This site is https but the bot address is http, so the browser blocks it. Use an https address (TUNNEL=1 in .env) or open the panel from the bot server.',badUrl:'Invalid address',
+ conTo:'Connected to',change:'Change address',keyT:'2. Sign in as Creator',keyLbl:'API key',keyPh:'From the bot terminal / data/config.json',enter:'Sign in',exit:'Sign out',wrong:'Wrong key',loginFail:'Sign-in failed',
+ hi:'Hi, {n}! You are signed in as Creator.',badge:'Verified Creator',
+ pairT:'3. Link the bot’s WhatsApp number',scan:'Scan the QR: WhatsApp → Linked devices → Link a device.',or:'Or use a code: enter the bot number, request a code, then type it in WhatsApp → Link with phone number.',
+ ask:'Get code',codeIs:'Link code (short-lived):',linked:'Connected as',ctl:'Bot is ready',ctl3:'Bot controls',total:'Commands run',banned:'Blocked',top:'Top',
+ restart:'Restart',unlink:'Unlink WhatsApp',unlinkQ:'Unlink WhatsApp from the bot? You will need to link again.',done:'Done',fail:'Failed',
+ apiT:'Free API: send messages with a link',apiNote:'Replace KUNCI_API with the key from the bot terminal. Never share this key.',
+ cmdsT:'Command list',cq:'Search commands',tap:'Tap a command to copy it',none:'No results'}};
 const L=()=>BT[(typeof lang!=='undefined'&&BT[lang])?lang:'id'];
 const $=s=>document.querySelector(s);
 const el=(t,a,...k)=>{const e=document.createElement(t);for(const[n,v]of Object.entries(a||{})){if(n==='class')e.className=v;else if(n.startsWith('on'))e.addEventListener(n.slice(2),v);else if(v!==false&&v!=null)e.setAttribute(n,v)}for(const c of k.flat())if(c!=null)e.append(c.nodeType?c:document.createTextNode(c));return e};
-const S={pub:null,cmds:null,own:null,err:false,sess:null,sig:''};
-try{S.sess=JSON.parse(localStorage.getItem('botSession')||'null')}catch(e){}
-if(S.sess&&(!S.sess.s||S.sess.exp<Date.now()))S.sess=null;
 const store=(k,v)=>{try{v==null?localStorage.removeItem(k):localStorage.setItem(k,v)}catch(e){}};
-const getBase=()=>{try{return localStorage.getItem('botBase')||''}catch(e){return''}};
-const norm=u=>{u=String(u||'').trim().replace(/\/+$/,'');if(!/^https?:\/\/[^\s/]+/i.test(u))return'';return u};
-let base=norm(getBase());
+const getS=k=>{try{return localStorage.getItem(k)||''}catch(e){return''}};
+const norm=u=>{u=String(u||'').trim().replace(/\/+$/,'');return/^https?:\/\/[^\s/]+/i.test(u)?u:''};
+const dec=s=>{try{return decodeURIComponent(s)}catch(e){return s}};
+/* link koneksi: https://panel/#bot=<alamat>&key=<kunci>  atau alamat biasa */
+function parseLink(v){v=String(v||'').trim();const b=/[#?&]bot=([^&\s]+)/.exec(v),k=/[#?&]key=([^&\s]+)/.exec(v);return b?{base:norm(dec(b[1])),key:k?dec(k[1]):''}:{base:norm(v),key:''}}
+const AV='data:image/svg+xml;utf8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#25d366"/><stop offset="1" stop-color="#128c7e"/></linearGradient></defs><rect width="64" height="64" fill="url(#g)"/><rect x="14" y="22" width="36" height="26" rx="9" fill="#fff"/><circle cx="25" cy="35" r="4" fill="#128c7e"/><circle cx="39" cy="35" r="4" fill="#128c7e"/><rect x="29" y="12" width="6" height="10" rx="3" fill="#fff"/><circle cx="32" cy="12" r="3.5" fill="#fff"/></svg>');
+const DEMO={prefix:'.',list:[{name:'menu',usage:'menu',desc:'Tampilkan semua perintah',category:'Umum'},{name:'ping',usage:'ping',desc:'Cek kecepatan bot',category:'Umum'},{name:'stiker',usage:'stiker',desc:'Ubah gambar atau video jadi stiker',category:'Media'},{name:'hitung',usage:'hitung 2+2*5',desc:'Kalkulator',category:'Alat'}]};
+
+let base=norm(getS('botBase'));
+const S={pub:null,cmds:null,own:null,err:false,sess:null,sig:'',demo:'menu'};
+try{S.sess=JSON.parse(getS('botSession')||'null')}catch(e){}
+if(S.sess&&(!S.sess.s||S.sess.exp<Date.now()||S.sess.base!==base))S.sess=null;
 
 async function api(path,o={}){
   if(!base)throw new Error('no-base');
@@ -806,102 +531,142 @@ async function api(path,o={}){
   }finally{clearTimeout(t)}
 }
 const fmtUp=s=>{const d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60);return(d?d+'d ':'')+(h?h+'h ':'')+m+'m'};
+const copy=v=>{const t=L();(navigator.clipboard?navigator.clipboard.writeText(v):Promise.reject()).then(()=>toast(t.copied+': '+(v.length>40?v.slice(0,40)+'…':v)),()=>toast(v))};
+const pre=txt=>el('div',{class:'bot-pre'},txt,el('button',{class:'btn',type:'button',onclick:()=>copy(txt)},L().copy));
+const stage=()=>!base||S.err||!S.pub?1:!S.sess?2:!S.own||S.own.status!=='open'?3:4;
 
-function pill(){
-  const t=L(),p=$('#botPill'),st=S.pub&&S.pub.status;let c='bad',x=t.off;
-  if(S.pub&&!S.err){if(st==='open'){c='ok';x=t.on}else if(st==='connecting'){c='wait';x=t.wait}else if(st==='qr'){c='wait';x=t.qr}else if(st==='logged_out'){c='wait';x=t.out}else{c='bad';x=t.closed}}
-  p.className='bot-pill '+c;p.lastChild.textContent=x;
-}
 function renderHead(){
-  const t=L();$('#botTitle').textContent=t.title;$('#botSub').textContent=t.sub;$('#lblBase').textContent=t.base;
-  $('#botBase').placeholder=t.basePh;$('#botSave').textContent=t.save;$('#botCmdSum').textContent=t.cmdsT+(S.cmds?' ('+S.cmds.list.length+')':'');$('#botCq').placeholder=t.cq;
-  pill();
+  const t=L(),st=S.pub&&S.pub.status,live=S.pub&&!S.err;let c='bad',x=t.off;
+  if(live){if(st==='open'){c='ok';x=t.on}else if(st==='connecting'||st==='qr'||st==='logged_out'){c='wait';x=st==='qr'?t.qr:st==='logged_out'?t.out:t.wait}else x=t.closed}
+  $('#botTitle').textContent=(live&&S.pub.name)||t.title;$('#botSub').textContent=t.sub;
+  $('#botPill').className='bot-pill '+c;$('#botPill').lastChild.textContent=x;$('#botAvBox').classList.toggle('ok',c==='ok');
+  $('#botByName').textContent=t.by+' '+((live&&S.pub.owner)||'Creator');
+  $('#botApiSum').textContent='🔌 '+t.apiT;$('#botCmdSum').textContent='📋 '+t.cmdsT+(S.cmds?' ('+S.cmds.list.length+')':'');$('#botCq').placeholder=t.cq;
   const box=$('#botStats');box.textContent='';
-  if(S.pub&&!S.err){const p=S.pub;[[t.owner,p.owner],[t.mode,p.mode==='self'?t.self:t.public],[t.cmds,p.commands],[t.users,p.users],[t.up,fmtUp(p.uptime)]].forEach(([k,v])=>box.append(el('span',{class:'stat'},k+': ',el('b',{},String(v)))))}
-  const h=$('#botHint');
-  if(S.err||!S.pub){h.hidden=false;h.className='bot-hint';h.textContent=(location.protocol==='https:'&&/^http:\/\//i.test(base)&&!/^http:\/\/(localhost|127\.)/i.test(base))?t.mixed:t.offHint}else h.hidden=true;
+  if(live){const p=S.pub;[['👑',t.owner,p.owner],['🛡️',t.mode,p.mode==='self'?t.self:t.public],['🧩',t.cmds,p.commands],['👥',t.users,p.users],['⏱️',t.up,fmtUp(p.uptime)]].forEach(([i,k,v])=>box.append(el('div',{class:'bt'},el('em',{},i),el('b',{},String(v)),el('small',{},k))))}
+  box.hidden=!live;
+  const s=$('#botSteps'),n=stage();s.textContent='';
+  t.s.forEach((l,i)=>s.append(el('li',{class:i+1<n?'done':i+1===n?'cur':''},el('span',{class:'n'},i+1<n?'✓':String(i+1)),l)));
 }
 function renderCreatorBadge(){
-  const t=L();let b=$('#creatorBadge');
-  if(S.sess){
-    if(!b){b=el('div',{class:'creator',id:'creatorBadge'});const h=document.querySelector('.profile h1');h&&h.after(b)}
-    b.textContent='👑 '+t.badge+' · '+(S.sess.owner||'');
-  }else if(b)b.remove();
+  let b=$('#creatorBadge');
+  if(S.sess){if(!b){b=el('div',{class:'creator',id:'creatorBadge'});const h=document.querySelector('.profile h1');h&&h.after(b)}b.textContent='👑 '+L().badge+' · '+(S.sess.owner||'')}
+  else if(b)b.remove();
 }
+async function login(v){
+  const t=L();
+  try{const r=await api('/api/login',{method:'POST',body:{token:v}});S.sess={s:r.session,owner:r.owner,exp:Date.now()+r.expiresIn*1000,base};store('botSession',JSON.stringify(S.sess));toast(t.hi.replace('{n}',r.owner));renderAll();await pollOwner();return true}
+  catch(e){toast(e.status===401?t.wrong:(e.message||t.loginFail));return false}
+}
+async function connect(v){
+  const p=typeof v==='string'?parseLink(v):v;if(!p.base){toast(L().badUrl);return}
+  if(p.base!==base){base=p.base;store('botBase',base);S.cmds=null;S.pub=null;S.own=null;S.sess=null;store('botSession',null)}
+  S.err=false;renderAll();await pollStatus();
+  if(p.key&&!S.err&&!S.sess)await login(p.key);else await pollOwner();
+}
+function resetBase(){base='';store('botBase',null);store('botSession',null);S.pub=S.own=S.sess=S.cmds=null;S.err=false;renderAll()}
+const conLine=()=>el('div',{class:'bot-acts'},el('span',{class:'bot-hint'},L().conTo+' '+base),el('button',{class:'btn',type:'button',onclick:resetBase},L().change));
+
 function renderOwner(force){
-  const t=L(),box=$('#botOwnerBox'),o=S.own;
-  const sig=[!!S.err,!!S.pub,!!S.sess,o&&o.status,o&&o.qr&&o.qr.length,o&&o.pairingCode,o&&o.mode,o&&o.me,o&&o.users,o&&o.totalCommands,lang].join('|');
+  const t=L(),box=$('#botOwnerBox'),o=S.own||{},n=stage();
+  const sig=[n,!!S.err,o.status,o.qr&&o.qr.length,o.pairingCode,o.mode,o.me,o.users,o.totalCommands,lang].join('|');
   if(!force&&sig===S.sig)return;S.sig=sig;
-  const keep=['#botTok','#botNum'].map(s=>{const e=$(s);return e?[s,e.value,document.activeElement===e]:null}).filter(Boolean);
+  const keep=['#botKey','#botNum','#botLink'].map(s=>{const e=$(s);return e?[s,e.value,document.activeElement===e]:null}).filter(Boolean);
   box.textContent='';
-  if(S.err||!S.pub){return}
-  if(!S.sess){
-    const tok=el('input',{type:'password',id:'botTok',placeholder:t.tokenPh,autocomplete:'current-password','aria-label':t.tokenPh});
-    const go=async()=>{const v=tok.value;if(!v)return;go.b.disabled=true;try{const r=await api('/api/login',{method:'POST',body:{token:v}});S.sess={s:r.session,owner:r.owner,exp:Date.now()+r.expiresIn*1000};store('botSession',JSON.stringify(S.sess));tok.value='';toast(t.hi.replace('{n}',r.owner));renderAll();pollOwner()}catch(e){toast(e.status===401?t.wrong:(e.message||t.loginFail))}go.b.disabled=false};
-    go.b=el('button',{class:'btn ok',type:'button',onclick:go},t.enter);
-    tok.addEventListener('keydown',e=>{if(e.key==='Enter')go()});
-    box.append(el('div',{class:'bot-box'},el('h3',{},'🔐 '+t.login),el('div',{class:'bot-row'},el('label',{class:'bot-f'},el('span',{},t.tokenPh),tok),go.b)));
-    return;
+  if(n===1){
+    const link=el('input',{type:'text',id:'botLink',placeholder:t.linkPh,autocomplete:'off',spellcheck:'false','aria-label':t.linkLbl});
+    const go=()=>connect(link.value);link.addEventListener('keydown',e=>{if(e.key==='Enter')go()});
+    const warn=base&&S.err?(location.protocol==='https:'&&/^http:\/\//i.test(base)&&!/^http:\/\/(localhost|127\.)/i.test(base)?t.mixed:t.offHint):'';
+    box.append(
+      el('div',{class:'bot-box'},el('h3',{},'🚀 '+t.runT),el('p',{},t.run),pre('cd bot\nnpm install\nnpm start')),
+      el('div',{class:'bot-box'},el('h3',{},'🔗 '+t.linkT),
+        el('div',{class:'bot-row'},el('label',{class:'bot-f'},el('span',{},t.linkLbl),link),el('button',{class:'btn violet',type:'button',onclick:go},t.connect)),
+        el('div',{class:'bot-acts'},el('button',{class:'btn',type:'button',onclick:()=>{link.value='http://localhost:3000';go()}},t.tryLocal)),
+        el('p',{class:'bot-hint'+(warn?' warn':'')},warn||t.linkHint)));
+  }else if(n===2){
+    const key=el('input',{type:'password',id:'botKey',placeholder:t.keyPh,autocomplete:'current-password','aria-label':t.keyLbl});
+    const go=el('button',{class:'btn ok',type:'button',onclick:async()=>{if(!key.value)return;go.disabled=true;if(await login(key.value))key.value='';go.disabled=false}},t.enter);
+    key.addEventListener('keydown',e=>{if(e.key==='Enter')go.click()});
+    box.append(el('div',{class:'bot-box'},el('h3',{},'🔐 '+t.keyT),conLine(),el('div',{class:'bot-row'},el('label',{class:'bot-f'},el('span',{},t.keyLbl),key),go)));
+  }else{
+    const post=async(p,body)=>{try{await api(p,{method:'POST',body});toast(t.done);pollOwner()}catch(e){toast(t.fail+': '+e.message)}};
+    if(n===3){
+      const b=el('div',{class:'bot-box'},el('h3',{},'📲 '+t.pairT));
+      if(o.qr&&/^data:image\/png;base64,[A-Za-z0-9+/=]+$/.test(o.qr))b.append(el('img',{class:'bot-qr',src:o.qr,alt:'QR'}),el('p',{},t.scan));
+      const num=el('input',{type:'tel',id:'botNum',placeholder:'6281234567890',inputmode:'numeric',autocomplete:'off','aria-label':'Nomor'});
+      const ask=el('button',{class:'btn violet',type:'button',onclick:async()=>{ask.disabled=true;try{const r=await api('/api/owner/pair',{method:'POST',body:{number:num.value}});S.own=Object.assign(S.own||{},{pairingCode:r.code});renderOwner(true)}catch(e){toast(e.message)}ask.disabled=false}},t.ask);
+      b.append(el('p',{},t.or),el('div',{class:'bot-row'},el('label',{class:'bot-f'},el('span',{},'6281234567890'),num),ask));
+      if(o.pairingCode)b.append(el('p',{},t.codeIs),el('div',{class:'bot-code'},o.pairingCode));
+      box.append(b);
+    }
+    const c=el('div',{class:'bot-box'},el('h3',{},(n===4?'✅ '+t.ctl:'🛠️ '+t.ctl3)+(o.me?' · '+t.linked+' +'+o.me:'')),conLine());
+    if(S.own)c.append(el('p',{},t.total+': '+o.totalCommands+' · '+t.users+': '+o.users+' · '+t.banned+': '+o.banned+(o.top&&o.top.length?' · '+t.top+': '+o.top.map(x=>x[0]+' ('+x[1]+')').join(', '):'')));
+    c.append(el('div',{class:'bot-acts'},el('span',{class:'bot-hint'},t.mode),el('div',{class:'seg',role:'group'},['public','self'].map(m=>el('button',{class:'btn'+(o.mode===m?' on':''),type:'button',onclick:()=>post('/api/owner/mode',{mode:m})},m==='self'?t.self:t.public)))),
+      el('div',{class:'bot-acts'},
+        el('button',{class:'btn amber',type:'button',onclick:()=>post('/api/owner/restart',{})},t.restart),
+        el('button',{class:'btn danger',type:'button',onclick:()=>{if(confirm(t.unlinkQ))post('/api/owner/logout',{})}},t.unlink),
+        el('button',{class:'btn',type:'button',onclick:async()=>{try{await api('/api/owner/logout-panel',{method:'POST',body:{}})}catch(e){}S.sess=null;S.own=null;store('botSession',null);renderAll()}},t.exit)));
+    box.append(c);
   }
-  const blocks=[];
-  if(o&&o.status!=='open'){
-    const b=el('div',{class:'bot-box'},el('h3',{},'📲 '+t.linkT));
-    if(o.qr&&/^data:image\/png;base64,[A-Za-z0-9+/=]+$/.test(o.qr)){b.append(el('img',{class:'bot-qr',src:o.qr,alt:'QR'}),el('p',{},t.scan))}
-    b.append(el('p',{},t.or));
-    const num=el('input',{type:'tel',id:'botNum',placeholder:t.numPh,inputmode:'numeric',autocomplete:'off','aria-label':t.numPh});
-    const ask=el('button',{class:'btn violet',type:'button',onclick:async()=>{ask.disabled=true;try{const r=await api('/api/owner/pair',{method:'POST',body:{number:num.value}});S.own=Object.assign(S.own||{},{pairingCode:r.code});renderOwner(true)}catch(e){toast(e.message)}ask.disabled=false}},t.ask);
-    b.append(el('div',{class:'bot-row'},el('label',{class:'bot-f'},el('span',{},t.numPh),num),ask));
-    if(o.pairingCode)b.append(el('p',{},t.codeIs),el('div',{class:'bot-code'},o.pairingCode));
-    blocks.push(b);
-  }
-  const post=async(p,body,msg)=>{try{await api(p,{method:'POST',body});toast(msg||t.done);pollOwner()}catch(e){toast(t.fail+': '+e.message)}};
-  const c=el('div',{class:'bot-box'},el('h3',{},'🛠️ '+t.ctl+(o&&o.me?' · '+t.linked+' +'+o.me:'')));
-  if(o){c.append(el('p',{},t.total+': '+o.totalCommands+' · '+t.users+': '+o.users+' · '+t.banned+': '+o.banned+(o.top&&o.top.length?' · '+t.top+': '+o.top.map(x=>x[0]+' ('+x[1]+')').join(', '):'')))}
-  const modes=el('div',{class:'seg',role:'group'},['public','self'].map(m=>el('button',{class:'btn'+(o&&o.mode===m?' on':''),type:'button',onclick:()=>post('/api/owner/mode',{mode:m})},m==='self'?t.self:t.public)));
-  c.append(el('div',{class:'bot-acts'},el('span',{class:'stat'},t.mode),modes));
-  c.append(el('div',{class:'bot-acts'},
-    el('button',{class:'btn amber',type:'button',onclick:()=>post('/api/owner/restart',{})},t.restart),
-    el('button',{class:'btn danger',type:'button',onclick:()=>{if(confirm(t.unlinkQ))post('/api/owner/logout',{})}},t.unlink),
-    el('button',{class:'btn',type:'button',onclick:async()=>{try{await api('/api/owner/logout-panel',{method:'POST',body:{}})}catch(e){}S.sess=null;S.own=null;store('botSession',null);renderAll()}},t.exit)));
-  blocks.push(c);
-  box.append(...blocks);
   keep.forEach(([s,v,f])=>{const e=$(s);if(e){e.value=v;if(f)e.focus()}});
+}
+/* pratinjau chat WhatsApp: contoh balasan dibuat dari daftar perintah asli bot */
+function renderPhone(){
+  const t=L(),C=S.cmds||DEMO,P=C.prefix,box=$('#botPhone'),live=S.pub&&!S.err;
+  const cmd=C.list.find(c=>c.name===S.demo)||C.list[0];
+  let reply;
+  if(cmd.name==='menu'){const cats={};C.list.forEach(c=>(cats[c.category]=cats[c.category]||[]).push(P+c.name));reply='*MENU*\n'+Object.entries(cats).map(([k,v])=>'\n*'+k+'*\n'+v.join(' · ')).join('\n')}
+  else reply='*'+P+cmd.usage+'*\n'+cmd.desc;
+  const names=[...new Set(['menu'].concat(C.list.map(c=>c.name)))].filter(n=>C.list.some(c=>c.name===n)).slice(0,5);
+  box.textContent='';
+  box.append(
+    el('div',{class:'ph-h'},el('img',{src:AV,alt:''}),el('div',{},el('b',{},(live&&S.pub.name)||'Shin Bot'),el('small',{class:live&&S.pub.status==='open'?'':'off'},live&&S.pub.status==='open'?t.on:t.closed))),
+    el('div',{class:'ph-b'},el('div',{class:'bb me'},P+cmd.name),el('div',{class:'bb bot'},reply)),
+    el('div',{class:'ph-c'},names.map(n=>el('button',{type:'button',class:n===cmd.name?'on':'',onclick:()=>{S.demo=n;renderPhone()}},P+n))));
+}
+function renderApi(){
+  const t=L(),b=base||'http://localhost:3000',k='KUNCI_API',body=$('#botApiBody');body.textContent='';
+  body.append(el('p',{class:'bot-hint'},t.apiNote),
+    pre('GET '+b+'/api/send?key='+k+'&to=6281234567890&message=Halo'),
+    pre('curl -X POST '+b+'/api/send \\\n  -H "Authorization: Bearer '+k+'" \\\n  -H "Content-Type: application/json" \\\n  -d \'{"to":"6281234567890","message":"Halo"}\''),
+    pre('fetch("'+b+'/api/send",{method:"POST",\n  headers:{Authorization:"Bearer '+k+'","Content-Type":"application/json"},\n  body:JSON.stringify({to:"6281234567890",message:"Halo"})})'));
 }
 function renderCmds(){
   const t=L(),box=$('#botCmdList');box.textContent='';
-  if(!S.cmds){return}
+  if(!S.cmds)return;
   const q=$('#botCq').value.trim().toLowerCase(),cats={};
   S.cmds.list.forEach(c=>{if(q&&!(c.name+' '+c.desc+' '+c.usage+' '+(c.aliases||[]).join(' ')).toLowerCase().includes(q))return;(cats[c.category]=cats[c.category]||[]).push(c)});
   const ks=Object.keys(cats);if(!ks.length){box.append(el('p',{class:'bot-hint'},t.none));return}
   box.append(el('p',{class:'bot-hint'},t.tap));
-  ks.forEach(k=>{box.append(el('div',{class:'bot-cat'},k));cats[k].forEach(c=>box.append(el('button',{class:'bot-cmd',type:'button',onclick:()=>{const v=S.cmds.prefix+c.usage;(navigator.clipboard?navigator.clipboard.writeText(v):Promise.reject()).then(()=>toast(t.copied+v),()=>toast(v))}},el('code',{},S.cmds.prefix+c.usage),el('span',{},c.desc))))});
+  ks.forEach(k=>{box.append(el('div',{class:'bot-cat'},k));cats[k].forEach(c=>box.append(el('button',{class:'bot-cmd',type:'button',onclick:()=>copy(S.cmds.prefix+c.usage)},el('code',{},S.cmds.prefix+c.usage),el('span',{},c.desc))))});
 }
-function renderAll(){renderHead();renderCreatorBadge();renderOwner(true);renderCmds();const i=$('#botBase');if(i&&document.activeElement!==i)i.value=base}
+function renderAll(){renderHead();renderCreatorBadge();renderOwner(true);renderPhone();renderApi();renderCmds()}
 
 let busyS=false;
 async function pollStatus(){
   if(busyS||!base||document.hidden)return;busyS=true;
-  try{S.pub=await api('/api/status');S.err=false;if(!S.cmds){try{S.cmds=await api('/api/commands');renderCmds()}catch(e){}}}catch(e){S.err=true}
+  try{S.pub=await api('/api/status');S.err=false;if(!S.cmds){try{S.cmds=await api('/api/commands');renderPhone();renderCmds()}catch(e){}}}catch(e){S.err=true}
   busyS=false;renderHead();renderOwner();
 }
 async function pollOwner(){
   if(!S.sess||S.err||document.hidden||!base)return;
-  try{S.own=await api('/api/owner/state');renderOwner()}catch(e){}
+  try{S.own=await api('/api/owner/state');renderHead();renderOwner()}catch(e){}
   renderCreatorBadge();
 }
-$('#botSave').addEventListener('click',()=>{const v=norm($('#botBase').value);if(!v){toast('URL?');return}base=v;store('botBase',v);S.cmds=null;S.err=false;S.pub=null;toast(L().saved);renderAll();pollStatus().then(pollOwner)});
-$('#botBase').addEventListener('keydown',e=>{if(e.key==='Enter')$('#botSave').click()});
 $('#botCq').addEventListener('input',renderCmds);
-document.addEventListener('visibilitychange',()=>{if(!document.hidden){pollStatus().then(pollOwner)}});
-
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)pollStatus().then(pollOwner)});
 const _al=applyLang;applyLang=function(){_al.apply(this,arguments);renderAll()};
 
 (async function init(){
-  if(!base&&/^https?:$/.test(location.protocol)){ // dilayani langsung oleh server bot? coba alamat asal yang sama
+  $('#botAv').src=AV;$('#botBy').src=document.getElementById('profileImg').currentSrc||document.getElementById('profileImg').src;
+  const hash=/^#bot=/.test(location.hash)?parseLink(location.hash):null;
+  if(hash)history.replaceState(null,'',location.pathname+location.search);
+  if(!base&&!hash&&/^https?:$/.test(location.protocol)&&(location.port||location.hostname==='localhost')){ // dilayani langsung oleh server bot? coba alamat asal yang sama
     try{const c=new AbortController();setTimeout(()=>c.abort(),2500);const r=await fetch(location.origin+'/api/status',{signal:c.signal,cache:'no-store'});const j=await r.json();if(r.ok&&j&&j.name&&'status' in j){base=location.origin;store('botBase',base)}}catch(e){}
   }
   renderAll();
-  if(base){await pollStatus();await pollOwner();}
+  if(hash&&hash.base){await connect(hash);$('#botSec').scrollIntoView({behavior:'smooth',block:'start'})}
+  else if(base){await pollStatus();await pollOwner()}
   setInterval(()=>{pollStatus().then(()=>{if(S.sess&&(!S.own||S.own.status!=='open'||Date.now()%3===0))pollOwner()})},4000);
   setInterval(pollOwner,6000);
 })();
