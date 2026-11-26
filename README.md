@@ -16,6 +16,8 @@ Kumpulan alat web yang berjalan sepenuhnya di browser: PDF, gambar, video, audio
 - Strip **Terakhir dibuka** untuk akses cepat
 - Penanda **mode offline**
 - Tema (11 pilihan) dan bahasa ID/EN
+- Tombol **?** di setiap alat (kartu dan bilah atas) berisi penjelasan singkat dan langkah pakai
+- Semua kotak teks di alat punya **Unggah berkas** (txt, json, csv, md, kode, dll.), **Tempel** dari papan klip, dan seret-lepas berkas; mengetik manual tetap bisa
 - Tautan langsung ke alat: `index.html#pdf-tools`, `#image-tools`, `#video-tools`, `#audio-tools`, `#utility-tools`, `#dev-tools`, `#qr-tools`, `#text-tools`
 
 ## Menjalankan

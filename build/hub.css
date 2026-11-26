@@ -121,3 +121,20 @@ mark.m{background:color-mix(in srgb,var(--ac) 35%,transparent);color:inherit;bor
 .keys button.eq{background:var(--ac);color:var(--on);border-color:transparent}
 .disp{min-height:64px;padding:10px 14px;border-radius:14px;background:var(--bg);border:1px solid var(--ln);text-align:right;overflow-wrap:anywhere}
 .disp small{display:block;color:var(--mut);min-height:20px;font-size:13px}.disp b{font-size:28px;font-weight:800}
+
+.tc{position:relative}
+.hq{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;padding:0;font-size:13px;font-weight:800;line-height:1;color:var(--cc,var(--ac));background:var(--pn);border:1.6px solid color-mix(in srgb,var(--cc,var(--ac)) 50%,var(--ln));cursor:pointer;flex:none;font-style:normal}
+.hq:hover{border-color:var(--cc,var(--ac))}
+.tc .hq{position:absolute;top:7px;right:7px}
+.tbar .ib.hq{width:34px;height:34px;font-size:16px;margin-left:auto}
+.upl{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:6px}
+.upl small{font-size:12px}
+textarea.drag{border-color:var(--ac);background:color-mix(in srgb,var(--ac) 8%,var(--bg))}
+dialog#hlp{width:min(440px,94vw);max-height:86vh;overflow:auto;padding:20px;border:1.5px solid var(--ln);border-radius:18px;background:var(--pn);color:var(--ink)}
+dialog#hlp::backdrop{background:rgba(0,0,0,.5)}
+dialog#hlp h3{margin:12px 0 4px;font-size:17px}
+dialog#hlp p{margin:6px 0}
+dialog#hlp ol{margin:8px 0;padding-left:20px;display:flex;flex-direction:column;gap:4px}
+dialog#hlp .hlI{display:grid;place-items:center;width:46px;height:46px;border-radius:14px;background:linear-gradient(140deg,var(--cc,var(--ac)),color-mix(in srgb,var(--cc,var(--ac)) 55%,#000));color:#fff}
+dialog#hlp .hltip{padding:10px 12px;border-radius:12px;background:var(--bg);border:1px solid var(--ln);font-size:13px}
+dialog#hlp .row{margin-top:14px}

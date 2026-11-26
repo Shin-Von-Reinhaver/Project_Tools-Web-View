@@ -1,4 +1,5 @@
 (function(){
+const HP=(w,s,t)=>{const p=x=>x.split('||');return{w:p(w),s:s.map(p),t:t?p(t):null}};
 const {h,I,btn,field,inl,sel,seg,num,txt,box,row,stats,toast,copyBtn,out,bytes,tm,readFile,drop,save,result,busy,zip,debounce,_}=H;
 const tick=()=>new Promise(r=>setTimeout(r));
 let AC=null;const ctx=()=>AC||(AC=new(window.AudioContext||window.webkitAudioContext)());
@@ -139,7 +140,22 @@ function tTone(st){let o=null,g=null;const f=h('input',{type:'range',min:20,max:
  st.append(box(null,fv,f,wv,field(_('Volume','Volume'),vol),go,h('p',{class:'note'},_('Hati-hati dengan volume tinggi, terutama memakai earphone.','Careful with high volume, especially with headphones.'))));return stop}
 const cats=[{id:'edit',n:()=>_('Potong & susun','Cut & arrange'),c:'var(--c1)'},{id:'fx',n:()=>_('Ubah & percantik','Convert & enhance'),c:'var(--c2)'},{id:'live',n:()=>_('Rekam & musik','Record & music'),c:'var(--c3)'},{id:'info',n:()=>_('Analisis','Analysis'),c:'var(--c5)'}];
 const T=(id,cat,ic,n,d,run,k)=>({id,cat,ic,n,d,run,k});
-H.start({title:'Audio Tools',icon:'music',cats,tag:()=>_('Edit audio langsung di browser. Berkas tidak diunggah ke server.','Edit audio right in your browser. Files are never uploaded.'),tools:[
+const HELP={
+trim:HP('Potong bagian audio, beri fade, lalu simpan sebagai MP3/WAV.||Cut a part of audio, add fades and save as MP3/WAV.',['Unggah berkas audio.||Upload an audio file.','Pilih bagian yang diambil dan atur fade.||Select the part to keep and set fades.','Simpan sebagai MP3 atau WAV.||Save as MP3 or WAV.'],null),
+merge:HP('Gabungkan beberapa lagu, bisa dengan crossfade.||Join several tracks, optionally with crossfade.',['Tambah beberapa berkas audio.||Add several audio files.','Atur urutan dan crossfade.||Set the order and crossfade.','Gabung lalu simpan.||Merge and save.'],null),
+split:HP('Pisah audio per durasi atau di bagian senyap, hasil ZIP.||Split audio by length or at silences, delivered as a ZIP.',['Unggah audio.||Upload audio.','Pilih mode per durasi atau di bagian senyap.||Pick by length or at silences.','Pisahkan dan unduh ZIP.||Split and download the ZIP.'],null),
+convert:HP('Ubah format MP3 ⇄ WAV, atur bitrate, atau jadikan mono.||Convert MP3 ⇄ WAV, set bitrate or make mono.',['Unggah audio.||Upload audio.','Pilih format dan kualitas.||Pick the format and quality.','Konversi lalu unduh.||Convert and download.'],null),
+extract:HP('Ambil suara dari video dan simpan sebagai MP3.||Extract the sound from a video and save it as MP3.',['Unggah video.||Upload a video.','Mulai ekstrak.||Start extracting.','Unduh MP3.||Download the MP3.'],null),
+speed:HP('Ubah kecepatan dan nada: nightcore, slowed + reverb, dan lainnya.||Change speed and pitch: nightcore, slowed + reverb and more.',['Unggah audio.||Upload audio.','Pilih preset atau atur manual.||Pick a preset or adjust manually.','Proses lalu unduh.||Process and download.'],null),
+volume:HP('Keraskan, samakan (normalisasi), dan beri fade masuk/keluar.||Boost volume, normalize and add fade in/out.',['Unggah audio.||Upload audio.','Atur penguatan, normalisasi, dan fade.||Set gain, normalization and fades.','Proses lalu simpan.||Process and save.'],null),
+fx:HP('Efek audio: balik, hapus senyap, echo, bass, 8D.||Audio effects: reverse, trim silence, echo, bass, 8D.',['Unggah audio.||Upload audio.','Pilih efek.||Pick an effect.','Proses lalu unduh.||Process and download.'],null),
+record:HP('Rekam suara dengan mikrofon dan ekspor sebagai MP3.||Record with the microphone and export as MP3.',['Izinkan akses mikrofon.||Allow microphone access.','Tekan rekam, lalu berhenti bila selesai.||Press record, then stop when done.','Simpan hasilnya.||Save the recording.'],null),
+tuner:HP('Deteksi nada gitar atau vokal dari mikrofon.||Detect guitar or vocal pitch from the microphone.',['Izinkan mikrofon.||Allow the microphone.','Mainkan satu nada.||Play a single note.','Lihat nada dan selisihnya.||See the note and how far off it is.'],null),
+metro:HP('Metronom dengan BPM, birama, dan tap tempo.||Metronome with BPM, time signature and tap tempo.',['Atur BPM atau ketuk tempo.||Set the BPM or tap the tempo.','Pilih birama.||Pick the time signature.','Tekan mulai.||Press start.'],null),
+tone:HP('Generator nada gelombang 20–2000 Hz.||Tone generator for 20–2000 Hz waveforms.',['Pilih bentuk gelombang.||Pick a waveform.','Atur frekuensi.||Set the frequency.','Tekan putar; turunkan volume perangkat dulu.||Press play; lower your device volume first.'],null),
+info:HP('Lihat durasi, puncak, RMS, dan perkiraan BPM audio.||See duration, peak, RMS and estimated BPM of audio.',['Unggah audio.||Upload audio.','Tunggu analisis selesai.||Wait for the analysis.','Baca hasilnya.||Read the results.'],null)
+};
+H.start({help:HELP,title:'Audio Tools',icon:'music',cats,tag:()=>_('Edit audio langsung di browser. Berkas tidak diunggah ke server.','Edit audio right in your browser. Files are never uploaded.'),tools:[
  T('trim','edit','scissors',['Potong audio','Trim audio'],['Pilih bagian, fade, simpan MP3/WAV','Pick a part, fade, save MP3/WAV'],tTrim,'cut crop'),
  T('merge','edit','layers',['Gabung audio','Merge audio'],['Satukan beberapa lagu dengan crossfade','Join several tracks with crossfade'],tMerge,'join combine'),
  T('split','edit','split',['Pisah audio','Split audio'],['Potong per durasi atau di bagian senyap (ZIP)','Cut by length or at silences (ZIP)'],tSplit),
