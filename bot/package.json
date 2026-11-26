@@ -1,0 +1,25 @@
+{
+  "name": "shin-wa-bot",
+  "version": "1.0.0",
+  "description": "Bot WhatsApp dengan panel kendali web (terhubung ke index.html)",
+  "main": "src/index.js",
+  "private": true,
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node --test test/bot.test.js",
+    "termux": "bash termux.sh"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@whiskeysockets/baileys": "6.7.24",
+    "node-webpmux": "3.2.1",
+    "pdf-lib": "1.17.1",
+    "pino": "^9.0.0",
+    "qrcode": "^1.5.4"
+  },
+  "optionalDependencies": {
+    "sharp": "^0.34.0"
+  }
+}

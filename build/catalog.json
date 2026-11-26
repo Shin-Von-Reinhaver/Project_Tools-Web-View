@@ -1,0 +1,1477 @@
+[
+{
+"a": "pdf-tools",
+"n": [
+"Editor PDF",
+"PDF editor"
+],
+"d": [
+"Kertas kosong ukuran bebas: teks, gambar, coret, tanda tangan",
+"Blank paper of any size: text, images, drawings, signatures"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Gambar ke PDF",
+"Images to PDF"
+],
+"d": [
+"Foto dari galeri jadi PDF",
+"Photos from the gallery into a PDF"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Pindai dengan kamera",
+"Scan with the camera"
+],
+"d": [
+"Foto dokumen langsung jadi PDF",
+"Photograph a document straight into a PDF"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"PDF ke gambar",
+"PDF to image"
+],
+"d": [
+"Simpan halaman sebagai PNG atau JPG",
+"Save pages as PNG or JPG"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Satu gambar panjang",
+"One long image"
+],
+"d": [
+"Semua halaman jadi satu gambar",
+"All pages into one image"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"PDF ke Word (.doc)",
+"PDF to Word (.doc)"
+],
+"d": [
+"Teks PDF jadi dokumen Word yang bisa diedit",
+"PDF text into an editable Word document"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Ambil teks (OCR)",
+"Extract text (OCR)"
+],
+"d": [
+"Salin teks dari dokumen pindaian",
+"Copy text from a scanned document"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Gabung PDF",
+"Merge PDF"
+],
+"d": [
+"Satukan beberapa PDF jadi satu",
+"Combine several PDFs into one"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Atur halaman",
+"Arrange pages"
+],
+"d": [
+"Putar, hapus, salin, dan urutkan dengan pratinjau",
+"Rotate, delete, copy, and arrange with a preview"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Pisah PDF",
+"Split PDF"
+],
+"d": [
+"Ambil halaman atau pisah per halaman",
+"Extract pages or split by page"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Pangkas halaman",
+"Crop pages"
+],
+"d": [
+"Buang tepi halaman dengan pratinjau",
+"Trim page edges with a preview"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Ukuran halaman",
+"Page size"
+],
+"d": [
+"Ubah ke A4, A3, A5, Letter, atau Legal",
+"Change to A4, A3, A5, Letter, or Legal"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Sisipkan PDF lain",
+"Insert another PDF"
+],
+"d": [
+"Tambah halaman dari PDF lain",
+"Add pages from another PDF"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Balik urutan halaman",
+"Reverse page order"
+],
+"d": [
+"Halaman terakhir jadi pertama",
+"Last page becomes first"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Pangkas otomatis",
+"Auto crop"
+],
+"d": [
+"Buang tepi kosong semua halaman sekaligus",
+"Trim blank edges on all pages at once"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Sisip halaman kosong",
+"Insert blank page"
+],
+"d": [
+"Tambah halaman kosong setelah halaman pilihan",
+"Add a blank page after the selected page"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Susun scan dua sisi",
+"Arrange double-sided scans"
+],
+"d": [
+"Gabung scan depan dan belakang dengan urutan benar",
+"Merge front and back scans in the right order"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Edit teks PDF",
+"Edit PDF text"
+],
+"d": [
+"Ubah tulisan yang sudah ada di PDF dengan font mirip",
+"Change existing text in a PDF with a similar font"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Tulis teks",
+"Write text"
+],
+"d": [
+"Tulis teks langsung di halaman",
+"Write text directly on the page"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Gambar dan stabilo",
+"Draw and highlight"
+],
+"d": [
+"Coret dan tandai bagian penting",
+"Draw and mark important parts"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Tanda tangan",
+"Signature"
+],
+"d": [
+"Tempel tanda tangan atau gambar",
+"Paste a signature or image"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Stempel",
+"Stamp"
+],
+"d": [
+"Cap DISETUJUI, RAHASIA, DRAFT dan lainnya",
+"APPROVED, CONFIDENTIAL, DRAFT stamps and more"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Isi formulir",
+"Fill form"
+],
+"d": [
+"Isi kolom formulir PDF lalu ratakan",
+"Fill in PDF form fields, then flatten"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Redaksi",
+"Redaction"
+],
+"d": [
+"Tutup area rahasia secara permanen",
+"Permanently cover secret areas"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Tanda air",
+"Watermark"
+],
+"d": [
+"Tanda air milik Anda sendiri",
+"Your own watermark"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Nomor halaman",
+"Page number"
+],
+"d": [
+"Beri nomor otomatis",
+"Number automatically"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Header dan footer",
+"Header and footer"
+],
+"d": [
+"Teks atas dan bawah di semua halaman",
+"Top and bottom text on all pages"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Sorot atau sensor kata",
+"Highlight or redact words"
+],
+"d": [
+"Cari kata lalu sorot, coret, atau tutup hitam",
+"Find words, then highlight, strike through, or black out"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Tambah margin",
+"Add margin"
+],
+"d": [
+"Beri ruang kosong di sekeliling halaman",
+"Add blank space around the page"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Cetak PDF",
+"Print PDF"
+],
+"d": [
+"Ke printer atau simpan lewat dialog cetak",
+"To a printer or save via the print dialog"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Cetak bolak-balik",
+"Duplex printing"
+],
+"d": [
+"Depan dan belakang, 1 kertas = 2 halaman",
+"Front and back, 1 sheet = 2 pages"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Beberapa halaman per lembar",
+"Several pages per sheet"
+],
+"d": [
+"Buat PDF 2 atau 4 halaman per lembar",
+"Make a PDF with 2 or 4 pages per sheet"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Printer termal / label",
+"Thermal / label printer"
+],
+"d": [
+"Cetak langsung lewat Bluetooth atau USB",
+"Print directly over Bluetooth or USB"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Bagi halaman kiri/kanan",
+"Split pages left/right"
+],
+"d": [
+"Pisah hasil scan buku dua halaman",
+"Split a two-page book scan"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Pisah per berkas (ZIP)",
+"Split per file (ZIP)"
+],
+"d": [
+"Satu PDF per N halaman dalam ZIP",
+"One PDF per N pages in a ZIP"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Abu-abu / hitam putih",
+"Grayscale / black and white"
+],
+"d": [
+"Hemat tinta saat dicetak",
+"Save ink when printing"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Ekstrak teks",
+"Extract text"
+],
+"d": [
+"Ambil teks asli dari PDF tanpa OCR",
+"Extract the original text from a PDF without OCR"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Daftar isi",
+"Table of contents"
+],
+"d": [
+"Bookmark dan lompat ke halaman",
+"Bookmarks and jump to page"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Mode baca",
+"Reading mode"
+],
+"d": [
+"Gelap, sepia, atau kontras tinggi",
+"Dark, sepia, or high contrast"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Kompres PDF",
+"Compress PDF"
+],
+"d": [
+"Kecilkan ukuran, gambar tetap jernih",
+"Reduce the size, the image stays sharp"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Cari teks",
+"Search text"
+],
+"d": [
+"Temukan kata di seluruh halaman",
+"Find words across all pages"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Info dokumen",
+"Document info"
+],
+"d": [
+"Lihat dan ubah judul, penulis",
+"View and change the title and author"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Hapus halaman kosong",
+"Delete blank pages"
+],
+"d": [
+"Deteksi dan buang otomatis",
+"Detect and remove automatically"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Hapus metadata",
+"Remove metadata"
+],
+"d": [
+"Bersihkan judul, penulis, dan lainnya",
+"Clear the title, author, and more"
+]
+},
+{
+"a": "pdf-tools",
+"n": [
+"Ratakan jadi gambar",
+"Flatten to images"
+],
+"d": [
+"Kunci halaman agar teks tidak bisa disalin",
+"Lock the pages so the text cannot be copied"
+]
+},
+{
+"a": "image-tools",
+"n": [
+"Perbesar (Upscaler)",
+"Enlarge (Upscaler)"
+],
+"d": [
+"Perbesar foto 2x sampai 4x dengan penajaman detail",
+"Enlarge photos 2x to 4x with detail sharpening"
+]
+},
+{
+"a": "image-tools",
+"n": [
+"Perkecil (Downscale)",
+"Shrink (Downscale)"
+],
+"d": [
+"Kecilkan piksel foto agar ringan dibagikan",
+"Reduce the photo pixels so it is light to share"
+]
+},
+{
+"a": "image-tools",
+"n": [
+"Kompres ke ukuran KB",
+"Compress to a size in KB"
+],
+"d": [
+"Atur target ukuran berkas, misalnya 200 KB",
+"Set a target file size, for example 200 KB"
+]
+},
+{
+"a": "image-tools",
+"n": [
+"Pangkas dan putar",
+"Crop and rotate"
+],
+"d": [
+"Potong, putar, balik, dan luruskan foto",
+"Crop, rotate, flip, and straighten photos"
+]
+},
+{
+"a": "image-tools",
+"n": [
+"Pas foto",
+"ID photo"
+],
+"d": [
+"Ukuran 2x3, 3x4, 4x6 dengan latar merah atau biru",
+"2x3, 3x4, 4x6 sizes with a red or blue background"
+]
+},
+{
+"a": "image-tools",
+"n": [
+"Sesuaikan",
+"Adjust"
+],
+"d": [
+"Cahaya, kontras, warna, ketajaman, blur, vinyet",
+"Light, contrast, color, sharpness, blur, vignette"
+]
+},
+{
+"a": "image-tools",
+"n": [
+"Filter",
+"Filter"
+],
+"d": [
+"Hitam putih, sepia, sinema, vintage, dan lainnya",
+"Black and white, sepia, cinema, vintage, and more"
+]
+},
+{
+"a": "image-tools",
+"n": [
+"Coret dan bentuk",
+"Draw and shapes"
+],
+"d": [
+"Pena, stabilo, panah, kotak, lingkaran",
+"Pen, highlighter, arrow, box, circle"
+]
+},
+{
+"a": "image-tools",
+"n": [
+"Teks dan emoji",
+"Text and emoji"
+],
+"d": [
+"Tulis teks berfont, tambahkan emoji",
+"Write text with fonts, add emoji"
+]
+},
+{
+"a": "image-tools",
+"n": [
+"Sensor",
+"Redact"
+],
+"d": [
+"Blur, pikselasi, atau blok hitam pada area",
+"Blur, pixelate, or black-block an area"
+]
+},
+{
+"a": "image-tools",
+"n": [
+"Hapus latar",
+"Remove background"
+],
+"d": [
+"Buat latar polos jadi bening (PNG)",
+"Make a plain background transparent (PNG)"
+]
+},
+{
+"a": "image-tools",
+"n": [
+"Bingkai dan sudut",
+"Frame and corners"
+],
+"d": [
+"Tepi berwarna dan sudut membulat",
+"Colored border and rounded corners"
+]
+},
+{
+"a": "image-tools",
+"n": [
+"Tanda air",
+"Watermark"
+],
+"d": [
+"Teks atau logo berulang atau di pojok",
+"Repeated text or logo, or in a corner"
+]
+},
+{
+"a": "image-tools",
+"n": [
+"Stiker",
+"Sticker"
+],
+"d": [
+"Hapus latar plus garis tepi putih",
+"Remove background plus white border"
+]
+},
+{
+"a": "image-tools",
+"n": [
+"Stiker WhatsApp",
+"WhatsApp sticker"
+],
+"d": [
+"Stiker 512×512 tanpa bingkai putih, siap kirim ke WA",
+"512×512 sticker with no white frame, ready to send on WA"
+]
+},
+{
+"a": "image-tools",
+"n": [
+"Ambil teks (OCR)",
+"Extract text (OCR)"
+],
+"d": [
+"Ubah tulisan di foto jadi teks yang bisa disalin",
+"Turn text in a photo into copyable text"
+]
+},
+{
+"a": "image-tools",
+"n": [
+"Palet warna",
+"Color palette"
+],
+"d": [
+"Warna dominan dan pipet kode HEX",
+"Dominant colors and a HEX picker"
+]
+},
+{
+"a": "image-tools",
+"n": [
+"Info foto",
+"Photo info"
+],
+"d": [
+"Ukuran foto dan pembersihan data lokasi (EXIF)",
+"Photo size and location data (EXIF) cleanup"
+]
+},
+{
+"a": "image-tools",
+"n": [
+"Kolase foto",
+"Photo collage"
+],
+"d": [
+"Gabung beberapa foto jadi satu",
+"Combine several photos into one"
+]
+},
+{
+"a": "image-tools",
+"n": [
+"Pecah foto (grid)",
+"Split photo (grid)"
+],
+"d": [
+"Potong jadi petak untuk carousel atau puzzle",
+"Cut into tiles for a carousel or puzzle"
+]
+},
+{
+"a": "image-tools",
+"n": [
+"Proses banyak foto (ZIP)",
+"Process many photos (ZIP)"
+],
+"d": [
+"Ubah ukuran, format, dan filter banyak foto sekaligus",
+"Change the size, format, and filter of many photos at once"
+]
+},
+{
+"a": "video-tools",
+"n": [
+"Preset sosmed",
+"Social presets"
+],
+"d": []
+},
+{
+"a": "video-tools",
+"n": [
+"Upscale video",
+"Upscale video"
+],
+"d": []
+},
+{
+"a": "video-tools",
+"n": [
+"Downscale video",
+"Downscale video"
+],
+"d": []
+},
+{
+"a": "video-tools",
+"n": [
+"Kompres video",
+"Compress video"
+],
+"d": []
+},
+{
+"a": "video-tools",
+"n": [
+"Pangkas durasi",
+"Trim duration"
+],
+"d": []
+},
+{
+"a": "video-tools",
+"n": [
+"Kecepatan",
+"Speed"
+],
+"d": []
+},
+{
+"a": "video-tools",
+"n": [
+"Fade in/out",
+"Fade in/out"
+],
+"d": []
+},
+{
+"a": "video-tools",
+"n": [
+"Putar & balik",
+"Rotate & flip"
+],
+"d": []
+},
+{
+"a": "video-tools",
+"n": [
+"Pangkas bingkai",
+"Crop frame"
+],
+"d": []
+},
+{
+"a": "video-tools",
+"n": [
+"Reverse & boomerang",
+"Reverse & boomerang"
+],
+"d": []
+},
+{
+"a": "video-tools",
+"n": [
+"Gabung video",
+"Merge videos"
+],
+"d": []
+},
+{
+"a": "video-tools",
+"n": [
+"Volume & bisu",
+"Volume & mute"
+],
+"d": []
+},
+{
+"a": "video-tools",
+"n": [
+"Ekstrak audio",
+"Extract audio"
+],
+"d": []
+},
+{
+"a": "video-tools",
+"n": [
+"Filter warna",
+"Color filter"
+],
+"d": []
+},
+{
+"a": "video-tools",
+"n": [
+"Watermark teks",
+"Text watermark"
+],
+"d": []
+},
+{
+"a": "video-tools",
+"n": [
+"Video ke GIF",
+"Video to GIF"
+],
+"d": []
+},
+{
+"a": "video-tools",
+"n": [
+"Stiker WA (video)",
+"WA sticker (video)"
+],
+"d": []
+},
+{
+"a": "video-tools",
+"n": [
+"Ambil gambar",
+"Take image"
+],
+"d": []
+},
+{
+"a": "audio-tools",
+"n": [
+"Potong audio",
+"Trim audio"
+],
+"d": [
+"Pilih bagian, fade, simpan MP3/WAV",
+"Pick a part, fade, save MP3/WAV"
+]
+},
+{
+"a": "audio-tools",
+"n": [
+"Gabung audio",
+"Merge audio"
+],
+"d": [
+"Satukan beberapa lagu dengan crossfade",
+"Join several tracks with crossfade"
+]
+},
+{
+"a": "audio-tools",
+"n": [
+"Pisah audio",
+"Split audio"
+],
+"d": [
+"Potong per durasi atau di bagian senyap (ZIP)",
+"Cut by length or at silences (ZIP)"
+]
+},
+{
+"a": "audio-tools",
+"n": [
+"Ubah format & kompres",
+"Convert & compress"
+],
+"d": [
+"MP3 ⇄ WAV, bitrate, mono",
+"MP3 ⇄ WAV, bitrate, mono"
+]
+},
+{
+"a": "audio-tools",
+"n": [
+"Ekstrak dari video",
+"Extract from video"
+],
+"d": [
+"Ambil suara dari video jadi MP3",
+"Pull audio from a video as MP3"
+]
+},
+{
+"a": "audio-tools",
+"n": [
+"Kecepatan & nada",
+"Speed & pitch"
+],
+"d": [
+"Nightcore, slowed + reverb, dan lainnya",
+"Nightcore, slowed + reverb and more"
+]
+},
+{
+"a": "audio-tools",
+"n": [
+"Volume, normalisasi & fade",
+"Volume, normalize & fade"
+],
+"d": [
+"Keraskan, samakan, fade masuk/keluar",
+"Boost, normalize, fade in/out"
+]
+},
+{
+"a": "audio-tools",
+"n": [
+"Efek audio",
+"Audio effects"
+],
+"d": [
+"Balik, hapus senyap, echo, bass, 8D",
+"Reverse, trim silence, echo, bass, 8D"
+]
+},
+{
+"a": "audio-tools",
+"n": [
+"Perekam suara",
+"Voice recorder"
+],
+"d": [
+"Rekam dengan mikrofon, ekspor MP3",
+"Record with the mic, export MP3"
+]
+},
+{
+"a": "audio-tools",
+"n": [
+"Penala (tuner)",
+"Tuner"
+],
+"d": [
+"Deteksi nada gitar/vokal dari mikrofon",
+"Detect guitar/vocal pitch from the mic"
+]
+},
+{
+"a": "audio-tools",
+"n": [
+"Metronom",
+"Metronome"
+],
+"d": [
+"BPM, birama, tap tempo",
+"BPM, time signature, tap tempo"
+]
+},
+{
+"a": "audio-tools",
+"n": [
+"Generator nada",
+"Tone generator"
+],
+"d": [
+"Gelombang 20–2000 Hz",
+"20–2000 Hz waveforms"
+]
+},
+{
+"a": "audio-tools",
+"n": [
+"Info audio & BPM",
+"Audio info & BPM"
+],
+"d": [
+"Durasi, puncak, RMS, perkiraan BPM",
+"Duration, peak, RMS, estimated BPM"
+]
+},
+{
+"a": "utility-tools",
+"n": [
+"Kalkulator ilmiah",
+"Scientific calculator"
+],
+"d": [
+"Trigonometri, pangkat, log, riwayat",
+"Trig, powers, logs, history"
+]
+},
+{
+"a": "utility-tools",
+"n": [
+"Persen & diskon",
+"Percent & discount"
+],
+"d": [
+"Diskon bertingkat, PPN, margin",
+"Stacked discounts, tax, margin"
+]
+},
+{
+"a": "utility-tools",
+"n": [
+"Konverter satuan",
+"Unit converter"
+],
+"d": [
+"Panjang, berat, suhu, data, dan lain-lain",
+"Length, mass, temperature, data and more"
+]
+},
+{
+"a": "utility-tools",
+"n": [
+"Mata uang",
+"Currency"
+],
+"d": [
+"Kurs terbaru, bisa offline",
+"Live rates, offline fallback"
+]
+},
+{
+"a": "utility-tools",
+"n": [
+"Cicilan & tabungan",
+"Loan & savings"
+],
+"d": [
+"KPR, kredit flat/anuitas, bunga majemuk",
+"Mortgage, flat/annuity, compound interest"
+]
+},
+{
+"a": "utility-tools",
+"n": [
+"Bagi tagihan",
+"Split the bill"
+],
+"d": [
+"Service, pajak, tip, pembulatan",
+"Service, tax, tip, rounding"
+]
+},
+{
+"a": "utility-tools",
+"n": [
+"BMI & kalori",
+"BMI & calories"
+],
+"d": [
+"Berat ideal, BMR, kebutuhan air",
+"Ideal weight, BMR, water needs"
+]
+},
+{
+"a": "utility-tools",
+"n": [
+"Kata sandi",
+"Password generator"
+],
+"d": [
+"Kata sandi, frasa sandi, PIN yang aman",
+"Secure passwords, passphrases, PINs"
+]
+},
+{
+"a": "utility-tools",
+"n": [
+"Warna dari gambar",
+"Color from image"
+],
+"d": [
+"Ambil warna dan palet dominan",
+"Pick colors and a dominant palette"
+]
+},
+{
+"a": "utility-tools",
+"n": [
+"Penghitung / tasbih",
+"Counter / tally"
+],
+"d": [
+"Hitung dengan ketukan, ada target & getar",
+"Tap to count with target & vibration"
+]
+},
+{
+"a": "utility-tools",
+"n": [
+"Tanggal, umur & weton",
+"Dates, age & weton"
+],
+"d": [
+"Selisih tanggal, ulang tahun, Hijriah",
+"Date difference, birthdays, Hijri"
+]
+},
+{
+"a": "utility-tools",
+"n": [
+"Timer & stopwatch",
+"Timer & stopwatch"
+],
+"d": [
+"Timer, stopwatch, Pomodoro",
+"Timer, stopwatch, Pomodoro"
+]
+},
+{
+"a": "utility-tools",
+"n": [
+"Acak & undian",
+"Random & raffle"
+],
+"d": [
+"Roda undian, angka, dadu, bagi tim",
+"Wheel, numbers, dice, team split"
+]
+},
+{
+"a": "dev-tools",
+"n": [
+"JSON",
+"JSON"
+],
+"d": [
+"Rapikan, perkecil, validasi, ke CSV",
+"Format, minify, validate, to CSV"
+]
+},
+{
+"a": "dev-tools",
+"n": [
+"Rapikan CSS/HTML/SQL",
+"Beautify CSS/HTML/SQL"
+],
+"d": [
+"Beautify dan minify kode",
+"Beautify and minify code"
+]
+},
+{
+"a": "dev-tools",
+"n": [
+"Bandingkan teks",
+"Text diff"
+],
+"d": [
+"Lihat beda dua teks per baris",
+"Line-by-line differences"
+]
+},
+{
+"a": "dev-tools",
+"n": [
+"Data palsu & Lorem",
+"Fake data & Lorem"
+],
+"d": [
+"Contoh data JSON/CSV/SQL",
+"Sample JSON/CSV/SQL data"
+]
+},
+{
+"a": "dev-tools",
+"n": [
+"Hash & HMAC",
+"Hash & HMAC"
+],
+"d": [
+"MD5, SHA-1/256/384/512",
+"MD5, SHA-1/256/384/512"
+]
+},
+{
+"a": "dev-tools",
+"n": [
+"JWT decoder",
+"JWT decoder"
+],
+"d": [
+"Baca isi token dan verifikasi HS256",
+"Read tokens, verify HS256"
+]
+},
+{
+"a": "dev-tools",
+"n": [
+"Base64",
+"Base64"
+],
+"d": [
+"Teks dan berkas ⇄ Base64",
+"Text and files ⇄ Base64"
+]
+},
+{
+"a": "dev-tools",
+"n": [
+"Encoder lain",
+"More encoders"
+],
+"d": [
+"Hex, biner, Morse, ROT13, Caesar",
+"Hex, binary, Morse, ROT13, Caesar"
+]
+},
+{
+"a": "dev-tools",
+"n": [
+"UUID, ULID, NanoID",
+"UUID, ULID, NanoID"
+],
+"d": [
+"ID unik acak",
+"Random unique IDs"
+]
+},
+{
+"a": "dev-tools",
+"n": [
+"Timestamp",
+"Timestamp"
+],
+"d": [
+"Unix ⇄ tanggal, zona waktu",
+"Unix ⇄ date, time zones"
+]
+},
+{
+"a": "dev-tools",
+"n": [
+"Cron",
+"Cron"
+],
+"d": [
+"Jadwal berikutnya dari ekspresi cron",
+"Next runs from a cron expression"
+]
+},
+{
+"a": "dev-tools",
+"n": [
+"Regex tester",
+"Regex tester"
+],
+"d": [
+"Uji pola, sorot, ganti",
+"Test patterns, highlight, replace"
+]
+},
+{
+"a": "dev-tools",
+"n": [
+"Warna & kontras",
+"Color & contrast"
+],
+"d": [
+"HEX/RGB/HSL/CMYK dan WCAG",
+"HEX/RGB/HSL/CMYK and WCAG"
+]
+},
+{
+"a": "dev-tools",
+"n": [
+"URL encode & uraikan",
+"URL encode & parse"
+],
+"d": [
+"Encode, decode, bedah URL",
+"Encode, decode, inspect URLs"
+]
+},
+{
+"a": "dev-tools",
+"n": [
+"Penguji API",
+"API tester"
+],
+"d": [
+"Kirim permintaan HTTP",
+"Send HTTP requests"
+]
+},
+{
+"a": "qr-tools",
+"n": [
+"Buat QR",
+"Create QR"
+],
+"d": [
+"Teks, Wi-Fi, WhatsApp, kontak, lokasi",
+"Text, Wi-Fi, WhatsApp, contact, location"
+]
+},
+{
+"a": "qr-tools",
+"n": [
+"Pindai QR",
+"Scan QR"
+],
+"d": [
+"Dari kamera atau gambar",
+"From the camera or an image"
+]
+},
+{
+"a": "qr-tools",
+"n": [
+"QR massal",
+"Bulk QR"
+],
+"d": [
+"Banyak QR sekaligus jadi ZIP",
+"Many QRs at once as a ZIP"
+]
+},
+{
+"a": "qr-tools",
+"n": [
+"Kode batang",
+"Barcode"
+],
+"d": [
+"Code 128, EAN, UPC, Code 39, dll",
+"Code 128, EAN, UPC, Code 39 and more"
+]
+},
+{
+"a": "qr-tools",
+"n": [
+"Link WhatsApp",
+"WhatsApp link"
+],
+"d": [
+"Buat wa.me + QR dengan pesan awal",
+"Make wa.me + QR with a prefilled message"
+]
+},
+{
+"a": "text-tools",
+"n": [
+"Penghitung kata",
+"Word counter"
+],
+"d": [
+"Kata, karakter, waktu baca, batas medsos",
+"Words, characters, reading time, social limits"
+]
+},
+{
+"a": "text-tools",
+"n": [
+"Tes mengetik",
+"Typing test"
+],
+"d": [
+"Ukur kecepatan (WPM) dan akurasi",
+"Measure speed (WPM) and accuracy"
+]
+},
+{
+"a": "text-tools",
+"n": [
+"Ubah huruf",
+"Change case"
+],
+"d": [
+"UPPER, Title, camelCase, snake_case, slug",
+"UPPER, Title, camelCase, snake_case, slug"
+]
+},
+{
+"a": "text-tools",
+"n": [
+"Rapikan baris",
+"Clean up lines"
+],
+"d": [
+"Hapus duplikat, urutkan, beri nomor",
+"Remove duplicates, sort, number"
+]
+},
+{
+"a": "text-tools",
+"n": [
+"Cari & ganti",
+"Find & replace"
+],
+"d": [
+"Banyak aturan sekaligus, dukung regex",
+"Many rules at once, regex supported"
+]
+},
+{
+"a": "text-tools",
+"n": [
+"Terbilang & Romawi",
+"Number words & Roman"
+],
+"d": [
+"Angka ke kata (kuitansi) dan Romawi",
+"Numbers to words (receipts) and Roman"
+]
+},
+{
+"a": "text-tools",
+"n": [
+"Konversi tabel",
+"Table converter"
+],
+"d": [
+"Excel/CSV ⇄ Markdown, HTML, JSON",
+"Excel/CSV ⇄ Markdown, HTML, JSON"
+]
+},
+{
+"a": "text-tools",
+"n": [
+"Markdown",
+"Markdown"
+],
+"d": [
+"Pratinjau langsung dan ekspor HTML",
+"Live preview and HTML export"
+]
+},
+{
+"a": "text-tools",
+"n": [
+"Teks gaya",
+"Fancy text"
+],
+"d": [
+"Tebal, miring, bulat, coret untuk bio",
+"Bold, italic, circled, strikethrough for bios"
+]
+}
+]

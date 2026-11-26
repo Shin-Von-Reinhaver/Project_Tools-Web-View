@@ -1,0 +1,24 @@
+{
+  "name": "Shin Tools",
+  "short_name": "Shin Tools",
+  "description": "Koleksi alat PDF, gambar, video, audio, utilitas, dan developer yang berjalan di perangkat Anda.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#070b14",
+  "theme_color": "#090d16",
+  "lang": "id",
+  "categories": ["utilities", "productivity"],
+  "icons": [
+    {"src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png"},
+    {"src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"},
+    {"src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml"}
+  ],
+  "shortcuts": [
+    {"name": "PDF Tools", "url": "./index.html#pdf-tools"},
+    {"name": "Audio Tools", "url": "./index.html#audio-tools"},
+    {"name": "QR & Kode", "url": "./index.html#qr-tools"}
+  ]
+}
