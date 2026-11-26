@@ -34,7 +34,7 @@ def inject_old(path,dic):
     t=sub_block(t,'script','kit-js',kit_js(dic,"{sw:'../sw.js'}"),'body')
     open(path,'w',encoding='utf-8').write(t)
 APPS={
- 'dev-tools':dict(title='Dev Tools',ac=('#0B7A8F','#38BDF8','#fff','#04202F'),theme='#0E1318'),
+ 'dev-tools':dict(title='Dev Tools',ac=('#0B7A8F','#38BDF8','#fff','#04202F'),theme='#0E1318',libs=['beautifier.min.js','terser.min.js']),
  'audio-tools':dict(title='Audio Tools',ac=('#C2410C','#FB923C','#fff','#2A1000'),theme='#0E1318',libs=['lame.min.js']),
  'utility-tools':dict(title='Utilitas Harian',ac=('#047857','#34D399','#fff','#03231A'),theme='#0E1318'),
  'qr-tools':dict(title='QR & Kode',ac=('#4338CA','#818CF8','#fff','#10113A'),theme='#0E1318',libs=['qrcode.min.js','jsqr.min.js','jsbarcode.min.js']),
@@ -67,7 +67,7 @@ def make_app(name,meta):
 {rd('hub.js')}
 </script>
 <script>
-{rd('apps/'+name+'.js')}
+{rd('apps/'+name+'.js').replace('</script','<\\/script')}
 </script>
 </body>
 </html>

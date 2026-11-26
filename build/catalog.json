@@ -1169,12 +1169,12 @@
 {
 "a": "dev-tools",
 "n": [
-"Rapikan CSS/HTML/SQL",
-"Beautify CSS/HTML/SQL"
+"Rapikan & perkecil kode",
+"Beautify & minify code"
 ],
 "d": [
-"Beautify dan minify kode",
-"Beautify and minify code"
+"JS, CSS, HTML campuran, JSON, SQL + cek sintaks",
+"JS, CSS, mixed HTML, JSON, SQL + syntax check"
 ]
 },
 {

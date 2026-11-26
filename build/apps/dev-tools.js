@@ -6,10 +6,10 @@ const b64e=(u8,url)=>{let s='';const CH=0x8000;for(let i=0;i<u8.length;i+=CH)s+=
 const b64d=s=>{s=s.replace(/\s+/g,'').replace(/-/g,'+').replace(/_/g,'/');while(s.length%4)s+='=';const b=atob(s),u=new Uint8Array(b.length);for(let i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return u};
 /* kerangka umum: kotak teks masuk + tombol aksi + keluaran */
 function io(st,o){const inp=area(o.val||'',{ph:o.ph,rows:o.rows||7}),res=out(''),bar=row();
- const run=(f)=>{try{const r=f(inp.value);res.className='out';res.textContent=r==null?'':r}catch(e){res.className='out err';res.textContent=e.message||String(e)}};
+ const run=(f)=>{const ok=x=>{res.className='out';res.textContent=x==null?'':x;o.onresult&&o.onresult(x,inp.value)},bad=e=>{res.className='out err';res.textContent=e.message||String(e)};try{const r=f(inp.value);if(r&&typeof r.then==='function'){res.className='out';res.textContent='…';r.then(ok,bad)}else ok(r)}catch(e){bad(e)}};
  (o.actions||[]).forEach(a=>bar.append(btn(a[0],{p:a[2],on:()=>run(a[1])})));
  bar.append(copyBtn(()=>res.textContent),btn(_('Pakai hasil','Use result'),{s:1,on:()=>{inp.value=res.textContent}}),btn(_('Hapus','Clear'),{s:1,d:1,on:()=>{inp.value='';res.textContent='';res.className='out'}}));
- st.append(box(o.title||null,o.extra||null,field(_('Masukan','Input'),inp),bar),box(_('Hasil','Result'),res));if(o.auto)run(o.auto);return{inp,res,run}}
+ st.append(box(o.title||null,o.extra||null,field(_('Masukan','Input'),inp),bar),box(_('Hasil','Result'),res,o.after||null));if(o.auto)run(o.auto);return{inp,res,run}}
 /* ---------- JSON ---------- */
 function jsonErr(e,s){const m=/position (\d+)/.exec(e.message);if(m){const p=+m[1],b=s.slice(0,p).split('\n');return e.message+'\n→ '+_('baris ','line ')+b.length+_(', kolom ',', col ')+(b[b.length-1].length+1)}return e.message}
 const sortKeys=v=>Array.isArray(v)?v.map(sortKeys):v&&typeof v==='object'?Object.keys(v).sort().reduce((a,k)=>(a[k]=sortKeys(v[k]),a),{}):v;
@@ -111,8 +111,30 @@ const htmlPretty=s=>{const t=s.replace(/>\s+</g,'><').trim().split(/(<[^>]+>)/).
 const htmlMin=s=>s.replace(/<!--[\s\S]*?-->/g,'').replace(/>\s+</g,'><').replace(/\s{2,}/g,' ').trim();
 const KW='SELECT|FROM|WHERE|GROUP BY|ORDER BY|HAVING|LIMIT|OFFSET|INSERT INTO|VALUES|UPDATE|SET|DELETE FROM|LEFT JOIN|RIGHT JOIN|INNER JOIN|JOIN|ON|UNION|AND|OR|AS|IN|NOT|NULL|LIKE|BETWEEN|DISTINCT|CREATE TABLE|ALTER TABLE|DROP TABLE';
 const sqlPretty=s=>s.replace(/\s+/g,' ').replace(new RegExp('\\b('+KW+')\\b','gi'),m=>m.toUpperCase()).replace(/\b(FROM|WHERE|GROUP BY|ORDER BY|HAVING|LIMIT|VALUES|SET|LEFT JOIN|RIGHT JOIN|INNER JOIN|JOIN|UNION)\b/g,'\n$1').replace(/\b(AND|OR)\b/g,'\n  $1').trim();
-function tFormat(st){const lang=seg([['css','CSS'],['html','HTML'],['sql','SQL']],'css');
- io(st,{ph:'body{margin:0;padding:0}',extra:lang,actions:[[_('Rapikan','Beautify'),s=>({css:cssPretty,html:htmlPretty,sql:sqlPretty})[lang.value](s),1],[_('Perkecil','Minify'),s=>({css:cssMin,html:htmlMin,sql:x=>x.replace(/\s+/g,' ').trim()})[lang.value](s)]]})}
+/* ---- Rapikan & perkecil: JS, CSS, HTML (campuran dengan CSS/JS di dalamnya), JSON, SQL ---- */
+function detectLang(s){const t=s.trim();if(!t)return'js';if(/^</.test(t))return'html';try{JSON.parse(t);return'json'}catch(e){}if(/^(select|insert|update|delete|create|alter|drop|with)\b/i.test(t))return'sql';if(/^(@[\w-]+[^{;]*[{;]|[^(){};=]+\{[^{}]*:[^{}]*\})/.test(t)&&!/\b(function|const|let|var|return|class)\b|=>/.test(t))return'css';return'js'}
+const LN={js:'JavaScript',css:'CSS',html:_('HTML (+ CSS & JS di dalamnya)','HTML (+ inline CSS & JS)'),json:'JSON',sql:'SQL'};
+function codeErr(e,src,label){const ln=e.line||e.lineNumber,col=e.col||e.column;let m=(label?label+': ':'')+(e.message||String(e));if(ln){const L=src.split('\n');m+='\n→ '+_('baris ','line ')+ln+(col!=null?_(', kolom ',', col ')+(col+1):'')+'\n'+(L[ln-1]||'').slice(0,160)+(col!=null?'\n'+' '.repeat(Math.min(col,160))+'^':'')}return new Error(m)}
+function scriptKind(attrs){const m=/\btype\s*=\s*["']?([^"'\s>]+)/i.exec(attrs||'');if(!m)return'js';const t=m[1].toLowerCase();return t==='module'?'module':/javascript|ecmascript|jsx/.test(t)?'js':/json/.test(t)?'json':'other'}
+async function minJs(src,o,mod){try{const r=await Terser.minify(src,{module:!!mod,compress:{drop_console:!!o.dc},mangle:!!o.mg,format:{comments:false}});return r.code||''}catch(e){throw codeErr(e,src)}}
+async function minHtml(s,o){const B=[];let t=s.replace(/<(script|style)\b([^>]*)>([\s\S]*?)<\/\1>/gi,(m,tag,at,body)=>{B.push({tag:tag.toLowerCase(),at,body,m});return'\u0000B'+(B.length-1)+'\u0000'});t=t.replace(/<(pre|textarea)\b[\s\S]*?<\/\1>/gi,m=>{B.push({raw:m});return'\u0000B'+(B.length-1)+'\u0000'});
+ t=htmlMin(t).replace(/>\s+(?=\u0000B)/g,'>').replace(/(\u0000B\d+\u0000)\s+(?=[<\u0000])/g,'$1');const R=[];for(let i=0;i<B.length;i++){const b=B[i];if(b.raw){R.push(b.raw);continue}const at=b.at||'';if(b.tag==='style'){R.push('<style'+at+'>'+cssMin(b.body)+'</style>');continue}const k=scriptKind(at);if(!b.body.trim()||/\bsrc\s*=/i.test(at)||k==='other'){R.push(b.m);continue}
+  if(k==='json'){let c=b.body.trim();try{c=JSON.stringify(JSON.parse(c))}catch(e){}R.push('<script'+at+'>'+c+'<\/script>');continue}
+  try{R.push('<script'+at+'>'+await minJs(b.body,o,k==='module')+'<\/script>')}catch(e){throw new Error(_('Skrip ke-','Script #')+(B.slice(0,i+1).filter(x=>x.tag==='script').length)+' — '+e.message)}}
+ return t.replace(/\u0000B(\d+)\u0000/g,(_m,i)=>R[+i])}
+function tFormat(st){const mode=seg([['auto',_('Otomatis','Auto')],['js','JS'],['css','CSS'],['html',_('HTML + campuran','HTML + mixed')],['json','JSON'],['sql','SQL']],'auto'),ind=seg([['2','2'],['4','4'],['t','Tab']],'2'),mg=h('input',{type:'checkbox',checked:true}),dc=h('input',{type:'checkbox'}),info=h('p',{class:'note'}),lang=()=>mode.value==='auto'?detectLang(inp.value):mode.value,
+  bo=()=>({indent_size:ind.value==='t'?1:+ind.value,indent_with_tabs:ind.value==='t',preserve_newlines:true,max_preserve_newlines:2,end_with_newline:false});
+ let inp;
+ const pretty=s=>{const l=lang(),o=bo();if(l==='js'){try{if(typeof Terser!=='undefined')return Terser.minify(s,{compress:false,mangle:false,format:{beautify:false}}).then(()=>beautifier.js(s,o),e=>{throw codeErr(e,s)})}catch(e){}return beautifier.js(s,o)}
+  if(l==='css')return beautifier.css(s,o);if(l==='html')return beautifier.html(s,Object.assign({},o,{indent_inner_html:true,wrap_line_length:0,max_preserve_newlines:1,unformatted:['pre','textarea','code']}));if(l==='json')return JSON.stringify(JSON.parse(s),null,ind.value==='t'?'\t':+ind.value);return sqlPretty(s)};
+ const mini=s=>{const l=lang(),o={mg:mg.checked,dc:dc.checked};if(l==='js')return minJs(s,o);if(l==='css')return cssMin(s);if(l==='html')return minHtml(s,o);if(l==='json')return JSON.stringify(JSON.parse(s));return s.replace(/\s+/g,' ').trim()};
+ const check=async s=>{const l=lang();if(l==='json'){JSON.parse(s);return'✓ JSON '+_('valid','valid')}if(l==='js'){await minJs(s,{mg:0,dc:0});return'✓ '+_('Sintaks JavaScript valid','JavaScript syntax is valid')}
+  if(l==='html'){let n=0;for(const m of s.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)){if(/\bsrc\s*=/i.test(m[1])||!m[2].trim()||scriptKind(m[1])==='other')continue;n++;if(scriptKind(m[1])==='json'){JSON.parse(m[2]);continue}try{await minJs(m[2],{},scriptKind(m[1])==='module')}catch(e){throw new Error(_('Skrip ke-','Script #')+n+' — '+e.message)}}return'✓ HTML: '+n+_(' skrip diperiksa, sintaks valid',' script(s) checked, syntax valid')}
+  if(l==='css'){let d=0;for(const c of s.replace(/\/\*[\s\S]*?\*\//g,''))if(c==='{')d++;else if(c==='}'&&--d<0)throw new Error(_('Kurung } berlebih','Extra }'));if(d)throw new Error(_('Kurung { tidak ditutup','Unclosed {'));return'✓ CSS '+_('seimbang (kurung cocok)','balanced (braces match)')}return'—'};
+ const R=io(st,{ph:'function hai(n){console.log("halo "+n)}',extra:h('div',{class:'stage'},mode,row(h('span',{class:'mut'},_('Indentasi','Indent')),ind),row(inl(_('Ubah nama variabel saat memperkecil JS','Mangle names when minifying JS'),mg),inl(_('Hapus console.log','Drop console.log'),dc))),after:info,
+  actions:[[_('Rapikan','Beautify'),pretty,1],[_('Perkecil','Minify'),mini],[_('Cek sintaks','Check syntax'),check]],
+  onresult:(x,src)=>{const l=lang();info.textContent=(mode.value==='auto'?_('Terdeteksi: ','Detected: '):'')+LN[l]+(typeof x==='string'&&x&&!/^[✓—]/.test(x)?' · '+bytes(new Blob([src]).size)+' → '+bytes(new Blob([x]).size)+(src.length?' ('+(x.length<=src.length?'−':'+')+Math.abs(Math.round((1-x.length/src.length)*100))+'%)':''):'')}});
+ inp=R.inp}
 /* ---------- Data palsu & Lorem ---------- */
 const NAMA=['Budi','Siti','Agus','Dewi','Rizky','Putri','Andi','Ratna','Dimas','Wulan','Fajar','Sari','Eko','Intan','Hendra','Maya','Bayu','Citra','Yoga','Nadia'],NB=['Santoso','Wijaya','Pratama','Lestari','Saputra','Kusuma','Hidayat','Rahayu','Nugroho','Permata','Setiawan','Anggraini'],KOTA=['Jakarta','Bandung','Surabaya','Medan','Makassar','Banjarmasin','Yogyakarta','Semarang','Denpasar','Palembang'],JL=['Merdeka','Sudirman','Diponegoro','Ahmad Yani','Gajah Mada','Pahlawan','Melati','Kenanga'],PT=['Maju Jaya','Karya Mandiri','Sinar Abadi','Nusantara Tech','Cipta Solusi'];
 const LW='lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim ad minim veniam quis nostrud exercitation ullamco laboris nisi aliquip ex ea commodo consequat duis aute irure in reprehenderit voluptate velit esse cillum fugiat nulla pariatur'.split(' ');
@@ -141,7 +163,7 @@ const cats=[{id:'data',n:()=>_('Data & format','Data & format'),c:'var(--c1)'},{
 const T=(id,cat,ic,n,d,run,k)=>({id,cat,ic,n,d,run,k});
 H.start({title:'Dev Tools',icon:'code',cats,tag:()=>_('Alat bantu developer: semua dijalankan di browser, tidak ada data yang dikirim ke server.','Developer helpers: everything runs in your browser, nothing is sent to a server.'),tools:[
  T('json','data','braces',['JSON','JSON'],['Rapikan, perkecil, validasi, ke CSV','Format, minify, validate, to CSV'],tJson,'format validate prettify'),
- T('format','data','code',['Rapikan CSS/HTML/SQL','Beautify CSS/HTML/SQL'],['Beautify dan minify kode','Beautify and minify code'],tFormat),
+ T('format','data','code',['Rapikan & perkecil kode','Beautify & minify code'],['JS, CSS, HTML campuran, JSON, SQL + cek sintaks','JS, CSS, mixed HTML, JSON, SQL + syntax check'],tFormat,'javascript minify beautify js terser html css campuran'),
  T('diff','data','diff',['Bandingkan teks','Text diff'],['Lihat beda dua teks per baris','Line-by-line differences'],tDiff,'compare'),
  T('fake','data','users',['Data palsu & Lorem','Fake data & Lorem'],['Contoh data JSON/CSV/SQL','Sample JSON/CSV/SQL data'],tFake,'dummy mock lorem ipsum'),
  T('hash','sec','finger',['Hash & HMAC','Hash & HMAC'],['MD5, SHA-1/256/384/512','MD5, SHA-1/256/384/512'],tHash,'md5 sha checksum'),

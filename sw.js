@@ -1,5 +1,5 @@
 /* Service worker: membuat semua alat bisa dibuka offline. Naikkan VERSION saat ada pembaruan. */
-const VERSION='shin-tools-v1';
+const VERSION='shin-tools-v2';
 const CORE=['./','index.html','manifest.webmanifest','icons/icon-192.png','icons/icon-512.png','icons/icon.svg','media/images/images.jpeg',
  'tools/pdf-tools.html','tools/image-tools.html','tools/video-tools.html','tools/audio-tools.html','tools/utility-tools.html','tools/dev-tools.html','tools/qr-tools.html','tools/text-tools.html'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(VERSION).then(c=>Promise.all(CORE.map(u=>c.add(u).catch(()=>{})))).then(()=>self.skipWaiting()))});
