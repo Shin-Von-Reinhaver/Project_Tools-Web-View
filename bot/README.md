@@ -4,7 +4,7 @@ Bot WhatsApp tanpa API berbayar. Jalankan, buka link yang muncul, selesai.
 
 ## Termux (Android), satu perintah
 ```
-pkg update -y && pkg upgrade -y && pkg install -y git && git clone https://github.com/USERNAME/REPO.git && cd REPO/bot && bash termux.sh
+pkg update -y && pkg upgrade -y && pkg install -y git && git clone https://github.com/Shin-Von-Reinhaver/Tools-Web-View.git && cd Tools-Web-View/bot && bash termux.sh
 ```
 Ganti `USERNAME/REPO` dengan repo kamu. Jika repo hanya berisi isi folder `bot`, hapus `/bot`.
 `termux.sh` memasang Node.js, git, ffmpeg, menjalankan `npm install`, mengaktifkan wake-lock, lalu `npm start`.
