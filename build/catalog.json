@@ -731,7 +731,10 @@
 "Preset sosmed",
 "Social presets"
 ],
-"d": []
+"d": [
+"Ukuran siap pakai untuk TikTok, Reels, Shorts, dan Status",
+"Ready-made sizes for TikTok, Reels, Shorts, and Status"
+]
 },
 {
 "a": "video-tools",
@@ -739,7 +742,10 @@
 "Upscale video",
 "Upscale video"
 ],
-"d": []
+"d": [
+"Perbesar resolusi video agar lebih tajam",
+"Enlarge video resolution for a sharper picture"
+]
 },
 {
 "a": "video-tools",
@@ -747,7 +753,10 @@
 "Downscale video",
 "Downscale video"
 ],
-"d": []
+"d": [
+"Kecilkan resolusi video agar ringan dibagikan",
+"Reduce video resolution so it is light to share"
+]
 },
 {
 "a": "video-tools",
@@ -755,7 +764,10 @@
 "Kompres video",
 "Compress video"
 ],
-"d": []
+"d": [
+"Perkecil ukuran berkas video dengan kualitas terjaga",
+"Shrink the video file size while keeping quality"
+]
 },
 {
 "a": "video-tools",
@@ -763,7 +775,10 @@
 "Pangkas durasi",
 "Trim duration"
 ],
-"d": []
+"d": [
+"Potong bagian awal dan akhir video",
+"Cut the start and end of a video"
+]
 },
 {
 "a": "video-tools",
@@ -771,7 +786,10 @@
 "Kecepatan",
 "Speed"
 ],
-"d": []
+"d": [
+"Percepat atau perlambat video",
+"Speed up or slow down a video"
+]
 },
 {
 "a": "video-tools",
@@ -779,7 +797,10 @@
 "Fade in/out",
 "Fade in/out"
 ],
-"d": []
+"d": [
+"Efek memudar masuk dan keluar",
+"Fade-in and fade-out effects"
+]
 },
 {
 "a": "video-tools",
@@ -787,7 +808,10 @@
 "Putar & balik",
 "Rotate & flip"
 ],
-"d": []
+"d": [
+"Putar 90° dan cerminkan video",
+"Rotate 90° and mirror the video"
+]
 },
 {
 "a": "video-tools",
@@ -795,7 +819,10 @@
 "Pangkas bingkai",
 "Crop frame"
 ],
-"d": []
+"d": [
+"Potong tepi gambar video",
+"Crop the edges of the video frame"
+]
 },
 {
 "a": "video-tools",
@@ -803,7 +830,10 @@
 "Reverse & boomerang",
 "Reverse & boomerang"
 ],
-"d": []
+"d": [
+"Putar video mundur atau bolak-balik",
+"Play a video backwards or back and forth"
+]
 },
 {
 "a": "video-tools",
@@ -811,7 +841,10 @@
 "Gabung video",
 "Merge videos"
 ],
-"d": []
+"d": [
+"Satukan beberapa video jadi satu",
+"Join several videos into one"
+]
 },
 {
 "a": "video-tools",
@@ -819,7 +852,10 @@
 "Volume & bisu",
 "Volume & mute"
 ],
-"d": []
+"d": [
+"Atur volume atau hilangkan suara",
+"Adjust the volume or mute the sound"
+]
 },
 {
 "a": "video-tools",
@@ -827,7 +863,10 @@
 "Ekstrak audio",
 "Extract audio"
 ],
-"d": []
+"d": [
+"Ambil suara dari video jadi berkas audio",
+"Pull the sound out of a video as an audio file"
+]
 },
 {
 "a": "video-tools",
@@ -835,7 +874,10 @@
 "Filter warna",
 "Color filter"
 ],
-"d": []
+"d": [
+"Hitam putih, sepia, dan penyesuaian warna",
+"Black and white, sepia, and color adjustments"
+]
 },
 {
 "a": "video-tools",
@@ -843,7 +885,10 @@
 "Watermark teks",
 "Text watermark"
 ],
-"d": []
+"d": [
+"Tempel teks tanda air di video",
+"Overlay a text watermark on a video"
+]
 },
 {
 "a": "video-tools",
@@ -851,7 +896,10 @@
 "Video ke GIF",
 "Video to GIF"
 ],
-"d": []
+"d": [
+"Ubah potongan video jadi GIF animasi",
+"Turn a video clip into an animated GIF"
+]
 },
 {
 "a": "video-tools",
@@ -859,7 +907,10 @@
 "Stiker WA (video)",
 "WA sticker (video)"
 ],
-"d": []
+"d": [
+"Stiker animasi WhatsApp tanpa bingkai putih",
+"Animated WhatsApp sticker with no white frame"
+]
 },
 {
 "a": "video-tools",
@@ -867,7 +918,10 @@
 "Ambil gambar",
 "Take image"
 ],
-"d": []
+"d": [
+"Simpan satu frame video sebagai foto",
+"Save a single video frame as a photo"
+]
 },
 {
 "a": "audio-tools",

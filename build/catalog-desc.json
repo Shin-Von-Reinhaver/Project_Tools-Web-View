@@ -1,0 +1,74 @@
+{
+ "Preset sosmed": [
+  "Ukuran siap pakai untuk TikTok, Reels, Shorts, dan Status",
+  "Ready-made sizes for TikTok, Reels, Shorts, and Status"
+ ],
+ "Upscale video": [
+  "Perbesar resolusi video agar lebih tajam",
+  "Enlarge video resolution for a sharper picture"
+ ],
+ "Downscale video": [
+  "Kecilkan resolusi video agar ringan dibagikan",
+  "Reduce video resolution so it is light to share"
+ ],
+ "Kompres video": [
+  "Perkecil ukuran berkas video dengan kualitas terjaga",
+  "Shrink the video file size while keeping quality"
+ ],
+ "Pangkas durasi": [
+  "Potong bagian awal dan akhir video",
+  "Cut the start and end of a video"
+ ],
+ "Kecepatan": [
+  "Percepat atau perlambat video",
+  "Speed up or slow down a video"
+ ],
+ "Fade in/out": [
+  "Efek memudar masuk dan keluar",
+  "Fade-in and fade-out effects"
+ ],
+ "Putar & balik": [
+  "Putar 90° dan cerminkan video",
+  "Rotate 90° and mirror the video"
+ ],
+ "Pangkas bingkai": [
+  "Potong tepi gambar video",
+  "Crop the edges of the video frame"
+ ],
+ "Reverse & boomerang": [
+  "Putar video mundur atau bolak-balik",
+  "Play a video backwards or back and forth"
+ ],
+ "Gabung video": [
+  "Satukan beberapa video jadi satu",
+  "Join several videos into one"
+ ],
+ "Volume & bisu": [
+  "Atur volume atau hilangkan suara",
+  "Adjust the volume or mute the sound"
+ ],
+ "Ekstrak audio": [
+  "Ambil suara dari video jadi berkas audio",
+  "Pull the sound out of a video as an audio file"
+ ],
+ "Filter warna": [
+  "Hitam putih, sepia, dan penyesuaian warna",
+  "Black and white, sepia, and color adjustments"
+ ],
+ "Watermark teks": [
+  "Tempel teks tanda air di video",
+  "Overlay a text watermark on a video"
+ ],
+ "Video ke GIF": [
+  "Ubah potongan video jadi GIF animasi",
+  "Turn a video clip into an animated GIF"
+ ],
+ "Stiker WA (video)": [
+  "Stiker animasi WhatsApp tanpa bingkai putih",
+  "Animated WhatsApp sticker with no white frame"
+ ],
+ "Ambil gambar": [
+  "Simpan satu frame video sebagai foto",
+  "Save a single video frame as a photo"
+ ]
+}

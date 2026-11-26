@@ -9,16 +9,50 @@
   "background_color": "#070b14",
   "theme_color": "#090d16",
   "lang": "id",
-  "categories": ["utilities", "productivity"],
+  "categories": [
+    "utilities",
+    "productivity"
+  ],
   "icons": [
-    {"src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png"},
-    {"src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png"},
-    {"src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"},
-    {"src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml"}
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
   ],
   "shortcuts": [
-    {"name": "PDF Tools", "url": "./index.html#pdf-tools"},
-    {"name": "Audio Tools", "url": "./index.html#audio-tools"},
-    {"name": "QR & Kode", "url": "./index.html#qr-tools"}
-  ]
+    {
+      "name": "PDF Tools",
+      "url": "./index.html#pdf-tools"
+    },
+    {
+      "name": "Image Tools",
+      "url": "./index.html#image-tools"
+    },
+    {
+      "name": "Audio Tools",
+      "url": "./index.html#audio-tools"
+    },
+    {
+      "name": "QR & Kode",
+      "url": "./index.html#qr-tools"
+    }
+  ],
+  "id": "./index.html"
 }

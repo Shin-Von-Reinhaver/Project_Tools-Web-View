@@ -1,6 +1,6 @@
 /* Service worker: membuat semua alat bisa dibuka offline. Naikkan VERSION saat ada pembaruan. */
-const VERSION='shin-tools-v2';
-const CORE=['./','index.html','manifest.webmanifest','icons/icon-192.png','icons/icon-512.png','icons/icon.svg','media/images/images.jpeg',
+const VERSION='shin-tools-v3';
+const CORE=['./','index.html','manifest.webmanifest','icons/icon-192.png','icons/icon-512.png','icons/icon.svg','icons/maskable-512.png','icons/apple-touch-icon.png','media/images/images.jpeg',
  'tools/pdf-tools.html','tools/image-tools.html','tools/video-tools.html','tools/audio-tools.html','tools/utility-tools.html','tools/dev-tools.html','tools/qr-tools.html','tools/text-tools.html'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(VERSION).then(c=>Promise.all(CORE.map(u=>c.add(u).catch(()=>{})))).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==VERSION).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
