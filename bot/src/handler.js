@@ -33,6 +33,7 @@ async function dispatch(ctx, raw) {
     busy.add(ctx.sender);
   }
   ctx.prefix = cfg.prefix;
+  ctx.cmdName = name.toLowerCase();
   ctx.args = args;
   ctx.text = body.slice(name.length).trim();
   ctx.mentioned = ctx.mentioned || [];

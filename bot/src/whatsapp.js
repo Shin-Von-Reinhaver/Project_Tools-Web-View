@@ -75,6 +75,7 @@ async function buildCtx(msg) {
       }
       return null;
     },
+    quotedText: quotedRaw ? textOf(quotedRaw) : '',
     _raw: textOf(inner),
   };
 }

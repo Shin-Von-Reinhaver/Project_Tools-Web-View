@@ -282,4 +282,77 @@ async function makeQr(text) {
   return require('qrcode').toBuffer(String(text).slice(0, 1000), { margin: 2, width: 512 });
 }
 
-module.exports = { imageToSticker, videoToSticker, videoToStickerInfo, toAudio, compressVideo, trimVideo, stickerToImage, resizeImage, compressImage, imagesToPdf, makeQr, addExif, MAX_STICKER_SECONDS };
+
+/* ---------- Efek audio, video, dan filter gambar (ffmpeg) ---------- */
+const AUDIO_FX = {
+  nightcore: 'asetrate=55125,aresample=44100',
+  slowed: 'asetrate=37400,aresample=44100,aecho=0.8:0.88:60:0.4',
+  bass: 'bass=g=14,alimiter=limit=0.95',
+  '8d': 'apulsator=hz=0.125',
+  reverse: 'areverse',
+  echo: 'aecho=0.8:0.9:500:0.3',
+  jernih: 'highpass=f=80,lowpass=f=12000,loudnorm',
+};
+const tempoChain = (x) => { const f = []; while (x > 2) { f.push('atempo=2'); x /= 2; } while (x < 0.5) { f.push('atempo=0.5'); x /= 0.5; } f.push('atempo=' + x.toFixed(3)); return f.join(','); };
+/** Efek audio -> MP3. kind: nightcore|slowed|bass|8d|reverse|echo|jernih|volume|cepat. arg: angka untuk volume/cepat. */
+async function audioFx(buf, kind, arg) {
+  let af;
+  if (kind === 'volume') { const v = Math.min(5, Math.max(0.1, +arg || 2)); af = `volume=${v},alimiter=limit=0.97`; }
+  else if (kind === 'cepat') { const v = Math.min(4, Math.max(0.25, +arg || 1.5)); af = tempoChain(v); }
+  else if (AUDIO_FX[kind]) af = AUDIO_FX[kind];
+  else throw new Error('Efek tidak dikenal. Pilihan: ' + Object.keys(AUDIO_FX).join(', ') + ', volume <0.1-5>, cepat <0.25-4>');
+  return withTmp(async (dir) => {
+    const inp = path.join(dir, 'in.bin'), out = path.join(dir, 'out.mp3');
+    fs.writeFileSync(inp, buf);
+    await run('ffmpeg', ['-y', '-v', 'error', '-i', inp, '-vn', '-af', af, '-c:a', 'libmp3lame', '-b:a', '128k', out], 180000);
+    return fs.readFileSync(out);
+  });
+}
+const vEnc = ['-c:v', 'libx264', '-preset', 'veryfast', '-crf', '26', '-pix_fmt', 'yuv420p', '-movflags', '+faststart'];
+function ffVideo(buf, args, timeoutMs = 300000) {
+  return withTmp(async (dir) => {
+    const inp = path.join(dir, 'in.bin'), out = path.join(dir, 'out.mp4');
+    fs.writeFileSync(inp, buf);
+    await run('ffmpeg', ['-y', '-v', 'error', '-i', inp, ...args, out], timeoutMs);
+    return fs.readFileSync(out);
+  });
+}
+/** Ubah kecepatan video (0.25x–4x), suara ikut. */
+const videoSpeed = (buf, x) => {
+  const v = Math.min(4, Math.max(0.25, +x || 2));
+  return ffVideo(buf, ['-filter_complex', `[0:v]setpts=PTS/${v}[v];[0:a]${tempoChain(v)}[a]`, '-map', '[v]', '-map', '[a]', ...vEnc, '-c:a', 'aac', '-b:a', '96k'])
+    .catch(() => ffVideo(buf, ['-vf', `setpts=PTS/${v}`, '-an', ...vEnc])); // video tanpa suara
+};
+const muteVideo = (buf) => ffVideo(buf, ['-an', ...vEnc]);
+const reverseVideo = (buf) => ffVideo(buf, ['-t', '20', '-vf', 'reverse', '-af', 'areverse', ...vEnc, '-c:a', 'aac']).catch(() => ffVideo(buf, ['-t', '20', '-vf', 'reverse', '-an', ...vEnc]));
+const ROT = { kanan: 'transpose=1', kiri: 'transpose=2', balik: 'transpose=2,transpose=2', cermin: 'hflip', terbalik: 'vflip' };
+const rotateVideo = async (buf, how) => { if (!ROT[how]) throw new Error('Pilihan: ' + Object.keys(ROT).join(', ')); return ffVideo(buf, ['-vf', ROT[how], ...vEnc, '-c:a', 'aac', '-b:a', '96k']).catch(() => ffVideo(buf, ['-vf', ROT[how], ...vEnc, '-an'])); };
+/** Video -> GIF (maks 8 detik, lebar 480, 12 fps). */
+function videoToGif(buf) {
+  return withTmp(async (dir) => {
+    const inp = path.join(dir, 'in.bin'), out = path.join(dir, 'out.gif');
+    fs.writeFileSync(inp, buf);
+    await run('ffmpeg', ['-y', '-v', 'error', '-t', '8', '-i', inp, '-vf', "fps=12,scale='min(480,iw)':-2:flags=lanczos,split[a][b];[a]palettegen=max_colors=128[p];[b][p]paletteuse=dither=bayer", out], 180000);
+    return fs.readFileSync(out);
+  });
+}
+/** Ambil satu frame video sebagai JPG pada detik tertentu. */
+function frameAt(buf, sec) {
+  return withTmp(async (dir) => {
+    const inp = path.join(dir, 'in.bin'), out = path.join(dir, 'out.jpg');
+    fs.writeFileSync(inp, buf);
+    await run('ffmpeg', ['-y', '-v', 'error', '-ss', String(Math.max(0, sec || 0)), '-i', inp, '-frames:v', '1', '-q:v', '2', out], 60000);
+    return fs.readFileSync(out);
+  });
+}
+const IMG_FX = {
+  hitamputih: 'hue=s=0', sepia: 'colorchannelmixer=.393:.769:.189:0:.349:.686:.168:0:.272:.534:.131', negatif: 'negate', blur: 'gblur=sigma=8',
+  tajam: 'unsharp=5:5:1.2', terang: 'eq=brightness=0.12:contrast=1.05', gelap: 'eq=brightness=-0.12', kontras: 'eq=contrast=1.35', pixel: 'scale=iw/16:-2,scale=iw*16:-2:flags=neighbor',
+  cermin: 'hflip', terbalik: 'vflip', kanan: 'transpose=1', kiri: 'transpose=2', vintage: 'curves=vintage,noise=alls=12:allf=t',
+};
+const imageFilter = async (buf, kind) => {
+  if (!IMG_FX[kind]) throw new Error('Filter tidak dikenal. Pilihan: ' + Object.keys(IMG_FX).join(', '));
+  return ffImage(buf, IMG_FX[kind], ['-q:v', '2'], 'jpg');
+};
+
+module.exports = { imageToSticker, videoToSticker, videoToStickerInfo, toAudio, compressVideo, trimVideo, stickerToImage, resizeImage, compressImage, imagesToPdf, makeQr, addExif, MAX_STICKER_SECONDS, audioFx, AUDIO_FX, videoSpeed, muteVideo, reverseVideo, rotateVideo, ROT, videoToGif, frameAt, imageFilter, IMG_FX };
