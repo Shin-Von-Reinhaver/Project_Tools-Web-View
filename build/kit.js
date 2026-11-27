@@ -7,7 +7,7 @@ var ls={get:function(k,d){try{return localStorage.getItem(k)||d}catch(e){return 
 var inFrame=false;try{inFrame=window.parent!==window}catch(e){inFrame=true}
 var nav=((navigator.language||'id')+'').slice(0,2);
 var P={theme:ls.get('sv-theme','auto'),skin:ls.get('sv-skin','default'),lang:ls.get('sv-lang',nav==='id'?'id':'en')};
-if(!SK[P.skin])P.skin='default';
+if(!SK[P.skin])P.skin='default'; var THEMES=['auto','light','dark']; if(THEMES.indexOf(P.theme)<0)P.theme='auto'; if(P.lang!=='id'&&P.lang!=='en')P.lang=nav==='id'?'id':'en';
 var LANGS=[['id','Bahasa Indonesia'],['en','English']];
 var DICT={en:{}},RDICT={en:{}},PK={},dirty={};
 function regLang(code,name,map){if(!DICT[code]){DICT[code]={};RDICT[code]={};if(name&&!LANGS.some(function(l){return l[0]===code}))LANGS.push([code,name])}reg(map,code)}
@@ -51,8 +51,10 @@ function apply(){var r=document.documentElement;
 function persist(){ls.set('sv-theme',P.theme);ls.set('sv-skin',P.skin);ls.set('sv-lang',P.lang)}
 function broadcast(){var msg={kit:'prefs',p:P};try{if(inFrame)window.parent.postMessage(msg,'*')}catch(e){}
  try{[].forEach.call(document.querySelectorAll('iframe'),function(f){try{f.contentWindow.postMessage(msg,'*')}catch(e){}})}catch(e){}}
-function set(o,from){var ch=0;['theme','skin','lang'].forEach(function(k){if(o[k]!==undefined&&o[k]!==P[k]){P[k]=o[k];ch=1}});if(!ch)return;persist();apply();if(from!=='msg')broadcast();if(sheet&&sheet.classList.contains('on'))buildSheet()}
-addEventListener('message',function(e){var d=e.data;if(!d||typeof d!=='object')return;
+function okPref(k,v){return typeof v==='string'&&(k==='theme'?THEMES.indexOf(v)>=0:k==='skin'?Object.prototype.hasOwnProperty.call(SK,v):k==='lang'?(v==='id'||Object.prototype.hasOwnProperty.call(DICT,v)):false)}
+function set(o,from){var ch=0;['theme','skin','lang'].forEach(function(k){if(o[k]!==undefined&&okPref(k,o[k])&&o[k]!==P[k]){P[k]=o[k];ch=1}});if(!ch)return;persist();apply();if(from!=='msg')broadcast();if(sheet&&sheet.classList.contains('on'))buildSheet()}
+function trusted(e){try{if(window.parent!==window&&e.source===window.parent)return true;var f=document.querySelectorAll('iframe');for(var i=0;i<f.length;i++)if(f[i].contentWindow===e.source)return true}catch(x){}return false}
+addEventListener('message',function(e){var d=e.data;if(!d||typeof d!=='object'||!trusted(e))return;
  if(d.kit==='prefs'&&d.p)set(d.p,'msg');
  else if(d.kit==='hello'){try{e.source.postMessage({kit:'prefs',p:P},'*')}catch(x){}}
  else if(d.kit==='open')openCard(d.key)});

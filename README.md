@@ -34,5 +34,11 @@ Jangan sunting `tools/audio-tools.html`, `dev-tools.html`, `qr-tools.html`, `tex
 ## Bot
 Lihat `bot/README.md`. Tes: `cd bot && npm ci && npm test`.
 
+## Tes UI
+`pip install playwright && playwright install chromium && python3 tests/ui_smoke.py` — memeriksa semua halaman alat (galat JS, tombol bantuan, overflow di 320–1280 px, preferensi rusak, mode offline) dan versi cache `sw.js`. Setelah mengubah sumber di `build/`, jalankan `python3 build/build.py`; `python3 build/build.py --check` memastikan hasilnya sudah dibangun.
+
+## Lapor bug & riwayat perubahan
+Buat issue lewat template *Laporan bug*. Riwayat ada di `CHANGELOG.md`. Repositori ini belum memiliki berkas lisensi; pemilik perlu memilihnya (mis. MIT) agar orang lain tahu hak pakainya.
+
 ## Catatan keamanan
 Jangan menempelkan token GitHub atau kunci API di chat/issue. Bot membuat kunci sendiri di `bot/data/config.json` (sudah di `.gitignore`).

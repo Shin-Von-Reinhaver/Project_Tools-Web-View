@@ -3,7 +3,7 @@
  - menyisipkan kit (tema/bahasa/PWA) ke semua alat dan beranda
  - membuat alat baru dari build/apps/*.js
 """
-import re,json,os,sys
+import re,json,os,sys,hashlib
 B=os.path.dirname(os.path.abspath(__file__)); ROOT=os.path.dirname(B)
 sys.path.insert(0,B); import skins
 rd=lambda p:open(os.path.join(B,p),encoding='utf-8').read()
@@ -86,7 +86,27 @@ def inject_index():
         cat=json.load(open(cp,encoding='utf-8'))
         t=re.sub(r'/\*CATALOG_START\*/.*?/\*CATALOG_END\*/','/*CATALOG_START*/const CATALOG='+json.dumps(cat,ensure_ascii=False,separators=(',',':')).replace('\\','\\\\')+';/*CATALOG_END*/',t,flags=re.S)
     open(p,'w',encoding='utf-8').write(t); print('index injected')
+
+def site_hash():
+    """Hash isi halaman + aset statis, dipakai sebagai versi cache service worker."""
+    h=hashlib.sha1()
+    files=['index.html','manifest.webmanifest']+sorted('tools/'+f for f in os.listdir(os.path.join(ROOT,'tools')) if f.endswith('.html'))
+    for f in files:
+        fp=os.path.join(ROOT,f)
+        if os.path.exists(fp): h.update(f.encode()); h.update(open(fp,'rb').read())
+    for d in ['icons','media']:
+        for dp,_,fs in sorted(os.walk(os.path.join(ROOT,d))):
+            for f in sorted(fs): fp=os.path.join(dp,f); h.update(os.path.relpath(fp,ROOT).encode()); h.update(open(fp,'rb').read())
+    return 'shin-tools-'+h.hexdigest()[:8]
+def set_sw_version(check=False):
+    p=os.path.join(ROOT,'sw.js'); t=open(p,encoding='utf-8').read(); v=site_hash()
+    n=re.sub(r"const VERSION='[^']*';","const VERSION='"+v+"';",t,count=1)
+    if check: return t==n,v
+    if n!=t: open(p,'w',encoding='utf-8').write(n)
+    print('sw VERSION',v); return True,v
 if __name__=='__main__':
+    if sys.argv[1:]==['--check']:
+        ok,v=set_sw_version(True); print('sw.js VERSION up to date' if ok else 'sw.js VERSION is stale (expected '+v+'); run build/build.py'); sys.exit(0 if ok else 1)
     only=sys.argv[1:]
     for n,m in APPS.items():
         if only and n not in only: continue
@@ -97,3 +117,4 @@ if __name__=='__main__':
         dic=json.load(open(dp,encoding='utf-8')) if os.path.exists(dp) else {}
         for n in ['pdf-tools','image-tools','video-tools']:
             inject_old(os.path.join(ROOT,'tools',n+'.html'),dic); print('injected',n,len(dic))
+    if not only: set_sw_version()

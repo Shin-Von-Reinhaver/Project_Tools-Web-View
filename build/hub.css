@@ -125,7 +125,7 @@ mark.m{background:color-mix(in srgb,var(--ac) 35%,transparent);color:inherit;bor
 .tc{position:relative}
 .hq{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;padding:0;font-size:13px;font-weight:800;line-height:1;color:var(--cc,var(--ac));background:var(--pn);border:1.6px solid color-mix(in srgb,var(--cc,var(--ac)) 50%,var(--ln));cursor:pointer;flex:none;font-style:normal}
 .hq:hover{border-color:var(--cc,var(--ac))}
-.tc .hq{position:absolute;top:7px;right:7px}
+.tcw>.hq{position:absolute;top:7px;right:7px}
 .tbar .ib.hq{width:34px;height:34px;font-size:16px;margin-left:auto}
 .upl{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:6px}
 .upl small{font-size:12px}
@@ -166,11 +166,11 @@ body{background:radial-gradient(760px 380px at 90% -120px,color-mix(in srgb,var(
 .tc{overflow:hidden;box-shadow:var(--sh);transition:border-color .18s,transform .18s,box-shadow .18s;min-height:140px;padding:20px 12px 16px}
 .tc::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,var(--cc,var(--ac)),transparent 85%);opacity:.85}
 .tc .ch{box-shadow:0 10px 20px -10px var(--cc,var(--ac));transition:transform .2s}
-@media(hover:hover){.tc:hover{transform:translateY(-3px);box-shadow:0 18px 34px -20px var(--cc,var(--ac))}.tc:hover .ch{transform:scale(1.07) rotate(-3deg)}}
+@media(hover:hover){.tcw{transition:transform .18s}.tcw:hover{transform:translateY(-3px)}.tcw:hover .tc{box-shadow:0 18px 34px -20px var(--cc,var(--ac));border-color:var(--cc,var(--ac))}.tcw:hover .ch{transform:scale(1.07) rotate(-3deg)}}
 .tc:active{transform:scale(.97)}
 .tc small{-webkit-line-clamp:3}
-.tc .hq{transition:background .15s,color .15s,transform .12s}
-.tc .hq:hover{background:var(--cc,var(--ac));color:#fff;transform:scale(1.1)}
+.tcw>.hq{transition:background .15s,color .15s,transform .12s}
+.tcw>.hq:hover{background:var(--cc,var(--ac));color:#fff;transform:scale(1.1)}
 .empty{border:1.5px dashed var(--ln);border-radius:var(--rs)}
 @keyframes vin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .view.on{animation:vin .24s ease both}
@@ -211,3 +211,7 @@ input:focus,select:focus,textarea:focus{box-shadow:0 0 0 4px color-mix(in srgb,v
 .upl .btn{--cc:var(--ac)}
 @media(min-width:900px){.wrapc{max-width:980px}.cards{grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}.scroll{padding-top:24px}.tag{font-size:15.5px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+.tcw{position:relative;display:flex;min-width:0}
+.tcw>.tc{flex:1;width:100%;min-width:0}
+.hq{font-family:inherit;padding:0}

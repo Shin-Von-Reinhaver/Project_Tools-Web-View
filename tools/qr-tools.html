@@ -141,7 +141,7 @@ mark.m{background:color-mix(in srgb,var(--ac) 35%,transparent);color:inherit;bor
 .tc{position:relative}
 .hq{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;padding:0;font-size:13px;font-weight:800;line-height:1;color:var(--cc,var(--ac));background:var(--pn);border:1.6px solid color-mix(in srgb,var(--cc,var(--ac)) 50%,var(--ln));cursor:pointer;flex:none;font-style:normal}
 .hq:hover{border-color:var(--cc,var(--ac))}
-.tc .hq{position:absolute;top:7px;right:7px}
+.tcw>.hq{position:absolute;top:7px;right:7px}
 .tbar .ib.hq{width:34px;height:34px;font-size:16px;margin-left:auto}
 .upl{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:6px}
 .upl small{font-size:12px}
@@ -182,11 +182,11 @@ body{background:radial-gradient(760px 380px at 90% -120px,color-mix(in srgb,var(
 .tc{overflow:hidden;box-shadow:var(--sh);transition:border-color .18s,transform .18s,box-shadow .18s;min-height:140px;padding:20px 12px 16px}
 .tc::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,var(--cc,var(--ac)),transparent 85%);opacity:.85}
 .tc .ch{box-shadow:0 10px 20px -10px var(--cc,var(--ac));transition:transform .2s}
-@media(hover:hover){.tc:hover{transform:translateY(-3px);box-shadow:0 18px 34px -20px var(--cc,var(--ac))}.tc:hover .ch{transform:scale(1.07) rotate(-3deg)}}
+@media(hover:hover){.tcw{transition:transform .18s}.tcw:hover{transform:translateY(-3px)}.tcw:hover .tc{box-shadow:0 18px 34px -20px var(--cc,var(--ac));border-color:var(--cc,var(--ac))}.tcw:hover .ch{transform:scale(1.07) rotate(-3deg)}}
 .tc:active{transform:scale(.97)}
 .tc small{-webkit-line-clamp:3}
-.tc .hq{transition:background .15s,color .15s,transform .12s}
-.tc .hq:hover{background:var(--cc,var(--ac));color:#fff;transform:scale(1.1)}
+.tcw>.hq{transition:background .15s,color .15s,transform .12s}
+.tcw>.hq:hover{background:var(--cc,var(--ac));color:#fff;transform:scale(1.1)}
 .empty{border:1.5px dashed var(--ln);border-radius:var(--rs)}
 @keyframes vin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .view.on{animation:vin .24s ease both}
@@ -227,6 +227,10 @@ input:focus,select:focus,textarea:focus{box-shadow:0 0 0 4px color-mix(in srgb,v
 .upl .btn{--cc:var(--ac)}
 @media(min-width:900px){.wrapc{max-width:980px}.cards{grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}.scroll{padding-top:24px}.tag{font-size:15.5px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+.tcw{position:relative;display:flex;min-width:0}
+.tcw>.tc{flex:1;width:100%;min-width:0}
+.hq{font-family:inherit;padding:0}
 
 </style>
 <style id="kit-css">
@@ -279,7 +283,7 @@ var ls={get:function(k,d){try{return localStorage.getItem(k)||d}catch(e){return 
 var inFrame=false;try{inFrame=window.parent!==window}catch(e){inFrame=true}
 var nav=((navigator.language||'id')+'').slice(0,2);
 var P={theme:ls.get('sv-theme','auto'),skin:ls.get('sv-skin','default'),lang:ls.get('sv-lang',nav==='id'?'id':'en')};
-if(!SK[P.skin])P.skin='default';
+if(!SK[P.skin])P.skin='default'; var THEMES=['auto','light','dark']; if(THEMES.indexOf(P.theme)<0)P.theme='auto'; if(P.lang!=='id'&&P.lang!=='en')P.lang=nav==='id'?'id':'en';
 var LANGS=[['id','Bahasa Indonesia'],['en','English']];
 var DICT={en:{}},RDICT={en:{}},PK={},dirty={};
 function regLang(code,name,map){if(!DICT[code]){DICT[code]={};RDICT[code]={};if(name&&!LANGS.some(function(l){return l[0]===code}))LANGS.push([code,name])}reg(map,code)}
@@ -323,8 +327,10 @@ function apply(){var r=document.documentElement;
 function persist(){ls.set('sv-theme',P.theme);ls.set('sv-skin',P.skin);ls.set('sv-lang',P.lang)}
 function broadcast(){var msg={kit:'prefs',p:P};try{if(inFrame)window.parent.postMessage(msg,'*')}catch(e){}
  try{[].forEach.call(document.querySelectorAll('iframe'),function(f){try{f.contentWindow.postMessage(msg,'*')}catch(e){}})}catch(e){}}
-function set(o,from){var ch=0;['theme','skin','lang'].forEach(function(k){if(o[k]!==undefined&&o[k]!==P[k]){P[k]=o[k];ch=1}});if(!ch)return;persist();apply();if(from!=='msg')broadcast();if(sheet&&sheet.classList.contains('on'))buildSheet()}
-addEventListener('message',function(e){var d=e.data;if(!d||typeof d!=='object')return;
+function okPref(k,v){return typeof v==='string'&&(k==='theme'?THEMES.indexOf(v)>=0:k==='skin'?Object.prototype.hasOwnProperty.call(SK,v):k==='lang'?(v==='id'||Object.prototype.hasOwnProperty.call(DICT,v)):false)}
+function set(o,from){var ch=0;['theme','skin','lang'].forEach(function(k){if(o[k]!==undefined&&okPref(k,o[k])&&o[k]!==P[k]){P[k]=o[k];ch=1}});if(!ch)return;persist();apply();if(from!=='msg')broadcast();if(sheet&&sheet.classList.contains('on'))buildSheet()}
+function trusted(e){try{if(window.parent!==window&&e.source===window.parent)return true;var f=document.querySelectorAll('iframe');for(var i=0;i<f.length;i++)if(f[i].contentWindow===e.source)return true}catch(x){}return false}
+addEventListener('message',function(e){var d=e.data;if(!d||typeof d!=='object'||!trusted(e))return;
  if(d.kit==='prefs'&&d.p)set(d.p,'msg');
  else if(d.kit==='hello'){try{e.source.postMessage({kit:'prefs',p:P},'*')}catch(x){}}
  else if(d.kit==='open')openCard(d.key)});
@@ -450,8 +456,8 @@ var curTool=null,cleanup=null,APPD=null;
 function start(app){APPD=app;var tools=app.tools,cats=app.cats,filter='all',q='';
  document.title=app.title;
  var top=h('header',{class:'top'},h('span',{class:'logo'},I(app.icon)),h('h1',null,app.title),h('span',{class:'sp'}));
- var home=h('section',{id:'home',class:'view on'},h('div',{class:'scroll'},h('div',{class:'wrapc',id:'hw'})));
- var tool=h('section',{id:'tool',class:'view'},h('div',{class:'tbar'},h('button',{class:'ib',id:'tback',type:'button','aria-label':_('Kembali','Back'),title:_('Kembali','Back'),onclick:function(){history.back()}},I('back')),h('h2',{id:'ttitle'}),h('span',{class:'sp'}),h('button',{class:'ib hq',id:'thelp',type:'button','aria-label':_('Bantuan','Help'),title:_('Bantuan','Help'),onclick:function(){if(curTool)helpDialog(app,curTool,false)}},'?')),h('div',{class:'scroll'},h('div',{class:'wrapc'},h('div',{class:'stage',id:'stage'}))));
+ var home=h('section',{id:'home',class:'view on'},h('main',{class:'scroll'},h('div',{class:'wrapc',id:'hw'})));
+ var tool=h('section',{id:'tool',class:'view'},h('div',{class:'tbar'},h('button',{class:'ib',id:'tback',type:'button','aria-label':_('Kembali','Back'),title:_('Kembali','Back'),onclick:function(){history.back()}},I('back')),h('h2',{id:'ttitle'}),h('span',{class:'sp'}),h('button',{class:'ib hq',id:'thelp',type:'button','aria-label':_('Bantuan','Help'),title:_('Bantuan','Help'),onclick:function(){if(curTool)helpDialog(app,curTool,false)}},'?')),h('main',{class:'scroll'},h('div',{class:'wrapc'},h('div',{class:'stage',id:'stage'}))));
  document.body.append(top,home,tool,h('div',{id:'toast',role:'status'}));
  try{new MutationObserver(function(){decorate($('#stage'))}).observe($('#stage'),{childList:true,subtree:true})}catch(e){}
  try{if(window.self===window.top){top.insertBefore(h('a',{class:'hb',href:'../index.html',title:_('Beranda','Home'),'aria-label':_('Beranda','Home')},I('home')),top.firstChild)}}catch(e){}
@@ -459,7 +465,7 @@ function start(app){APPD=app;var tools=app.tools,cats=app.cats,filter='all',q=''
  function render(){hw.innerHTML='';hw.append(h('p',{class:'tag'},app.tag?app.tag():''),h('label',{class:'srch'},I('search'),search),
   h('div',{class:'chips',role:'group'},[['all',_('Semua','All')]].concat(cats.map(function(c){return[c.id,c.n()]})).map(function(c){return h('button',{type:'button',class:'chip'+(filter===c[0]?' on':''),onclick:function(){filter=c[0];render()}},c[1])})));
   var any=0;cats.forEach(function(c){if(filter!=='all'&&filter!==c.id)return;var L=tools.filter(function(t){return t.cat===c.id&&(!q||(t.n[0]+' '+t.n[1]+' '+t.d[0]+' '+t.d[1]+' '+(t.k||'')).toLowerCase().indexOf(q)>=0)});if(!L.length)return;any=1;
-   hw.append(h('div',{class:'sec',style:{'--cc':c.c}},c.n(),h('span',{class:'cnt'},String(L.length))),h('div',{class:'cards'},L.map(function(t){return h('button',{type:'button',class:'tc',style:{'--cc':t.c||c.c},onclick:function(){openTool(t.id)}},h('span',{class:'ch'},I(t.ic)),h('b',null,_(t.n[0],t.n[1])),h('small',null,_(t.d[0],t.d[1])),h('span',{class:'hq',role:'button',tabindex:'0','aria-label':_('Bantuan: ','Help: ')+_(t.n[0],t.n[1]),title:_('Bantuan','Help'),onclick:function(e){e.stopPropagation();e.preventDefault();helpDialog(app,t,true,function(){openTool(t.id)})},onkeydown:function(e){if(e.key==='Enter'||e.key===' '){e.stopPropagation();e.preventDefault();helpDialog(app,t,true,function(){openTool(t.id)})}}},'?'))})))});
+   hw.append(h('div',{class:'sec',style:{'--cc':c.c}},c.n(),h('span',{class:'cnt'},String(L.length))),h('div',{class:'cards'},L.map(function(t){var oh=function(){helpDialog(app,t,true,function(){openTool(t.id)})};return h('div',{class:'tcw',style:{'--cc':t.c||c.c}},h('button',{type:'button',class:'tc',onclick:function(){openTool(t.id)}},h('span',{class:'ch'},I(t.ic)),h('b',null,_(t.n[0],t.n[1])),h('small',null,_(t.d[0],t.d[1]))),h('button',{type:'button',class:'hq','aria-label':_('Bantuan: ','Help: ')+_(t.n[0],t.n[1]),title:_('Bantuan','Help'),onclick:oh},'?'))})))});
   if(!any)hw.append(h('p',{class:'empty'},_('Tidak ada alat yang cocok.','No matching tools.')));KIT.translate()}
  function openTool(id,noPush){var t=tools.filter(function(x){return x.id===id})[0];if(!t)return;closeTool(true);curTool=t;if(!noPush)try{history.pushState({tool:id},'')}catch(e){}
   $('#ttitle').textContent=_(t.n[0],t.n[1]);var st=$('#stage');st.innerHTML='';home.classList.remove('on');tool.classList.add('on');
