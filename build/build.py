@@ -78,7 +78,7 @@ def inject_index():
     t=ensure_head(t,'')
     t=sub_block(t,'style','kit-css',rd('kit.css')+'\n'+skins.index_css(),'head')
     js=kit_js(None,"{index:true,noTranslate:true,sw:'sw.js'}")
-    t=re.sub(r'<script id="kit-js">.*?</script>\n?','',t,flags=re.S)
+    t=re.sub(r'\n?<script id="kit-js">.*?</script>\n?','',t,flags=re.S)
     m=re.search(r'<body[^>]*>',t); blk='<script id="kit-js">\n'+js+'\n</script>\n'
     t=t[:m.end()]+'\n'+blk+t[m.end():]
     cp=os.path.join(B,'catalog.json')
@@ -86,6 +86,17 @@ def inject_index():
         cat=json.load(open(cp,encoding='utf-8'))
         t=re.sub(r'/\*CATALOG_START\*/.*?/\*CATALOG_END\*/','/*CATALOG_START*/const CATALOG='+json.dumps(cat,ensure_ascii=False,separators=(',',':')).replace('\\','\\\\')+';/*CATALOG_END*/',t,flags=re.S)
     open(p,'w',encoding='utf-8').write(t); print('index injected')
+
+
+def site_version():
+    """Versi tampilan = judul '## YYYY-MM-DD' teratas di CHANGELOG.md."""
+    m=re.search(r'^##\s+(\d{4}-\d{2}-\d{2})',open(os.path.join(ROOT,'CHANGELOG.md'),encoding='utf-8').read(),re.M)
+    return 'v'+m.group(1).replace('-','.') if m else 'v0'
+def inject_version():
+    p=os.path.join(ROOT,'index.html'); t=open(p,encoding='utf-8').read()
+    n=re.sub(r'<!--VER-->.*?<!--/VER-->','<!--VER-->'+site_version()+'<!--/VER-->',t,count=1,flags=re.S)
+    if n!=t: open(p,'w',encoding='utf-8').write(n)
+    print('site version',site_version())
 
 def site_hash():
     """Hash isi halaman + aset statis, dipakai sebagai versi cache service worker."""
@@ -106,7 +117,18 @@ def set_sw_version(check=False):
     print('sw VERSION',v); return True,v
 if __name__=='__main__':
     if sys.argv[1:]==['--check']:
-        ok,v=set_sw_version(True); print('sw.js VERSION up to date' if ok else 'sw.js VERSION is stale (expected '+v+'); run build/build.py'); sys.exit(0 if ok else 1)
+        # Bangun ulang di salinan sementara lalu bandingkan dengan berkas di repo: pastikan hasil build konsisten dengan sumber.
+        import shutil,subprocess,tempfile
+        tmp=tempfile.mkdtemp(prefix='buildcheck-')
+        try:
+            shutil.copytree(ROOT,tmp+'/r',ignore=shutil.ignore_patterns('.git','node_modules','bot','tests','__pycache__','.github'))
+            r=subprocess.run([sys.executable,tmp+'/r/build/build.py'],capture_output=True,text=True)
+            if r.returncode: print(r.stdout+r.stderr); sys.exit(2)
+            outs=['index.html','sw.js']+['tools/'+f for f in sorted(os.listdir(os.path.join(ROOT,'tools'))) if f.endswith('.html')]
+            bad=[f for f in outs if open(os.path.join(ROOT,f),'rb').read()!=open(os.path.join(tmp,'r',f),'rb').read()]
+            print('Hasil build konsisten dengan sumber ('+str(len(outs))+' berkas)' if not bad else 'Hasil build USANG, jalankan python3 build/build.py. Berbeda: '+', '.join(bad))
+            sys.exit(1 if bad else 0)
+        finally: shutil.rmtree(tmp,ignore_errors=True)
     only=sys.argv[1:]
     for n,m in APPS.items():
         if only and n not in only: continue
@@ -117,4 +139,4 @@ if __name__=='__main__':
         dic=json.load(open(dp,encoding='utf-8')) if os.path.exists(dp) else {}
         for n in ['pdf-tools','image-tools','video-tools']:
             inject_old(os.path.join(ROOT,'tools',n+'.html'),dic); print('injected',n,len(dic))
-    if not only: set_sw_version()
+    if not only: inject_version(); set_sw_version()

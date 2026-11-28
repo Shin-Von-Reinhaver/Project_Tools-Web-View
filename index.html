@@ -90,6 +90,7 @@ h1{font-size:clamp(1.4rem,4.2vw,2rem);font-weight:800;letter-spacing:-.03em;line
 .recent .rl{font-size:.74rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);margin-right:2px}
 .recent .btn{padding:6px 14px 6px 10px;border-radius:999px}
 .empty{text-align:center;color:var(--mut);padding:40px 10px;display:none}
+.ver{display:inline-block;margin-left:8px;padding:2px 9px;border-radius:99px;border:1px solid var(--line);font-size:12px;font-weight:700;color:var(--mut);text-decoration:none}.ver:hover,.ver:focus-visible{color:var(--ink);border-color:var(--ac)}
 .foot{max-width:1040px;margin:0 auto;padding:0 18px calc(72px + env(safe-area-inset-bottom,0px));text-align:center;color:var(--mut);font-size:.78rem}
 /* penampil */
 .ov{position:fixed;inset:0;z-index:100;display:none;flex-direction:column;background:var(--bg)}
@@ -426,6 +427,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 
 
 
+
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></symbol>
 <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></symbol>
@@ -508,7 +510,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   </div>
 </section>
 </main>
-<footer class="foot"><span data-i18n="foot"></span></footer>
+<footer class="foot"><span data-i18n="foot"></span> <a class="ver" id="verLink" href="https://github.com/Shin-Von-Reinhaver/Project_Tools-Web-View/blob/main/CHANGELOG.md" target="_blank" rel="noopener" data-notr title="Changelog"><!--VER-->v2026.11.29<!--/VER--></a></footer>
 
 <div class="ov" id="ov" role="dialog" aria-modal="true" aria-labelledby="vTitle">
   <div class="vbar">
@@ -960,5 +962,6 @@ const _al=applyLang;applyLang=function(){_al.apply(this,arguments);renderAll()};
 })();
 })();
 </script>
+<script>try{caches.keys().then(function(k){var c=k.filter(function(x){return x.indexOf('shin-tools-')===0}).pop();if(c)document.getElementById('verLink').title='Changelog · cache '+c.slice(11)})}catch(e){}</script>
 </body>
 </html>

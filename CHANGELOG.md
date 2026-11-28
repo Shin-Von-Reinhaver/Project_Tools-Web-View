@@ -1,6 +1,15 @@
 # Changelog
 
-Format: tanggal (WIB) · ringkasan. Versi cache PWA otomatis berubah setiap `python3 build/build.py` (hash isi situs).
+Format: tanggal (WIB) · ringkasan. Versi di kaki beranda = judul `## YYYY-MM-DD` teratas. Versi cache PWA otomatis berubah setiap `python3 build/build.py` (hash isi situs).
+
+## 2026-11-29
+### Ditambah
+- `LICENSE` (MIT untuk kode), `THIRD_PARTY_NOTICES.md`, `SECURITY.md`, `CONTRIBUTING.md`.
+- Indikator versi di kaki beranda (tautan ke changelog; tooltip menampilkan versi cache).
+- `build.py --check` kini membangun ulang di salinan sementara dan membandingkan semua hasil (`index.html`, `sw.js`, `tools/*.html`) dengan isi repo.
+
+### Diperbaiki
+- `build.py` tidak idempoten: setiap build menambah satu baris kosong di `index.html`, sehingga hash versi cache ikut berubah.
 
 ## 2026-11-28
 ### Diperbaiki
