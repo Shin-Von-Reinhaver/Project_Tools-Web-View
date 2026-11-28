@@ -8,7 +8,7 @@ Format: tanggal (WIB) · ringkasan. Versi di kaki beranda = judul `## YYYY-MM-DD
 - Indikator versi di kaki beranda (tautan ke changelog; tooltip menampilkan versi cache).
 - `build.py --check` kini membangun ulang di salinan sementara dan membandingkan semua hasil (`index.html`, `sw.js`, `tools/*.html`) dengan isi repo.
 
-- GitHub Actions (`.github/workflows/ci.yml`): `build-consistency`, `bot-tests` (Node 20/22), `ui-tests` (Chromium wajib; Firefox/WebKit informatif) dan `ci-gate` untuk branch protection; `dependabot.yml`; template PR. Lihat `docs/CI.md`.
+- GitHub Actions (siap pasang di `docs/ci.yml`; token yang dipakai tidak punya scope `workflow` sehingga belum bisa ditaruh di `.github/workflows/` — lihat `docs/CI.md`): `build-consistency`, `bot-tests` (Node 20/22), `ui-tests` (Chromium wajib; Firefox/WebKit informatif) dan `ci-gate` untuk branch protection; `dependabot.yml`; template PR. Lihat `docs/CI.md`.
 - Tes baru: `tests/pwa_update.py`, `tests/panel_e2e.py`, `tests/a11y.py`, `tests/bot_server.js` (bot tanpa WhatsApp); `docs/TESTING.md` berisi daftar uji manual.
 
 ### Diperbaiki

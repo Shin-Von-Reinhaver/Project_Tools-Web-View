@@ -1,6 +1,13 @@
 # CI dan perlindungan branch
 
-Workflow: `.github/workflows/ci.yml` (berjalan di setiap push ke `main`, setiap PR, dan manual).
+> **Langkah wajib sekali saja — memasang workflow.** Token GitHub yang dipakai untuk menyiapkan perubahan ini tidak punya scope `workflow`, sehingga GitHub menolak push ke `.github/workflows/`. Berkasnya sudah siap dan lolos `actionlint` di **`docs/ci.yml`**. Pasang dengan salah satu cara:
+> 1. Lewat web: GitHub → *Add file → Create new file* → nama `.github/workflows/ci.yml` → tempel isi `docs/ci.yml` → commit ke branch PR; atau
+> 2. Lewat git dengan kredensial yang punya scope `workflow` (PAT klasik: centang `workflow`; PAT fine-grained: *Workflows: Read and write*):
+>    `mkdir -p .github/workflows && git mv docs/ci.yml .github/workflows/ci.yml && git commit -m "Pasang workflow CI" && git push`
+>
+> Setelah terpasang, hapus `docs/ci.yml` dan paragraf ini.
+
+Workflow (`docs/ci.yml` → `.github/workflows/ci.yml`) berjalan di setiap push ke `main`, setiap PR, dan manual.
 
 | Job | Nama status | Isi | Memblokir? |
 |---|---|---|---|
