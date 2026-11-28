@@ -53,6 +53,12 @@ jobs:
       - name: Pasang ffmpeg (untuk tes efek media)
         working-directory: .
         run: sudo apt-get update -y && sudo apt-get install -y --no-install-recommends ffmpeg
+      - name: Siapkan berkas sampel untuk tes media (dibuat lokal, tanpa unduhan)
+        working-directory: .
+        run: |
+          ffmpeg -y -v error -f lavfi -i testsrc=size=320x240 -frames:v 1 "$RUNNER_TEMP/sample.jpg"
+          echo "TEST_IMG=$RUNNER_TEMP/sample.jpg" >> "$GITHUB_ENV"
+          echo "TEST_VID=$GITHUB_WORKSPACE/tests/sample.webm" >> "$GITHUB_ENV"
       - run: npm ci
       - run: npm test
 

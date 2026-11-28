@@ -34,11 +34,21 @@ Jangan sunting `tools/audio-tools.html`, `dev-tools.html`, `qr-tools.html`, `tex
 ## Bot
 Lihat `bot/README.md`. Tes: `cd bot && npm ci && npm test`.
 
-## Tes UI
-`pip install playwright && playwright install chromium && python3 tests/ui_smoke.py` — memeriksa semua halaman alat (galat JS, tombol bantuan, overflow di 320–1280 px, preferensi rusak, mode offline) dan versi cache `sw.js`. Setelah mengubah sumber di `build/`, jalankan `python3 build/build.py`; `python3 build/build.py --check` memastikan hasilnya sudah dibangun.
+## Tes & CI
+Rincian di `docs/TESTING.md` dan `docs/CI.md`. Singkatnya:
+```bash
+python3 build/build.py --check                      # hasil build konsisten dengan sumber di build/
+(cd bot && npm ci && npm test)                      # tes bot
+pip install -r tests/requirements.txt && python3 -m playwright install chromium && (cd tests && npm ci)
+python3 tests/ui_smoke.py && python3 tests/pwa_update.py && python3 tests/panel_e2e.py && python3 tests/a11y.py
+```
+Setelah mengubah sumber di `build/`, jalankan `python3 build/build.py` dan commit hasilnya. Tes tidak menyambung ke WhatsApp.
+
+## Keamanan, lisensi, kontribusi
+`SECURITY.md` (cara melapor kerentanan dan menangani kunci bot), `LICENSE` (MIT untuk kode; aset gambar dan pustaka pihak ketiga dijelaskan di `THIRD_PARTY_NOTICES.md`), `CONTRIBUTING.md`.
 
 ## Lapor bug & riwayat perubahan
-Buat issue lewat template *Laporan bug*. Riwayat ada di `CHANGELOG.md`. Repositori ini belum memiliki berkas lisensi; pemilik perlu memilihnya (mis. MIT) agar orang lain tahu hak pakainya.
+Buat issue lewat template *Laporan bug*. Riwayat ada di `CHANGELOG.md`. Versi situs tampil di kaki beranda dan mengikuti judul teratas `CHANGELOG.md`.
 
 ## Catatan keamanan
 Jangan menempelkan token GitHub atau kunci API di chat/issue. Bot membuat kunci sendiri di `bot/data/config.json` (sudah di `.gitignore`).

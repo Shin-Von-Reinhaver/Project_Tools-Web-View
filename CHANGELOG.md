@@ -8,8 +8,17 @@ Format: tanggal (WIB) · ringkasan. Versi di kaki beranda = judul `## YYYY-MM-DD
 - Indikator versi di kaki beranda (tautan ke changelog; tooltip menampilkan versi cache).
 - `build.py --check` kini membangun ulang di salinan sementara dan membandingkan semua hasil (`index.html`, `sw.js`, `tools/*.html`) dengan isi repo.
 
+- GitHub Actions (`.github/workflows/ci.yml`): `build-consistency`, `bot-tests` (Node 20/22), `ui-tests` (Chromium wajib; Firefox/WebKit informatif) dan `ci-gate` untuk branch protection; `dependabot.yml`; template PR. Lihat `docs/CI.md`.
+- Tes baru: `tests/pwa_update.py`, `tests/panel_e2e.py`, `tests/a11y.py`, `tests/bot_server.js` (bot tanpa WhatsApp); `docs/TESTING.md` berisi daftar uji manual.
+
 ### Diperbaiki
+- **Pembaruan PWA tertahan cache HTTP hosting.** Dengan `Cache-Control: max-age=600` (seperti GitHub Pages), service worker baru terpasang dan cache lama dihapus, tetapi isinya tetap versi lama karena pra-cache dan `fetch` HTML memakai cache HTTP browser. `sw.js` kini memakai `cache:'reload'` saat pra-cache dan `no-cache` untuk HTML (reproduksi + tes di `tests/pwa_update.py`).
+- Kontras warna skin: Mint (aksen), Mawar (aksen), Pasir dan Langit (teks redup), Mint (teks redup); chip aktif Video Tools (teks putih di atas aksen terang pada skin gelap); `.fhint` PDF Tools. Kini 0 pelanggaran `color-contrast` di 11 tampilan.
 - `build.py` tidak idempoten: setiap build menambah satu baris kosong di `index.html`, sehingga hash versi cache ikut berubah.
+
+### Terkonfirmasi, belum diubah (keputusan pemilik)
+- Batas percobaan login bot (5 gagal → kunci 10 menit) dan batas kirim berbasis alamat soket: di belakang tunnel/proxy semua klien tampak satu alamat, sehingga orang asing dapat mengunci login pemilik 10 menit. Terbukti di `tests/panel_e2e.py`; lihat `SECURITY.md`.
+- Kartu PDF/Image Tools memuat tombol di dalam tombol (`nested-interactive`, 66 node). Perlu perombakan markup kartu; tercatat di `KNOWN` pada `tests/a11y.py`.
 
 ## 2026-11-28
 ### Diperbaiki
