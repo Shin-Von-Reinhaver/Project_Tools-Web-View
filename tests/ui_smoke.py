@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Tes UI cepat (Playwright untuk Python). Menjalankan server lokal sendiri.
 Pasang:  pip install playwright && playwright install chromium
-Jalankan: python3 tests/ui_smoke.py"""
+Jalankan: python3 tests/ui_smoke.py [--browser chromium|firefox|webkit]"""
 import functools, http.server, os, re, subprocess, sys, threading
 from playwright.sync_api import sync_playwright
 
@@ -24,7 +24,8 @@ def main():
     r = subprocess.run([sys.executable, os.path.join(ROOT, 'build', 'build.py'), '--check'], capture_output=True, text=True)
     check('versi cache sw.js sesuai isi situs (build.py --check)', r.returncode == 0, r.stdout)
     with sync_playwright() as p:
-        b = p.chromium.launch()
+        bname = sys.argv[sys.argv.index('--browser') + 1] if '--browser' in sys.argv else 'chromium'
+        b = getattr(p, bname).launch()
         ctx = b.new_context(viewport={'width': 420, 'height': 900}); pg = ctx.new_page(); errs = []
         pg.on('pageerror', lambda e: errs.append(str(e)))
         # 1. setiap alat hub terbuka tanpa galat, punya tombol ? yang membuka dialog, dan tidak ada kontrol bersarang
