@@ -7,10 +7,10 @@ SKINS={
  'sunset':('Senja','Sunset',1,'#1a0f10','#140a0b','#2a1718','#fff1e8','#c9a597','#4a2a26','#fb923c','#4a2410','#2a1000',['#fb923c','#f472b6','#fbbf24','#f87171','#a78bfa']),
  'grape':('Anggur','Grape',1,'#120b1f','#0d0716','#1e1433','#f3ecff','#b3a2d6','#35265a','#c084fc','#32184f','#1d0b33',['#c084fc','#f472b6','#60a5fa','#fbbf24','#34d399']),
  'mono':('Mono','Mono',1,'#121212','#0b0b0b','#1c1c1c','#ededed','#9b9b9b','#333333','#e5e5e5','#2a2a2a','#111111',['#e5e5e5','#bdbdbd','#9e9e9e','#d6d6d6','#8a8a8a']),
- 'rose':('Mawar','Rose',0,'#fff5f7','#ffe8ee','#ffffff','#3b1220','#8b5a6a','#f3cbd6','#e11d48','#ffe1e8','#ffffff',['#e11d48','#c026d3','#ea580c','#0891b2','#7c3aed']),
- 'sand':('Pasir','Sand',0,'#faf6ee','#f0e8d8','#fffdf8','#2b2417','#7a6c52','#e5d9bf','#b45309','#fdebc8','#ffffff',['#b45309','#be123c','#4d7c0f','#0f766e','#7c3aed']),
- 'mint':('Mint','Mint',0,'#f0faf6','#dff3ea','#ffffff','#0f2a21','#4f7566','#c4e3d5','#059669','#d3f4e6','#ffffff',['#059669','#0891b2','#65a30d','#d97706','#7c3aed']),
- 'sky':('Langit','Sky',0,'#f0f7ff','#e0eeff','#ffffff','#0f1f35','#55708f','#cfe0f5','#2563eb','#dbe8ff','#ffffff',['#2563eb','#7c3aed','#0891b2','#ea580c','#db2777']),
+ 'rose':('Mawar','Rose',0,'#fff5f7','#ffe8ee','#ffffff','#3b1220','#8b5a6a','#f3cbd6','#cd1a42','#ffe1e8','#ffffff',['#cd1a42','#c026d3','#ea580c','#0891b2','#7c3aed']),
+ 'sand':('Pasir','Sand',0,'#faf6ee','#f0e8d8','#fffdf8','#2b2417','#71644c','#e5d9bf','#b45309','#fdebc8','#ffffff',['#b45309','#be123c','#4d7c0f','#0f766e','#7c3aed']),
+ 'mint':('Mint','Mint',0,'#f0faf6','#dff3ea','#ffffff','#0f2a21','#4b6f61','#c4e3d5','#047854','#d3f4e6','#ffffff',['#047854','#0891b2','#65a30d','#d97706','#7c3aed']),
+ 'sky':('Langit','Sky',0,'#f0f7ff','#e0eeff','#ffffff','#0f1f35','#4e6783','#cfe0f5','#2563eb','#dbe8ff','#ffffff',['#2563eb','#7c3aed','#0891b2','#ea580c','#db2777']),
 }
 def rgba(h,a):
     h=h.lstrip('#');r,g,b=int(h[0:2],16),int(h[2:4],16),int(h[4:6],16);return f'rgba({r},{g},{b},{a})'

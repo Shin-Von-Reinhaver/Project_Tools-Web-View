@@ -1,0 +1,6 @@
+{
+  "name": "shin-tools-ui-tests",
+  "private": true,
+  "description": "Dependensi tes aksesibilitas (axe-core). Dipasang dengan npm ci; tidak dipakai di runtime situs.",
+  "devDependencies": { "axe-core": "4.10.2" }
+}

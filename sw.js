@@ -1,6 +1,6 @@
 /* Service worker: membuat semua alat bisa dibuka offline. VERSION diisi otomatis oleh build/build.py (hash isi situs).
    Pra-cache memakai cache:'reload' dan halaman HTML 'no-cache' agar header Cache-Control hosting (mis. GitHub Pages max-age=600) tidak menahan pembaruan. */
-const VERSION='shin-tools-1f0d80c8';
+const VERSION='shin-tools-2f955feb';
 const CORE=['./','index.html','manifest.webmanifest','icons/icon-192.png','icons/icon-512.png','icons/icon.svg','icons/maskable-512.png','icons/apple-touch-icon.png','media/images/images.jpeg',
  'tools/pdf-tools.html','tools/image-tools.html','tools/video-tools.html','tools/audio-tools.html','tools/utility-tools.html','tools/dev-tools.html','tools/qr-tools.html','tools/text-tools.html'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(VERSION).then(c=>Promise.all(CORE.map(u=>c.add(new Request(u,{cache:'reload'})).catch(()=>{})))).then(()=>self.skipWaiting()))});
